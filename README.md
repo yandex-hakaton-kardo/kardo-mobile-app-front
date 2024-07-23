@@ -34,3 +34,4 @@ docker-compose up
 - `npm run lint:fix` - проверка и автоисправление кода линтерами eslint, stylelint
 - `npm run format` - проверка форматирования кода
 - `npm run format:fix` - автоисправление форматирования кода
+- `npm run generate:icons` - автоматическая генерация реакт-компонентов из svg-иконок в `src/components/icons`
