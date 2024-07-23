@@ -1,3 +1,27 @@
+:root {
+  --color-primary: #000;
+  --color-inverted-primary: #fff;
+  --color-brand: #ff4310;
+  --color-brand-active: #ff714c;
+  --color-error: #a62705;
+  --color-success: #658509;
+  --color-background: #f1f1f1;
+  --color-generic: #bfbfbf;
+  --color-generic-active: #808080;
+  --color-black-out-light: rgba(0, 0, 0, 0.45);
+  --color-black-out-mid: rgba(0, 0, 0, 0.75);
+  --color-black-out-heavy: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75));
+
+  --font-header-1: normal 700 36px/120% 'Grtsk Tera';
+  --font-header-2: normal 700 24px/120% 'Grtsk Tera';
+  --font-header-3: normal 700 20px/120% 'Grtsk Tera';
+  --font-header-4: normal 700 16px/130% 'Grtsk Tera';
+  --font-accent: normal 300 16px/130% 'Grtsk Tera';
+  --font-body: normal 300 16px/130% Rubic;
+  --font-body-small: normal 300 14px/130% Rubic;
+  --font-caption: normal 300 12px/140% Rubic;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,4 +36,40 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+@font-face {
+  font-family: 'Grtsk Tera';
+  src:
+    local('Grtsk Tera Bold'),
+    local('Grtsk-Tera-Bold'),
+    url('/fonts/GrtskTera-Bold.woff2') format('woff2'),
+    url('/fonts/GrtskTera-Bold.woff') format('woff'),
+    url('/fonts/GrtskTera-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Grtsk Tera';
+  src:
+    local('Grtsk Tera Light'),
+    local('Grtsk-Tera-Light'),
+    url('/fonts/GrtskTera-Light.woff2') format('woff2'),
+    url('/fonts/GrtskTera-Light.woff') format('woff'),
+    url('/fonts/GrtskTera-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src:
+    local('Rubik Light'),
+    local('Rubik-Light'),
+    url('/fonts/Rubik-Light.woff2') format('woff2'),
+    url('/fonts/Rubik-Light.woff') format('woff'),
+    url('/fonts/Rubik-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
 }

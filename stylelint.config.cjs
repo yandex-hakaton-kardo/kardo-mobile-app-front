@@ -13,6 +13,7 @@ module.exports = {
     'stylelint-scss',
     'stylelint-order',
     'stylelint-use-logical-spec',
+    'stylelint-declaration-strict-value',
     'stylelint-declaration-block-no-ignored-properties',
   ],
   rules: {
@@ -21,6 +22,13 @@ module.exports = {
     'order/properties-order': propertyOrdering,
     'selector-class-pattern': null,
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global'] }],
+    'scale-unlimited/declaration-strict-value': [
+      ['color', 'background-color', 'font', 'font-size', 'font-weight', 'font-family', 'filter'],
+      {
+        ignoreValues: ['currentColor', 'unset', 'inherit', 'initial', 'transparent'],
+        disableFix: true,
+      },
+    ],
   },
   customSyntax: 'postcss-scss',
   defaultSeverity: 'error',
