@@ -1,0 +1,12 @@
+.container {
+  position: relative;
+  display: flex;
+  inline-size: 100%;
+  block-size: 100vh;
+}
+
+.navigation {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+}

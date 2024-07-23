@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--color-black-out-heavy);
+}
+
+.link {
+  color: var(--color-generic-active);
+}
+
+.active {
+  color: var(--color-inverted-primary);
+}
