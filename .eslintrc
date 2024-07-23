@@ -14,7 +14,7 @@
     "plugin:@typescript-eslint/strict-type-checked",
     "eslint-config-prettier",
   ],
-  "plugins": ["@typescript-eslint", "import", "react-refresh", "jsx-expressions"],
+  "plugins": ["@typescript-eslint", "import", "react-refresh"],
   "ignorePatterns": ["dist", "stylelint.config.cjs", "vite.config.ts"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -42,7 +42,6 @@
     "no-underscore-dangle": "off",
     "no-param-reassign": ["error", { "props": false }],
     "no-console": "error",
-    "jsx-expressions/strict-logical-expressions": "error",
     "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
     "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
     "react/jsx-boolean-value": ["error", "never"],
