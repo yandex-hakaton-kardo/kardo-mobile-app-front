@@ -13,6 +13,7 @@
     "format:fix": "prettier --write . --ignore-unknown",
     "lint": "tsc --noEmit && eslint . --ext=.ts,.tsx --quiet && stylelint ./src/**/*.scss --quiet",
     "lint:fix": "eslint . --ext=.ts,.tsx --fix && stylelint ./src/**/*.scss --fix",
+    "generate:icons": "node ./scripts/generateIcons.js",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -58,6 +59,7 @@
     "typescript": "5.5.4",
     "vite": "5.3.4",
     "vite-plugin-checker": "0.7.2",
+    "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "4.3.2"
   }
 }
