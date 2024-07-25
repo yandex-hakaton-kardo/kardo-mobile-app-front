@@ -17,9 +17,9 @@
   --font-header-3: normal 700 20px/120% 'Grtsk Tera';
   --font-header-4: normal 700 16px/130% 'Grtsk Tera';
   --font-accent: normal 300 16px/130% 'Grtsk Tera';
-  --font-body: normal 300 16px/130% Rubic;
-  --font-body-small: normal 300 14px/130% Rubic;
-  --font-caption: normal 300 12px/140% Rubic;
+  --font-body: normal 300 16px/130% Rubik;
+  --font-body-small: normal 300 14px/130% Rubik;
+  --font-caption: normal 300 12px/140% Rubik;
 }
 
 * {
