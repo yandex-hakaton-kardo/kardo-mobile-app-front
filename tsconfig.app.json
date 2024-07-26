@@ -27,7 +27,8 @@
     "baseUrl": "./src",
     "paths": {
       "@components": ["./components"],
-      "@pages/*": ["./pages/*"]
+      "@pages/*": ["./pages/*"],
+      "@utils": ["./utils"]
     }
   },
   "include": ["src", "env.d.ts"]
