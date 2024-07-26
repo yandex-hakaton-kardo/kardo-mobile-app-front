@@ -23,7 +23,9 @@ export default defineConfig(() => {
       typescriptPaths(),
       checker({
         overlay: false,
-        typescript: true,
+        typescript: {
+          tsconfigPath: './tsconfig.app.json',
+        },
       }),
       svgr(),
     ],
