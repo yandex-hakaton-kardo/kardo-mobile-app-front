@@ -22,11 +22,22 @@
   --font-caption: normal 300 12px/140% Rubik;
 }
 
+body {
+  background-color: var(--color-primary);
+  color: var(--color-inverted-primary);
+  font: var(--font-body);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 input[type='number']::-webkit-inner-spin-button,
