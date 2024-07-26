@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+}
+
+.ticket {
+  color: var(--color-brand);
+}
+
+.content {
+  position: absolute;
+  inset: 8px;
+  inset-inline-start: 12%;
+}
