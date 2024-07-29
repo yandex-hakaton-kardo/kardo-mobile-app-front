@@ -1,10 +1,7 @@
-import { type lang } from '../../locale/ru';
+import type lang from '../../../public/locale/ru.json';
 
 export type TLang = typeof lang;
 export type TLocale = 'ru';
-export interface TLangModule {
-  lang: TLang;
-}
 
 export interface TLanguageContext {
   lang: TLang;
