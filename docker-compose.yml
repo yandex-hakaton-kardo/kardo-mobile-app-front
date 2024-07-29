@@ -2,4 +2,4 @@ services:
   front:
     build: .
     ports:
-      - '3000:80'
+      - '${VITE_PORT:-3000}:80'

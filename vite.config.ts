@@ -6,8 +6,8 @@ import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
-  const port = Number(import.meta.env?.FRONT_PORT ?? 3000);
-  const host = import.meta.env?.FRONT_HOST ?? 'http://localhost:5000';
+  const port = Number(import.meta.env?.VITE_PORT ?? 3000);
+  const host = import.meta.env?.VITE_HOST ?? 'http://localhost:5000';
 
   return {
     server: {
@@ -17,7 +17,6 @@ export default defineConfig(() => {
         '/api': { target: host },
       },
     },
-    envPrefix: 'FRONT_',
     plugins: [
       react(),
       typescriptPaths(),

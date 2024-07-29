@@ -1,8 +1,8 @@
 interface ImportMetaEnv {
   /** Порт, на котором запускается фронт */
-  readonly FRONT_PORT?: string;
+  readonly VITE_PORT?: string;
   /** Адрес сервера к которому выполнять запросы */
-  readonly FRONT_HOST?: string;
+  readonly VITE_HOST?: string;
 }
 
 interface ImportMeta {
