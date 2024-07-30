@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { TextBox } from './TextBox';
+import { TextInput } from './TextInput';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Components/TextBox',
-  component: TextBox,
+  title: 'Components/Inputs/TextInput',
+  component: TextInput,
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof TextBox>;
+} satisfies Meta<typeof TextInput>;
 
 export default meta;
 
-export const Base: StoryObj<typeof TextBox> = {
+export const Base: StoryObj<typeof TextInput> = {
   args: {
     error: 'error text',
     label: 'label',
@@ -23,9 +23,8 @@ export const Base: StoryObj<typeof TextBox> = {
     backgrounds: { default: 'light' },
   },
   render: ({ value: _value, onUpdate: _onUpdate, ...props }) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = useState('');
 
-    return <TextBox {...props} value={value} onUpdate={setValue} />;
+    return <TextInput {...props} value={value} onUpdate={setValue} />;
   },
 };

@@ -1,9 +1,8 @@
 import clsx from 'clsx';
-import { type ChangeEvent, useId, forwardRef, useState } from 'react';
-import { CheckmarkIcon, QuestionIcon } from 'components/icons';
-import styles from './TextBox.module.scss';
+import { type ChangeEvent, useId, forwardRef, type ReactNode } from 'react';
+import styles from './BaseInput.module.scss';
 
-type TextBoxProps = JSX.IntrinsicElements['input'] & {
+export type BaseInputProps = JSX.IntrinsicElements['input'] & {
   /** Описание над полем */
   label?: string;
   /** Подсказка под полем */
@@ -14,22 +13,19 @@ type TextBoxProps = JSX.IntrinsicElements['input'] & {
   value: string;
   /** Обработчик изменения значения */
   onUpdate?: (value: string) => void;
+  /** Дополнительные элементы(иконки, кнопки) размещаемые справа от поля ввода */
+  afterContent?: ReactNode;
 };
 
-export const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
-  ({ value, label, error, hint, disabled, ...props }, ref) => {
+/** Базовый компонент для поля ввода. Используется только для создания поверх него других полей ввода */
+export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
+  ({ value, label, error, hint, disabled, afterContent, ...props }, ref) => {
     const internalId = useId();
     const id = props.id ?? internalId;
-
-    const [hintVisible, setHintVisible] = useState(false);
-
-    const showHintIcon = hint && !value && !error && !disabled;
-    const showCheckIcon = value && !error;
 
     const onUpdate = (e: ChangeEvent<HTMLInputElement>) => {
       props.onUpdate?.(e.target.value);
       props.onChange?.(e);
-      setHintVisible(false);
     };
 
     return (
@@ -51,18 +47,11 @@ export const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
             ref={ref}
           />
 
-          {showHintIcon && (
-            <QuestionIcon
-              className={clsx(styles.hintIcon, hintVisible && styles.active)}
-              onClick={() => setHintVisible(!hintVisible)}
-            />
-          )}
-
-          {showCheckIcon && <CheckmarkIcon className={styles.checkIcon} />}
+          {afterContent}
         </div>
 
         {error && <span className={clsx(styles.hint, styles.error)}>{error}</span>}
-        {hintVisible && !error && <span className={styles.hint}>{hint}</span>}
+        {hint && <span className={styles.hint}>{hint}</span>}
       </div>
     );
   },
