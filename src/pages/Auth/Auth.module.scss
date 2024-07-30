@@ -1,0 +1,68 @@
+.pageBg {
+  background-image: url('/images/background_tv.jpeg');
+  background-size: cover;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  block-size: 100vh;
+  padding: 16px;
+  color: var(--color-inverted-primary);
+  background-color: rgb(0 0 0 / 75%);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-block: 16px 80px;
+  text-align: center;
+}
+
+.header1 {
+  max-inline-size: 300px;
+  font: var(--font-header-2);
+}
+
+.header2 {
+  font: var(--font-header-1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  inline-size: 100%;
+  font: var(--font-header-4);
+}
+
+.accountButton {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  inline-size: 100%;
+  padding-block: 12px;
+  padding-inline: 16px;
+  color: var(--color-primary);
+  font: var(--font-body);
+  background-color: var(--color-background);
+
+  &:active {
+    color: var(--color-inverted-primary);
+    background-color: var(--color-brand-active);
+  }
+}
+
+.footer {
+  max-inline-size: 230px;
+  margin-block-start: auto;
+  font: var(--font-caption);
+  text-align: center;
+}
+
+.link {
+  text-decoration: underline;
+}
