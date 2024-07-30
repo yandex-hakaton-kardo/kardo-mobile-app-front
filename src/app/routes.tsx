@@ -11,11 +11,15 @@ export const routes: RouteObject[] = [
         Component: lazy(async () => import('@pages/Intro')),
       },
       {
-        path: '/signin',
+        path: '/auth',
+        Component: lazy(async () => import('@pages/Auth')),
+      },
+      {
+        path: '/auth/signin',
         Component: lazy(async () => import('@pages/SignIn')),
       },
       {
-        path: '/signup',
+        path: '/auth/signup',
         Component: lazy(async () => import('@pages/SignUp')),
       },
       {

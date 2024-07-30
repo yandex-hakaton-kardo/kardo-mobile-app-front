@@ -1,4 +1,13 @@
 {
+  "auth": {
+    "title": "Международная премия",
+    "appName": "КАРДО",
+    "chooseAccount": "Выберите аккаунт для входа",
+    "createAccount": "Создать аккаунт",
+    "continueYouAgree": "Продолжая, вы соглашаетесь с",
+    "termsOfUse": "Условиями использования",
+    "privatePolicy": "Политикой конфиденциальности"
+  },
   "main": {
     "greeting": "Привет, {0}!",
     "recommendations": "Рекомендации",
