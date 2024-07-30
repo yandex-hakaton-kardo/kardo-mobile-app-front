@@ -1,26 +1,15 @@
 import clsx from 'clsx';
-import type { ReactNode } from 'react';
 import styles from './Button.module.scss';
 
-export interface ButtonProps {
-  onClick: () => void;
+export type ButtonProps = JSX.IntrinsicElements['button'] & {
   view?: 'normal' | 'contrast' | 'action' | 'flat' | 'raised';
   size?: 'large' | 'medium' | 'small';
   wide?: boolean;
-  disabled?: boolean;
-  className?: string;
-  children: ReactNode;
-}
+};
 
-export const Button = ({
-  view = 'normal',
-  size = 'large',
-  disabled,
-  wide,
-  className,
-  onClick,
-  children,
-}: ButtonProps) => {
+export const Button = ({ view = 'normal', size = 'large', wide, ...props }: ButtonProps) => {
+  const { disabled, className } = props;
+
   const cls = clsx(
     styles.button,
     disabled && styles.disabled,
@@ -30,9 +19,5 @@ export const Button = ({
     className,
   );
 
-  return (
-    <button className={cls} type="button" onClick={onClick} disabled={disabled}>
-      {children}
-    </button>
-  );
+  return <button {...props} className={cls} type="button" />;
 };
