@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { type ChangeEvent, forwardRef, useState } from 'react';
+import { type ChangeEvent, type FocusEvent, forwardRef, useState } from 'react';
 import { BaseInput, type BaseInputProps } from 'components/BaseInput';
 import { CheckmarkIcon, QuestionIcon } from 'components/icons';
 import styles from './TextInput.module.scss';
@@ -8,6 +8,7 @@ export type TextInputProps = BaseInputProps;
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
   const [hintVisible, setHintVisible] = useState(false);
+  const [touched, setTouched] = useState(false);
   const { value, error, hint, disabled, afterContent } = props;
 
   const showHintText = !error && hint && hintVisible;
@@ -19,13 +20,19 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, re
     props.onChange?.(e);
   };
 
+  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
+    setTouched(true);
+    props.onBlur?.(e);
+  };
+
   return (
     <BaseInput
       {...props}
       ref={ref}
       hint={showHintText ? hint : undefined}
-      error={error ?? undefined}
+      error={touched ? error : undefined}
       onChange={onChange}
+      onBlur={onBlur}
       afterContent={
         <>
           {afterContent}
