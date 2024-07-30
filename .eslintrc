@@ -105,4 +105,12 @@
       },
     ],
   },
+  "overrides": [
+    {
+      "files": ["**/*.story.tsx"],
+      "rules": {
+        "react-hooks/rules-of-hooks": "off",
+      },
+    },
+  ],
 }
