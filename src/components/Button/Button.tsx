@@ -3,11 +3,11 @@ import styles from './Button.module.scss';
 
 export type ButtonProps = JSX.IntrinsicElements['button'] & {
   view?: 'normal' | 'contrast' | 'action' | 'flat' | 'raised';
-  size?: 'large' | 'medium' | 'small';
+  size?: 's' | 'm' | 'l' | 'xl';
   wide?: boolean;
 };
 
-export const Button = ({ view = 'normal', size = 'large', wide, ...props }: ButtonProps) => {
+export const Button = ({ view = 'normal', size = 'l', wide, ...props }: ButtonProps) => {
   const { disabled, className } = props;
 
   const cls = clsx(

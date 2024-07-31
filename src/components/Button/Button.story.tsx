@@ -17,7 +17,7 @@ export const Base: Story = {
   args: {
     onClick: () => {},
     view: 'normal',
-    size: 'large',
+    size: 'l',
     wide: false,
     disabled: false,
     children: 'Text',
@@ -30,15 +30,15 @@ export const Gallery: Story = {
     onClick: () => {},
   },
   render: ({ onClick }) => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '16px', alignItems: 'center' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: '16px', alignItems: 'center' }}>
       {(['normal', 'contrast', 'action', 'flat', 'raised'] as const).map(view => (
         <React.Fragment key={view}>
-          {(['small', 'medium', 'large'] as const).map(size => (
+          {(['s', 'm', 'l', 'xl'] as const).map(size => (
             <Button view={view} size={size} wide onClick={onClick} key={`${view}-${size}`}>
               {view}-{size}
             </Button>
           ))}
-          <Button view={view} size="large" wide disabled onClick={onClick} key={`${view}-disabled`}>
+          <Button view={view} size="l" wide disabled onClick={onClick} key={`${view}-disabled`}>
             {view}-large-disabled
           </Button>
         </React.Fragment>
