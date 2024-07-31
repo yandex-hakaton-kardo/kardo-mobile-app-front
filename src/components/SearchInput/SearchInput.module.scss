@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  inline-size: 100%;
+  padding-block: 9px;
+  padding-inline: 12px;
+  background-color: var(--color-background);
+
+  &:focus-within {
+    background-color: var(--color-inverted-primary);
+  }
+}
+
+.icon {
+  inline-size: 16px;
+  block-size: 16px;
+  color: var(--color-generic-active);
+}
+
+.disabledIcon {
+  color: var(--color-generic);
+}
+
+.input {
+  font: var(--font-body-small);
+  line-height: 18px;
+  border: none;
+  background-color: var(--color-background);
+  outline: none;
+
+  &:focus {
+    background-color: var(--color-inverted-primary);
+  }
+
+  &:disabled::placeholder {
+    color: var(--color-generic);
+  }
+}
