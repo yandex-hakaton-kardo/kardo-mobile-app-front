@@ -6,6 +6,7 @@ export { default as ArrowUpIcon } from './arrowUp.svg?react';
 export { default as CalendarIcon } from './calendar.svg?react';
 export { default as CheckmarkIcon } from './checkmark.svg?react';
 export { default as CommentIcon } from './comment.svg?react';
+export { default as CrossIcon } from './cross.svg?react';
 export { default as EventsIcon } from './events.svg?react';
 export { default as ExitIcon } from './exit.svg?react';
 export { default as EyeClosedIcon } from './eyeClosed.svg?react';
