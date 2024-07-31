@@ -16,7 +16,7 @@
   background-color: var(--color-background);
 
   &:active {
-    background-color: var(--color-inverted-primary);
+    background-color: var(--color-brand-active);
   }
 
   &:disabled {
@@ -82,21 +82,28 @@
   }
 }
 
-.large {
+.xl {
+  gap: 12px;
+  min-block-size: 72px;
+  padding-inline: 16px;
+  font: var(--font-body);
+}
+
+.l {
   gap: 8px;
   min-block-size: 45px;
   padding-inline: 16px;
   font: var(--font-header-4);
 }
 
-.medium {
+.m {
   gap: 4px;
   min-block-size: 32px;
   padding-inline: 8px;
   font: var(--font-body-small);
 }
 
-.small {
+.s {
   gap: 4px;
   min-block-size: 26px;
   padding-inline: 4px;
