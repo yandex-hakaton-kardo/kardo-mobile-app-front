@@ -1,0 +1,32 @@
+.container {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  gap: 8px;
+  align-items: center;
+  inline-size: 100%;
+  padding-block: 12px;
+  padding-inline: 16px;
+  color: var(--color-primary);
+  font: var(--font-body);
+  line-height: 24px;
+  text-align: start;
+  border: none;
+  background-color: var(--color-inverted-primary);
+  outline: none;
+
+  &:active {
+    background-color: var(--color-brand-active);
+  }
+}
+
+.icon {
+  flex-grow: 0;
+  flex-shrink: 0;
+  inline-size: 24px;
+  block-size: 24px;
+  color: var(--color-primary);
+}
+
+.decorationIcon {
+  color: var(--color-generic-active);
+}

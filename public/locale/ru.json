@@ -20,5 +20,16 @@
     "greeting": "Привет, {0}!",
     "recommendations": "Рекомендации",
     "feed": "Лента"
+  },
+  "settings": {
+    "title": "Настройки",
+    "account": "Аккаунт",
+    "main": "Основные",
+    "additional": "Дополнительные",
+    "notifications": "Уведомления",
+    "favorite": "Избранное",
+    "confidence": "Конфиденциальность",
+    "support": "Поддержка",
+    "lang": "Язык"
   }
 }

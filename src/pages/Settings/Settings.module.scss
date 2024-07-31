@@ -1,0 +1,31 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 16px;
+  background-color: var(--color-primary);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  font: var(--font-header-2);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionTitle {
+  font: var(--font-header-4);
+}

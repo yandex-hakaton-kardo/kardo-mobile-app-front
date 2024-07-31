@@ -23,6 +23,10 @@ export const routes: RouteObject[] = [
         Component: lazy(async () => import('@pages/SignUp')),
       },
       {
+        path: '/settings',
+        Component: lazy(async () => import('@pages/Settings')),
+      },
+      {
         element: <Layout />,
         children: [
           {
