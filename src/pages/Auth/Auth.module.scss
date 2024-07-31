@@ -39,21 +39,15 @@
 }
 
 .accountButton {
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-  align-items: center;
-  inline-size: 100%;
-  padding-block: 12px;
-  padding-inline: 16px;
-  color: var(--color-primary);
-  font: var(--font-body);
-  background-color: var(--color-background);
+  justify-content: flex-start;
 
-  &:active {
+  &:not(:disabled):active {
     color: var(--color-inverted-primary);
-    background-color: var(--color-brand-active);
   }
+}
+
+.btnText {
+  line-height: 20px;
 }
 
 .footer {

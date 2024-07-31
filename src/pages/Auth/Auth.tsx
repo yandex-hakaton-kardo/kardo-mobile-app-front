@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
-import { PlusIcon } from '@components';
+import { useNavigate } from 'react-router-dom';
+import { Button, PlusIcon, VkIcon } from '@components';
 import { useLang } from 'context';
 import styles from './Auth.module.scss';
 
 export const Auth = () => {
   const lang = useLang().auth;
+  const navigate = useNavigate();
 
   return (
     <div className={styles.pageBg}>
@@ -16,10 +17,14 @@ export const Auth = () => {
 
         <div className={styles.content}>
           <p>{lang.chooseAccount}</p>
-          <Link to="/auth/signup" className={styles.accountButton}>
+          <Button className={styles.accountButton} onClick={() => navigate('/auth/signup')} wide size="xl">
             <PlusIcon width={48} height={48} />
-            {lang.createAccount}
-          </Link>
+            <span className={styles.btnText}>{lang.createAccount}</span>
+          </Button>
+          <Button disabled className={styles.accountButton} wide size="xl">
+            <VkIcon width={48} height={48} />
+            <span className={styles.btnText}>{lang.vkLogin}</span>
+          </Button>
         </div>
 
         <footer className={styles.footer}>
