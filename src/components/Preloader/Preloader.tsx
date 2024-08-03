@@ -1,9 +1,17 @@
 import styles from './Preloader.module.scss';
 
-export const Preloader = ()=>{
+export const Preloader = () => {
   return (
-    <svg className={styles.spinner} width="48px" height="48px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-    <circle className={styles.path} fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-</svg>
-  )
-}
+    <svg className={styles.spinner} width="48px" height="48px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <circle
+        className={styles.path}
+        fill="none"
+        stroke-width="3"
+        stroke-linecap="round"
+        cx="24"
+        cy="24"
+        r="21"
+      ></circle>
+    </svg>
+  );
+};
