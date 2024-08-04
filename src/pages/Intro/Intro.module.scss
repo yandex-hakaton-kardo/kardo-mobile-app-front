@@ -1,0 +1,143 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: url('../../public/images/onBoardImg.png') no-repeat center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.container::before {
+  content: '';
+  background-color: var(--color-black-out-mid);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.header {
+  font: var(--font-header-2);
+  color: var(--color-inverted-primary);
+  margin-top: 79px;
+  text-align: center;
+}
+
+.header2 {
+  font: var(--font-header-1);
+  color: var(--color-inverted-primary);
+  margin-top: 16px;
+}
+
+.text {
+  font: var(--font-accent);
+  color: var(--color-inverted-primary);
+  position: absolute;
+  bottom: 18%;
+}
+
+.text2 {
+  font: var(--font-body-small);
+  color: var(--color-inverted-primary);
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+.text_for_video {
+  font: var(--font-accent);
+  color: var(--color-inverted-primary);
+  position: absolute;
+  bottom: 53%;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.strip_rectangle {
+  width: 18px;
+  margin-right: 8px;
+  height: 100%;
+  background-color: var(--color-generic-active);
+}
+
+.strip_rectangle1 {
+  width: 18px;
+  margin-right: 8px;
+  height: 100%;
+  background-color: var(--color-generic-active);
+  animation-name: long_rectangle;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+.strip {
+  position: absolute;
+  bottom: 46%;
+  height: 4px;
+  width: 88px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_for_video {
+  position: absolute;
+  bottom: 5%;
+  height: 45px;
+  width: calc(100% - 8%);
+  color: var(--color-inverted-primary);
+}
+
+.video_wrap {
+  content: '';
+  background-color: var(--color-black-out-mid);
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.video_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.container_video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes long_rectangle {
+  from {
+    width: 18px;
+    background-color: var(--color-generic-active);
+  }
+  to {
+    width: 36px;
+    background-color: var(--color-inverted-primary);
+  }
+}
