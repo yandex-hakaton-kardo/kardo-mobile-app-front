@@ -6,8 +6,8 @@ export const Preloader = () => {
       <circle
         className={styles.path}
         fill="none"
-        stroke-width="3"
-        stroke-linecap="round"
+        strokeWidth="3"
+        strokeLinecap="round"
         cx="24"
         cy="24"
         r="21"
