@@ -1,6 +1,6 @@
 import { type BaseQueryApi, type FetchArgs, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { LsKeys } from '@shared/constants';
-import { type StoreSchema } from 'app/store';
+import { type AppDispatch, type StoreSchema } from 'app/store';
 import { authActions } from 'entities/Auth.slice';
 import { type LoginParams, type LoginResponse } from './types';
 
@@ -22,34 +22,34 @@ const baseQueryWithRefresh = async (
   api: BaseQueryApi,
   extraOptions: Record<string, unknown>,
 ) => {
-  const result = await baseQuery(args, api, extraOptions);
+  const tokenDiedDate = localStorage.getItem(LsKeys.ACCESS_TOKEN_EXPIRED);
+  const tokenIsDied = !tokenDiedDate || new Date(tokenDiedDate) <= new Date();
 
-  if (result.error && result.error.status === 401) {
-    const refreshToken = localStorage.getItem(LsKeys.REFRESH_TOKEN);
+  if (tokenIsDied) {
+    const credentials = localStorage.getItem(LsKeys.CREDS);
 
-    if (refreshToken) {
-      const { data } = await baseQuery(
-        {
-          url: '/users/tokens/refresh',
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${refreshToken}`,
-          },
-          credentials: 'include',
+    if (credentials) {
+      const data = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+          Authorization: `Basic ${credentials}`,
+          'Content-Type': 'application/json',
         },
-        api,
-        extraOptions,
-      );
+        credentials: 'include',
+      }).then<LoginResponse>(res => res.json());
 
-      if (data) {
-        api.dispatch(authActions.setAccessToken((data as { accessToken: string }).accessToken));
+      if (data.accessToken) {
+        api.dispatch(authActions.setAccessToken(data.accessToken));
+        localStorage.setItem(LsKeys.ACCESS_TOKEN_EXPIRED, data.accessTokenExpiry);
 
         return baseQuery(args, api, extraOptions);
       }
+
+      clearStore(api.dispatch);
     }
   }
 
-  return result;
+  return baseQuery(args, api, extraOptions);
 };
 
 export const api = createApi({
@@ -58,6 +58,7 @@ export const api = createApi({
     login: builder.mutation<LoginResponse, LoginParams>({
       query: authData => {
         const credentials = btoa(`${authData.login}:${authData.password}`);
+        localStorage.setItem(LsKeys.CREDS, credentials);
 
         return {
           url: 'users/login',
@@ -73,6 +74,7 @@ export const api = createApi({
         const { data } = await queryFulfilled;
         dispatch(authActions.setAccessToken(data.accessToken));
         dispatch(authActions.setRefreshToken(data.refreshToken));
+        localStorage.setItem(LsKeys.ACCESS_TOKEN_EXPIRED, data.accessTokenExpiry);
       },
     }),
     logout: builder.mutation<void, void>({
@@ -81,9 +83,13 @@ export const api = createApi({
         method: 'POST',
       }),
       onQueryStarted(_authData, { dispatch }) {
-        dispatch(authActions.clear());
-        dispatch(api.util.resetApiState());
+        clearStore(dispatch);
       },
     }),
   }),
 });
+
+function clearStore(dispatch: AppDispatch) {
+  dispatch(authActions.clear());
+  dispatch(api.util.resetApiState());
+}
