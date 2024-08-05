@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { type RouteObject } from 'react-router-dom';
 import { Layout, PageLoader } from '@components';
+import { RequireAuth } from 'components/RequireAuth';
 
 export const routes: RouteObject[] = [
   {
@@ -23,46 +24,51 @@ export const routes: RouteObject[] = [
         Component: lazy(async () => import('@pages/SignUp')),
       },
       {
-        path: '/settings',
-        Component: lazy(async () => import('@pages/Settings')),
-      },
-      {
-        element: <Layout />,
+        element: <RequireAuth />,
         children: [
           {
-            element: <PageLoader />,
+            path: '/settings',
+            Component: lazy(async () => import('@pages/Settings')),
+          },
+          {
+            element: <Layout />,
             children: [
               {
-                path: '/',
-                Component: lazy(async () => import('@pages/Main')),
-              },
-              {
-                path: '/feed',
-                Component: lazy(async () => import('@pages/Feed')),
-              },
-              {
-                path: '/competitions',
-                Component: lazy(async () => import('@pages/Competitions')),
-              },
-              {
-                path: '/competitions/:id',
-                Component: lazy(async () => import('@pages/CompetitionDetail')),
-              },
-              {
-                path: '/competitions/:id/request',
-                Component: lazy(async () => import('@pages/CompetitionRequest')),
-              },
-              {
-                path: '/events',
-                Component: lazy(async () => import('@pages/Events')),
-              },
-              {
-                path: '/profile',
-                Component: lazy(async () => import('@pages/Profile')),
-              },
-              {
-                path: '*',
-                Component: lazy(async () => import('@pages/NotFound')),
+                element: <PageLoader />,
+                children: [
+                  {
+                    path: '/',
+                    Component: lazy(async () => import('@pages/Main')),
+                  },
+                  {
+                    path: '/feed',
+                    Component: lazy(async () => import('@pages/Feed')),
+                  },
+                  {
+                    path: '/competitions',
+                    Component: lazy(async () => import('@pages/Competitions')),
+                  },
+                  {
+                    path: '/competitions/:id',
+                    Component: lazy(async () => import('@pages/CompetitionDetail')),
+                  },
+                  {
+                    path: '/competitions/:id/request',
+                    Component: lazy(async () => import('@pages/CompetitionRequest')),
+                  },
+                  {
+                    path: '/events',
+                    Component: lazy(async () => import('@pages/Events')),
+                  },
+                  {
+                    path: '/profile',
+                    Component: lazy(async () => import('@pages/Profile')),
+                  },
+                  {
+                    path: '*',
+                    Component: lazy(async () => import('@pages/NotFound')),
+                  },
+                ],
               },
             ],
           },

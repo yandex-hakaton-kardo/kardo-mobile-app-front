@@ -1,11 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Button, PlusIcon, VkIcon } from '@components';
+import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import styles from './Auth.module.scss';
 
 export const Auth = () => {
   const lang = useLang().auth;
   const navigate = useNavigate();
+  const isAuth = !!useAppSelector(state => state.auth.accessToken);
+
+  if (isAuth) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className={styles.pageBg}>

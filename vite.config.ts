@@ -6,15 +6,17 @@ import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
-  const port = Number(import.meta.env?.VITE_PORT ?? 3000);
-  const host = import.meta.env?.VITE_HOST ?? 'http://localhost:5000';
-
   return {
     server: {
-      port,
+      port: 3000,
       strictPort: true,
       proxy: {
-        '/api': { target: host },
+        '/api': {
+          target: 'https://localhost:5000',
+          changeOrigin: true,
+          secure: false,
+          rewrite: path => path.replace('/api', ''),
+        },
       },
     },
     plugins: [
