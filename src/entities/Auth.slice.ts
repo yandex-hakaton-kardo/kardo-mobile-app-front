@@ -24,8 +24,7 @@ export const authSlice = createSlice({
       localStorage.setItem(LsKeys.REFRESH_TOKEN, payload);
     },
     clear() {
-      localStorage.removeItem(LsKeys.ACCESS_TOKEN);
-      localStorage.removeItem(LsKeys.REFRESH_TOKEN);
+      localStorage.clear();
 
       return {
         ...initialState,
