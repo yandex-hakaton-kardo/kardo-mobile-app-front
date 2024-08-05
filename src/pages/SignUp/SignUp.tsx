@@ -1,12 +1,22 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 import { Button, Password, TextInput } from '@components';
+import { api, useCreateUserMutation } from '@shared/api';
+import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import { type SignUpData, signupSchema } from './signup.schema';
 import styles from './SignUp.module.scss';
 
 export const SignUp = () => {
   const lang = useLang().auth;
+  const isAuth = !!useAppSelector(state => state.auth.accessToken);
+
+  const [login, { isLoading: loginLoading, isError: loginError }] = api.useLoginMutation();
+  const [register, { isLoading: registerLoading, isError: registerError }] = useCreateUserMutation();
+  const isLoading = registerLoading || loginLoading;
+  const error = registerError || loginError;
 
   const {
     control,
@@ -23,10 +33,21 @@ export const SignUp = () => {
   });
 
   const onSubmit = (data: SignUpData) => {
-    // TODO: прикрутить отправку на сервер
-    // eslint-disable-next-line no-console
-    console.log(data);
+    register({ newUserRequest: data })
+      .unwrap()
+      .then(() => login({ login: data.username, password: data.password }));
   };
+
+  useEffect(() => {
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  }, [error]);
+
+  if (isAuth) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className={styles.pageBg}>
@@ -85,7 +106,7 @@ export const SignUp = () => {
             onClick={handleSubmit(onSubmit)}
             disabled={!isValid}
           >
-            {lang.signUp}
+            {isLoading ? '...loading...' : lang.signUp}
           </Button>
         </form>
       </div>
