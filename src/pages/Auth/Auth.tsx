@@ -1,5 +1,5 @@
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button, PlusIcon, VkIcon } from '@components';
+import { AccountIcon, Button, PlusIcon, VkIcon } from '@components';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import styles from './Auth.module.scss';
@@ -30,6 +30,10 @@ export const Auth = () => {
           <Button disabled className={styles.accountButton} wide size="xl">
             <VkIcon width={48} height={48} />
             <span className={styles.btnText}>{lang.vkLogin}</span>
+          </Button>
+          <Button className={styles.accountButton} onClick={() => navigate('/auth/signin')} wide size="xl">
+            <AccountIcon width={48} height={48} />
+            <span className={styles.btnText}>{lang.hasAccount}</span>
           </Button>
         </div>
 

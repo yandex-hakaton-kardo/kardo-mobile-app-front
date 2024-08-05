@@ -1,8 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
-import { Button, Password, TextInput } from '@components';
+import { Link, Navigate } from 'react-router-dom';
+import { ArrowLeftIcon, Button, Password, TextInput } from '@components';
 import { api, useCreateUserMutation } from '@shared/api';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
@@ -13,10 +12,9 @@ export const SignUp = () => {
   const lang = useLang().auth;
   const isAuth = !!useAppSelector(state => state.auth.accessToken);
 
-  const [login, { isLoading: loginLoading, isError: loginError }] = api.useLoginMutation();
-  const [register, { isLoading: registerLoading, isError: registerError }] = useCreateUserMutation();
+  const [login, { isLoading: loginLoading }] = api.useLoginMutation();
+  const [register, { isLoading: registerLoading }] = useCreateUserMutation();
   const isLoading = registerLoading || loginLoading;
-  const error = registerError || loginError;
 
   const {
     control,
@@ -38,13 +36,6 @@ export const SignUp = () => {
       .then(() => login({ login: data.username, password: data.password }));
   };
 
-  useEffect(() => {
-    if (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-  }, [error]);
-
   if (isAuth) {
     return <Navigate to="/" replace />;
   }
@@ -52,6 +43,9 @@ export const SignUp = () => {
   return (
     <div className={styles.pageBg}>
       <div className={styles.page}>
+        <Link className={styles.navLink} to="/auth">
+          <ArrowLeftIcon height={48} width={48} />
+        </Link>
         <div className={styles.header}>
           <p className={styles.header1}>{lang.title}</p>
           <p className={styles.header2}>{lang.appName}</p>
@@ -104,9 +98,9 @@ export const SignUp = () => {
             view="action"
             type="submit"
             onClick={handleSubmit(onSubmit)}
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
           >
-            {isLoading ? '...loading...' : lang.signUp}
+            {lang.signUp}
           </Button>
         </form>
       </div>
