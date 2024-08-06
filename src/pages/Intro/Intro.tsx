@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@components';
+import { LsKeys } from '@shared/constants';
 import { Preloader } from 'components/Preloader';
 import styles from './Intro.module.scss';
-// import { useLang } from "context";
 
 export const Intro = () => {
   interface TState {
@@ -58,6 +58,7 @@ export const Intro = () => {
         text: 'Настрой уведомления, чтобы не пропускать онлайн-трансляции соревнований',
       }));
     } else {
+      localStorage.setItem(LsKeys.PASS_INTRO, 'true');
       navigate('/');
     }
   };
@@ -97,7 +98,7 @@ export const Intro = () => {
           <Button view="action" size="l" className={styles.button_for_video} onClick={clickButton}>
             {state.button}
           </Button>
-          <Link to="/">
+          <Link to="/" onClick={() => localStorage.setItem(LsKeys.PASS_INTRO, 'true')}>
             <p className={styles.text2}>Пропустить</p>
           </Link>
         </div>

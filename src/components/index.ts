@@ -7,3 +7,4 @@ export * from './TextInput';
 export * from './Password';
 export * from './NavButton';
 export * from './RequireAuth';
+export * from './IntroRedirect';

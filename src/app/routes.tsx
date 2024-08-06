@@ -1,5 +1,5 @@
 import { type RouteObject } from 'react-router-dom';
-import { Layout, PageLoader, RequireAuth } from '@components';
+import { IntroRedirect, Layout, RequireAuth } from '@components';
 import Auth from '@pages/Auth';
 import CompetitionDetail from '@pages/CompetitionDetail';
 import CompetitionRequest from '@pages/CompetitionRequest';
@@ -16,7 +16,7 @@ import SignUp from '@pages/SignUp';
 
 export const routes: RouteObject[] = [
   {
-    element: <PageLoader />,
+    element: <IntroRedirect />,
     children: [
       {
         path: '/intro',
@@ -45,41 +45,36 @@ export const routes: RouteObject[] = [
             element: <Layout />,
             children: [
               {
-                element: <PageLoader />,
-                children: [
-                  {
-                    path: '/',
-                    Component: Main,
-                  },
-                  {
-                    path: '/feed',
-                    Component: Feed,
-                  },
-                  {
-                    path: '/competitions',
-                    Component: Competitions,
-                  },
-                  {
-                    path: '/competitions/:id',
-                    Component: CompetitionDetail,
-                  },
-                  {
-                    path: '/competitions/:id/request',
-                    Component: CompetitionRequest,
-                  },
-                  {
-                    path: '/events',
-                    Component: Events,
-                  },
-                  {
-                    path: '/profile',
-                    Component: Profile,
-                  },
-                  {
-                    path: '*',
-                    Component: NotFound,
-                  },
-                ],
+                path: '/',
+                Component: Main,
+              },
+              {
+                path: '/feed',
+                Component: Feed,
+              },
+              {
+                path: '/competitions',
+                Component: Competitions,
+              },
+              {
+                path: '/competitions/:id',
+                Component: CompetitionDetail,
+              },
+              {
+                path: '/competitions/:id/request',
+                Component: CompetitionRequest,
+              },
+              {
+                path: '/events',
+                Component: Events,
+              },
+              {
+                path: '/profile',
+                Component: Profile,
+              },
+              {
+                path: '*',
+                Component: NotFound,
               },
             ],
           },
