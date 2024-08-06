@@ -1,28 +1,21 @@
 import clsx from 'clsx';
-import { debounce } from 'es-toolkit';
-import { useCallback, useState } from 'react';
 import { CrossIcon, MicrophoneIcon, SearchIcon } from 'components/icons';
 import styles from './SearchInput.module.scss';
 
 export interface SearchInputProps {
+  value: string;
   onUpdate: (search: string) => void;
   placeholder?: string;
   disabled?: boolean;
 }
 
-export const SearchInput = ({ onUpdate, placeholder, disabled }: SearchInputProps) => {
-  const [value, setValue] = useState('');
-
-  const onUpdateDebounced = useCallback(debounce(onUpdate, 500), [onUpdate]);
-
+export const SearchInput = ({ value, onUpdate, placeholder, disabled }: SearchInputProps) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setValue(newValue);
-    onUpdateDebounced(newValue);
+    onUpdate(newValue);
   };
 
   const onReset = () => {
-    setValue('');
     onUpdate('');
   };
 

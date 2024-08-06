@@ -1,0 +1,42 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.pageHeader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-block-end: 16px;
+  font: var(--font-header-2);
+}
+
+.headerText {
+  margin-inline-end: auto;
+}
+
+.searchWrapper {
+  margin-block-end: 32px;
+}
+
+.feedWrapper {
+  flex-grow: 1;
+  margin-block-end: 86px;
+  overflow-y: auto;
+}
+
+.listFeed {
+  grid-template-columns: 1fr;
+}
+
+.icon {
+  inline-size: 24px;
+  block-size: 24px;
+  color: var(--color-generic-active);
+}
+
+.active {
+  color: var(--color-inverted-primary);
+}

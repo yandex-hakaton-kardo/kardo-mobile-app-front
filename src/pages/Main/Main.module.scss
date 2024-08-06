@@ -39,51 +39,7 @@
   font: var(--font-header-3);
 }
 
-.recommendations {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  inline-size: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.recommendation {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.caption {
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  font: var(--font-body);
-}
-
-.author {
-  font: var(--font-caption);
-}
-
-.feed {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.feedItem {
-  inline-size: 100%;
-  block-size: 164px;
-  background-color: var(--color-generic);
-
-  &:last-child {
-    margin-block-end: 78px;
-  }
+.feedWrapper {
+  flex-grow: 1;
+  margin-block-end: 76px;
 }
