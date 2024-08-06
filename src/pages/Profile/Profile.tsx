@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Button, ExitIcon, HammerIcon, ToolsIcon } from '@components';
-import { api, useFindUserByIdQuery } from '@shared/api';
+import { api, useFindUserByUsernameQuery } from '@shared/api';
 import { format } from '@utils';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
@@ -9,8 +9,8 @@ import styles from './Profile.module.scss';
 
 export const Profile = () => {
   const lang = useLang().profile;
-  const userId = useAppSelector(state => state.auth.userId);
-  const { data: user } = useFindUserByIdQuery({ userId: Number(userId) });
+  const userName = useAppSelector(state => state.auth.userName);
+  const { data: user } = useFindUserByUsernameQuery({ username: userName ?? '' });
   const [logout] = api.useLogoutMutation();
 
   return (

@@ -3,14 +3,14 @@
   "info": { "title": "KARDO mobile application API" },
   "servers": [{ "url": "https://51.250.33.187", "description": "Generated server url" }],
   "tags": [
-    { "name": "POST", "description": "Взаимодействие с постами пользователей" },
-    { "name": "LOCATION", "description": "Взаимодействие с географическими локациями" },
-    { "name": "USER", "description": "Взаимодействие с пользователями" }
+    { "name": "Посты пользователей", "description": "Взаимодействие с постами пользователей" },
+    { "name": "Географические локации", "description": "Взаимодействие с географическими локациями" },
+    { "name": "Пользователи", "description": "Взаимодействие с пользователями" }
   ],
   "paths": {
     "/users/{userId}/friends/{friendId}": {
       "put": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Добавление пользователя в друзья",
         "operationId": "addFriend",
         "parameters": [
@@ -58,7 +58,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Удаление пользователя из друзей",
         "operationId": "deleteFriend",
         "parameters": [
@@ -105,7 +105,7 @@
     },
     "/posts/{postId}/like": {
       "put": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Добавление лайка посту",
         "operationId": "addLikeToPost",
         "parameters": [
@@ -145,7 +145,7 @@
     },
     "/users/{userId}/avatar": {
       "get": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Получение фотографии профиля",
         "operationId": "getUserProfilePicture",
         "parameters": [
@@ -186,7 +186,7 @@
         "security": [{ "JWT": [] }]
       },
       "post": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Обновление фотографии профиля",
         "operationId": "uploadProfilePicture",
         "parameters": [
@@ -232,7 +232,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Удаление фотографии профиля",
         "operationId": "deleteProfilePicture",
         "parameters": [
@@ -272,7 +272,7 @@
     },
     "/users/register": {
       "post": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Регистрация пользователя в приложении",
         "operationId": "createUser",
         "requestBody": {
@@ -309,7 +309,7 @@
     },
     "/posts": {
       "get": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Поиск всех постов пользователя",
         "operationId": "getAllPostByUser",
         "parameters": [
@@ -350,7 +350,7 @@
         "security": [{ "JWT": [] }]
       },
       "post": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Публикация нового поста",
         "operationId": "createPost",
         "parameters": [
@@ -404,7 +404,7 @@
     },
     "/posts/{postId}/comment": {
       "post": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Добавление комментария к посту",
         "operationId": "addCommentToPost",
         "parameters": [
@@ -451,7 +451,7 @@
     },
     "/users/{userId}": {
       "get": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Поиск пользователя по идентификатору",
         "operationId": "findUserById",
         "parameters": [
@@ -489,7 +489,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Удаление профиля пользователя",
         "operationId": "deleteUser",
         "parameters": [
@@ -527,7 +527,7 @@
         "security": [{ "JWT": [] }]
       },
       "patch": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Редактирование данных пользователя",
         "operationId": "updateUser",
         "parameters": [
@@ -571,7 +571,7 @@
     },
     "/posts/{postId}": {
       "get": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Поиск поста по идентификатору",
         "operationId": "getPostById",
         "parameters": [
@@ -609,7 +609,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Удаление поста",
         "operationId": "deletePost",
         "parameters": [
@@ -647,7 +647,7 @@
         "security": [{ "JWT": [] }]
       },
       "patch": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Редактирование поста",
         "operationId": "updatePost",
         "parameters": [
@@ -704,7 +704,7 @@
     },
     "/posts/{postId}/comment/{commentId}": {
       "delete": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Удаление комментария",
         "operationId": "deleteComment",
         "parameters": [
@@ -749,7 +749,7 @@
         "security": [{ "JWT": [] }]
       },
       "patch": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Редактирование комментария",
         "operationId": "updateComment",
         "parameters": [
@@ -803,8 +803,8 @@
     },
     "/users": {
       "get": {
-        "tags": ["USER"],
-        "summary": "Удаление пользователя из друзей",
+        "tags": ["Пользователи"],
+        "summary": "Поиск пользователей",
         "operationId": "findAllUsers",
         "parameters": [
           {
@@ -860,7 +860,7 @@
     },
     "/users/{userId}/friends": {
       "get": {
-        "tags": ["USER"],
+        "tags": ["Пользователи"],
         "summary": "Получение списка друзей пользователя",
         "operationId": "getFriendsList",
         "parameters": [
@@ -903,9 +903,49 @@
         "security": [{ "JWT": [] }]
       }
     },
+    "/users/info": {
+      "get": {
+        "tags": ["Пользователи"],
+        "summary": "Поиск пользователя по никнейму",
+        "operationId": "findUserByUsername",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Идентификатор пользователя",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": { "description": "OK", "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserDto" } } } }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
     "/posts/recommendations": {
       "get": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Получение рекомендаций",
         "operationId": "getRecommendations",
         "parameters": [
@@ -962,7 +1002,7 @@
     },
     "/posts/feed": {
       "get": {
-        "tags": ["POST"],
+        "tags": ["Посты пользователей"],
         "summary": "Получение ленты постов",
         "operationId": "getPostsFeed",
         "parameters": [
@@ -1012,7 +1052,7 @@
     },
     "/countries": {
       "get": {
-        "tags": ["LOCATION"],
+        "tags": ["Географические локации"],
         "summary": "Получение списка всех стран в алфавитном порядке",
         "operationId": "getAllCountries",
         "responses": {
@@ -1047,7 +1087,7 @@
     },
     "/countries/{countryId}": {
       "get": {
-        "tags": ["LOCATION"],
+        "tags": ["Географические локации"],
         "summary": "Получение страны по идентификатору",
         "operationId": "getCountryById",
         "parameters": [
@@ -1089,7 +1129,7 @@
     },
     "/countries/{countryId}/regions/{regionId}": {
       "get": {
-        "tags": ["LOCATION"],
+        "tags": ["Географические локации"],
         "summary": "Получение региона по идентификатору",
         "operationId": "getRegionById",
         "parameters": [
@@ -1138,7 +1178,7 @@
     },
     "/countries/{countryId}/regions/": {
       "get": {
-        "tags": ["LOCATION"],
+        "tags": ["Географические локации"],
         "summary": "Получение регионов по идентификатору страны",
         "operationId": "getAllRegionsByCountryId",
         "parameters": [
