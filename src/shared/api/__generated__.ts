@@ -1,10 +1,6 @@
 import { api } from './api';
 
-export const addTagTypes = [
-  '\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438',
-  '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-  '\u0413\u0435\u043E\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043B\u043E\u043A\u0430\u0446\u0438\u0438',
-] as const;
+export const addTagTypes = ['USERS', 'POSTS', 'LOCATIONS'] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
@@ -13,39 +9,35 @@ const injectedRtkApi = api
     endpoints: build => ({
       addFriend: build.mutation<AddFriendApiResponse, AddFriendApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}/friends/${queryArg.friendId}`, method: 'PUT' }),
-        invalidatesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        invalidatesTags: ['USERS'],
       }),
       deleteFriend: build.mutation<DeleteFriendApiResponse, DeleteFriendApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}/friends/${queryArg.friendId}`, method: 'DELETE' }),
-        invalidatesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        invalidatesTags: ['USERS'],
       }),
       addLikeToPost: build.mutation<AddLikeToPostApiResponse, AddLikeToPostApiArg>({
         query: queryArg => ({ url: `/posts/${queryArg.postId}/like`, method: 'PUT' }),
-        invalidatesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        invalidatesTags: ['POSTS'],
       }),
       getUserProfilePicture: build.query<GetUserProfilePictureApiResponse, GetUserProfilePictureApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}/avatar` }),
-        providesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        providesTags: ['USERS'],
       }),
       uploadProfilePicture: build.mutation<UploadProfilePictureApiResponse, UploadProfilePictureApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}/avatar`, method: 'POST', body: queryArg.body }),
-        invalidatesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        invalidatesTags: ['USERS'],
       }),
       deleteProfilePicture: build.mutation<DeleteProfilePictureApiResponse, DeleteProfilePictureApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}/avatar`, method: 'DELETE' }),
-        invalidatesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        invalidatesTags: ['USERS'],
       }),
       createUser: build.mutation<CreateUserApiResponse, CreateUserApiArg>({
         query: queryArg => ({ url: `/users/register`, method: 'POST', body: queryArg.newUserRequest }),
-        invalidatesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        invalidatesTags: ['USERS'],
       }),
       getAllPostByUser: build.query<GetAllPostByUserApiResponse, GetAllPostByUserApiArg>({
         query: queryArg => ({ url: `/posts`, params: { userId: queryArg.userId } }),
-        providesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        providesTags: ['POSTS'],
       }),
       createPost: build.mutation<CreatePostApiResponse, CreatePostApiArg>({
         query: queryArg => ({
@@ -54,9 +46,7 @@ const injectedRtkApi = api
           body: queryArg.body,
           params: { content: queryArg.content },
         }),
-        invalidatesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        invalidatesTags: ['POSTS'],
       }),
       addCommentToPost: build.mutation<AddCommentToPostApiResponse, AddCommentToPostApiArg>({
         query: queryArg => ({
@@ -64,33 +54,27 @@ const injectedRtkApi = api
           method: 'POST',
           body: queryArg.commentRequest,
         }),
-        invalidatesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        invalidatesTags: ['POSTS'],
       }),
       findUserById: build.query<FindUserByIdApiResponse, FindUserByIdApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}` }),
-        providesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        providesTags: ['USERS'],
       }),
       deleteUser: build.mutation<DeleteUserApiResponse, DeleteUserApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}`, method: 'DELETE' }),
-        invalidatesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        invalidatesTags: ['USERS'],
       }),
       updateUser: build.mutation<UpdateUserApiResponse, UpdateUserApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}`, method: 'PATCH', body: queryArg.userUpdateRequest }),
-        invalidatesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        invalidatesTags: ['USERS'],
       }),
       getPostById: build.query<GetPostByIdApiResponse, GetPostByIdApiArg>({
         query: queryArg => ({ url: `/posts/${queryArg.postId}` }),
-        providesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        providesTags: ['POSTS'],
       }),
       deletePost: build.mutation<DeletePostApiResponse, DeletePostApiArg>({
         query: queryArg => ({ url: `/posts/${queryArg.postId}`, method: 'DELETE' }),
-        invalidatesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        invalidatesTags: ['POSTS'],
       }),
       updatePost: build.mutation<UpdatePostApiResponse, UpdatePostApiArg>({
         query: queryArg => ({
@@ -99,15 +83,11 @@ const injectedRtkApi = api
           body: queryArg.body,
           params: { content: queryArg.content },
         }),
-        invalidatesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        invalidatesTags: ['POSTS'],
       }),
       deleteComment: build.mutation<DeleteCommentApiResponse, DeleteCommentApiArg>({
         query: queryArg => ({ url: `/posts/${queryArg.postId}/comment/${queryArg.commentId}`, method: 'DELETE' }),
-        invalidatesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        invalidatesTags: ['POSTS'],
       }),
       updateComment: build.mutation<UpdateCommentApiResponse, UpdateCommentApiArg>({
         query: queryArg => ({
@@ -115,63 +95,56 @@ const injectedRtkApi = api
           method: 'PATCH',
           body: queryArg.commentRequest,
         }),
-        invalidatesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        invalidatesTags: ['POSTS'],
       }),
       findAllUsers: build.query<FindAllUsersApiResponse, FindAllUsersApiArg>({
         query: queryArg => ({
           url: `/users`,
           params: { filter: queryArg.filter, page: queryArg.page, size: queryArg.size },
         }),
-        providesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        providesTags: ['USERS'],
       }),
       getFriendsList: build.query<GetFriendsListApiResponse, GetFriendsListApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}/friends` }),
-        providesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        providesTags: ['USERS'],
       }),
       findUserByUsername: build.query<FindUserByUsernameApiResponse, FindUserByUsernameApiArg>({
         query: queryArg => ({ url: `/users/info`, params: { username: queryArg.username } }),
-        providesTags: ['\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'],
+        providesTags: ['USERS'],
+      }),
+      searchPosts: build.query<SearchPostsApiResponse, SearchPostsApiArg>({
+        query: queryArg => ({
+          url: `/posts/search`,
+          params: { searchFilter: queryArg.searchFilter, page: queryArg.page, size: queryArg.size },
+        }),
+        providesTags: ['POSTS'],
       }),
       getRecommendations: build.query<GetRecommendationsApiResponse, GetRecommendationsApiArg>({
         query: queryArg => ({
           url: `/posts/recommendations`,
           params: { page: queryArg.page, size: queryArg.size, sort: queryArg.sort },
         }),
-        providesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        providesTags: ['POSTS'],
       }),
       getPostsFeed: build.query<GetPostsFeedApiResponse, GetPostsFeedApiArg>({
         query: queryArg => ({ url: `/posts/feed`, params: { page: queryArg.page, size: queryArg.size } }),
-        providesTags: [
-          '\u041F\u043E\u0441\u0442\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
-        ],
+        providesTags: ['POSTS'],
       }),
       getAllCountries: build.query<GetAllCountriesApiResponse, GetAllCountriesApiArg>({
         query: () => ({ url: `/countries` }),
-        providesTags: [
-          '\u0413\u0435\u043E\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043B\u043E\u043A\u0430\u0446\u0438\u0438',
-        ],
+        providesTags: ['LOCATIONS'],
       }),
       getCountryById: build.query<GetCountryByIdApiResponse, GetCountryByIdApiArg>({
         query: queryArg => ({ url: `/countries/${queryArg.countryId}` }),
-        providesTags: [
-          '\u0413\u0435\u043E\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043B\u043E\u043A\u0430\u0446\u0438\u0438',
-        ],
+        providesTags: ['LOCATIONS'],
       }),
       getRegionById: build.query<GetRegionByIdApiResponse, GetRegionByIdApiArg>({
         query: queryArg => ({ url: `/countries/${queryArg.countryId}/regions/${queryArg.regionId}` }),
-        providesTags: [
-          '\u0413\u0435\u043E\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043B\u043E\u043A\u0430\u0446\u0438\u0438',
-        ],
+        providesTags: ['LOCATIONS'],
       }),
       getAllRegionsByCountryId: build.query<GetAllRegionsByCountryIdApiResponse, GetAllRegionsByCountryIdApiArg>({
         query: queryArg => ({ url: `/countries/${queryArg.countryId}/regions/` }),
-        providesTags: [
-          '\u0413\u0435\u043E\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043B\u043E\u043A\u0430\u0446\u0438\u0438',
-        ],
+        providesTags: ['LOCATIONS'],
       }),
     }),
     overrideExisting: false,
@@ -308,6 +281,15 @@ export type FindUserByUsernameApiResponse = /** status 200 OK */ UserDto;
 export interface FindUserByUsernameApiArg {
   /** Идентификатор пользователя */
   username: string;
+}
+export type SearchPostsApiResponse = /** status 200 OK */ PostDto[];
+export interface SearchPostsApiArg {
+  /** Фильтр поиска */
+  searchFilter: PostSearchFilter;
+  /** Номер страницы */
+  page?: number;
+  /** Количество постов на странице */
+  size?: number;
 }
 export type GetRecommendationsApiResponse = /** status 200 OK */ PostDto[];
 export interface GetRecommendationsApiArg {
@@ -533,6 +515,10 @@ export interface UserSearchFilter {
   /** Поиск данного значения в никнейме или электронной почте */
   name?: string;
 }
+export interface PostSearchFilter {
+  /** Поиск данного значения в названии поста */
+  title?: string;
+}
 export interface CountryDto {
   /** Идентификатор страны */
   id?: number;
@@ -576,6 +562,8 @@ export const {
   useLazyGetFriendsListQuery,
   useFindUserByUsernameQuery,
   useLazyFindUserByUsernameQuery,
+  useSearchPostsQuery,
+  useLazySearchPostsQuery,
   useGetRecommendationsQuery,
   useLazyGetRecommendationsQuery,
   useGetPostsFeedQuery,

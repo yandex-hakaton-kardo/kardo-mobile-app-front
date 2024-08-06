@@ -23,6 +23,7 @@
 }
 
 .input {
+  flex-grow: 1;
   font: var(--font-body-small);
   line-height: 18px;
   border: none;

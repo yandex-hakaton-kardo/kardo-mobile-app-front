@@ -1,0 +1,51 @@
+.recommendations {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  inline-size: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.recommendation {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+  gap: 8px;
+  inline-size: 200px;
+  block-size: 140px;
+  object-fit: cover;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font: var(--font-body);
+}
+
+.author {
+  font: var(--font-caption);
+}
+
+.skeletons {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  block-size: 140px;
+}
+
+.placeholder {
+  display: flex;
+  justify-content: center;
+  block-size: 140px;
+  padding-block: 32px;
+}

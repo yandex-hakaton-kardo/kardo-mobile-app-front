@@ -1,3 +1,3 @@
-import { Feed } from './Feed';
+import { FeedPage } from './Feed';
 
-export default Feed;
+export default FeedPage;

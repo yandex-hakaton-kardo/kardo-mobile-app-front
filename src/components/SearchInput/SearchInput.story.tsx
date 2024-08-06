@@ -14,6 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Base: Story = {
   args: {
+    value: '',
     onUpdate: () => {},
     placeholder: 'Поиск',
     disabled: false,

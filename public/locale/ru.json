@@ -23,7 +23,13 @@
   "main": {
     "greeting": "Привет, {0}!",
     "recommendations": "Рекомендации",
+    "noRecommendations": "Рекомендаций нет",
+    "emptyFeed": "Лента пуста",
     "feed": "Лента"
+  },
+  "feed": {
+    "title": "Лента",
+    "search": "Поиск"
   },
   "profile": {
     "addFriends": "Добавить друзей",

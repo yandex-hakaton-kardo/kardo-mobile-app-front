@@ -1,0 +1,23 @@
+.feed {
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  inline-size: 100%;
+}
+
+.feedItem {
+  inline-size: 100%;
+  block-size: 164px;
+  background-color: var(--color-generic);
+}
+
+.placeholder {
+  display: flex;
+  justify-content: center;
+  margin-block: 32px;
+}
+
+.skeleton {
+  block-size: 164px;
+}

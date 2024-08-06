@@ -3,14 +3,14 @@
   "info": { "title": "KARDO mobile application API" },
   "servers": [{ "url": "https://51.250.33.187", "description": "Generated server url" }],
   "tags": [
-    { "name": "Посты пользователей", "description": "Взаимодействие с постами пользователей" },
-    { "name": "Географические локации", "description": "Взаимодействие с географическими локациями" },
-    { "name": "Пользователи", "description": "Взаимодействие с пользователями" }
+    { "name": "POSTS", "description": "Взаимодействие с постами пользователей" },
+    { "name": "LOCATIONS", "description": "Взаимодействие с географическими локациями" },
+    { "name": "USERS", "description": "Взаимодействие с пользователями" }
   ],
   "paths": {
     "/users/{userId}/friends/{friendId}": {
       "put": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Добавление пользователя в друзья",
         "operationId": "addFriend",
         "parameters": [
@@ -58,7 +58,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Удаление пользователя из друзей",
         "operationId": "deleteFriend",
         "parameters": [
@@ -105,7 +105,7 @@
     },
     "/posts/{postId}/like": {
       "put": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Добавление лайка посту",
         "operationId": "addLikeToPost",
         "parameters": [
@@ -145,7 +145,7 @@
     },
     "/users/{userId}/avatar": {
       "get": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Получение фотографии профиля",
         "operationId": "getUserProfilePicture",
         "parameters": [
@@ -186,7 +186,7 @@
         "security": [{ "JWT": [] }]
       },
       "post": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Обновление фотографии профиля",
         "operationId": "uploadProfilePicture",
         "parameters": [
@@ -232,7 +232,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Удаление фотографии профиля",
         "operationId": "deleteProfilePicture",
         "parameters": [
@@ -272,7 +272,7 @@
     },
     "/users/register": {
       "post": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Регистрация пользователя в приложении",
         "operationId": "createUser",
         "requestBody": {
@@ -309,7 +309,7 @@
     },
     "/posts": {
       "get": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Поиск всех постов пользователя",
         "operationId": "getAllPostByUser",
         "parameters": [
@@ -350,7 +350,7 @@
         "security": [{ "JWT": [] }]
       },
       "post": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Публикация нового поста",
         "operationId": "createPost",
         "parameters": [
@@ -404,7 +404,7 @@
     },
     "/posts/{postId}/comment": {
       "post": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Добавление комментария к посту",
         "operationId": "addCommentToPost",
         "parameters": [
@@ -451,7 +451,7 @@
     },
     "/users/{userId}": {
       "get": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Поиск пользователя по идентификатору",
         "operationId": "findUserById",
         "parameters": [
@@ -489,7 +489,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Удаление профиля пользователя",
         "operationId": "deleteUser",
         "parameters": [
@@ -527,7 +527,7 @@
         "security": [{ "JWT": [] }]
       },
       "patch": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Редактирование данных пользователя",
         "operationId": "updateUser",
         "parameters": [
@@ -571,7 +571,7 @@
     },
     "/posts/{postId}": {
       "get": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Поиск поста по идентификатору",
         "operationId": "getPostById",
         "parameters": [
@@ -609,7 +609,7 @@
         "security": [{ "JWT": [] }]
       },
       "delete": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Удаление поста",
         "operationId": "deletePost",
         "parameters": [
@@ -647,7 +647,7 @@
         "security": [{ "JWT": [] }]
       },
       "patch": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Редактирование поста",
         "operationId": "updatePost",
         "parameters": [
@@ -704,7 +704,7 @@
     },
     "/posts/{postId}/comment/{commentId}": {
       "delete": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Удаление комментария",
         "operationId": "deleteComment",
         "parameters": [
@@ -749,7 +749,7 @@
         "security": [{ "JWT": [] }]
       },
       "patch": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Редактирование комментария",
         "operationId": "updateComment",
         "parameters": [
@@ -803,7 +803,7 @@
     },
     "/users": {
       "get": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Поиск пользователей",
         "operationId": "findAllUsers",
         "parameters": [
@@ -860,7 +860,7 @@
     },
     "/users/{userId}/friends": {
       "get": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Получение списка друзей пользователя",
         "operationId": "getFriendsList",
         "parameters": [
@@ -905,7 +905,7 @@
     },
     "/users/info": {
       "get": {
-        "tags": ["Пользователи"],
+        "tags": ["USERS"],
         "summary": "Поиск пользователя по никнейму",
         "operationId": "findUserByUsername",
         "parameters": [
@@ -943,9 +943,66 @@
         "security": [{ "JWT": [] }]
       }
     },
+    "/posts/search": {
+      "get": {
+        "tags": ["POSTS"],
+        "summary": "Поиск постов",
+        "operationId": "searchPosts",
+        "parameters": [
+          {
+            "name": "searchFilter",
+            "in": "query",
+            "description": "Фильтр поиска",
+            "required": true,
+            "schema": { "$ref": "#/components/schemas/PostSearchFilter" }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Количество постов на странице",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 10 }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/PostDto" } } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
     "/posts/recommendations": {
       "get": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Получение рекомендаций",
         "operationId": "getRecommendations",
         "parameters": [
@@ -1002,7 +1059,7 @@
     },
     "/posts/feed": {
       "get": {
-        "tags": ["Посты пользователей"],
+        "tags": ["POSTS"],
         "summary": "Получение ленты постов",
         "operationId": "getPostsFeed",
         "parameters": [
@@ -1052,7 +1109,7 @@
     },
     "/countries": {
       "get": {
-        "tags": ["Географические локации"],
+        "tags": ["LOCATIONS"],
         "summary": "Получение списка всех стран в алфавитном порядке",
         "operationId": "getAllCountries",
         "responses": {
@@ -1087,7 +1144,7 @@
     },
     "/countries/{countryId}": {
       "get": {
-        "tags": ["Географические локации"],
+        "tags": ["LOCATIONS"],
         "summary": "Получение страны по идентификатору",
         "operationId": "getCountryById",
         "parameters": [
@@ -1129,7 +1186,7 @@
     },
     "/countries/{countryId}/regions/{regionId}": {
       "get": {
-        "tags": ["Географические локации"],
+        "tags": ["LOCATIONS"],
         "summary": "Получение региона по идентификатору",
         "operationId": "getRegionById",
         "parameters": [
@@ -1178,7 +1235,7 @@
     },
     "/countries/{countryId}/regions/": {
       "get": {
-        "tags": ["Географические локации"],
+        "tags": ["LOCATIONS"],
         "summary": "Получение регионов по идентификатору страны",
         "operationId": "getAllRegionsByCountryId",
         "parameters": [
@@ -1508,6 +1565,11 @@
           "name": { "type": "string", "description": "Поиск данного значения в никнейме или электронной почте" }
         },
         "description": "Фильтр поиска пользователей"
+      },
+      "PostSearchFilter": {
+        "type": "object",
+        "properties": { "title": { "type": "string", "description": "Поиск данного значения в названии поста" } },
+        "description": "Фильтр поиска постов"
       },
       "CountryDto": {
         "type": "object",

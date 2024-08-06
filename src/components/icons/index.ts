@@ -1,4 +1,5 @@
 export { default as AccountIcon } from './account.svg?react';
+export { default as AllIcon } from './all.svg?react';
 export { default as ArrowDownIcon } from './arrowDown.svg?react';
 export { default as ArrowLeftIcon } from './arrowLeft.svg?react';
 export { default as ArrowRightIcon } from './arrowRight.svg?react';
@@ -15,6 +16,7 @@ export { default as HammerIcon } from './hammer.svg?react';
 export { default as HeartIcon } from './heart.svg?react';
 export { default as LanguageIcon } from './language.svg?react';
 export { default as LikeIcon } from './like.svg?react';
+export { default as ListIcon } from './list.svg?react';
 export { default as LockIcon } from './lock.svg?react';
 export { default as MainIcon } from './main.svg?react';
 export { default as MicrophoneIcon } from './microphone.svg?react';
