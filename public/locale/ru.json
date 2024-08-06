@@ -25,6 +25,11 @@
     "recommendations": "Рекомендации",
     "feed": "Лента"
   },
+  "profile": {
+    "addFriends": "Добавить друзей",
+    "countPublications": "{0} публикаций",
+    "countFriends": "{0} друзей"
+  },
   "settings": {
     "title": "Настройки",
     "account": "Аккаунт",

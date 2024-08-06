@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
 import { ArrowLeftIcon, Button, Password, TextInput } from '@components';
 import { api, useCreateUserMutation } from '@shared/api';
+import { LsKeys } from '@shared/constants';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import { type SignUpData, signupSchema } from './signup.schema';
@@ -33,6 +34,7 @@ export const SignUp = () => {
   const onSubmit = (data: SignUpData) => {
     register({ newUserRequest: data })
       .unwrap()
+      .then(res => localStorage.setItem(LsKeys.USER_ID, String(res.id)))
       .then(() => login({ login: data.username, password: data.password }));
   };
 

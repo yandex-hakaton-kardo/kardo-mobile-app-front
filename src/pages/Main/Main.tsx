@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom';
 import { ToolsIcon } from '@components';
+import { useFindUserByIdQuery } from '@shared/api';
 import { format } from '@utils';
+import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import { mockPosts } from './constants';
 import styles from './Main.module.scss';
 
 export const Main = () => {
   const lang = useLang().main;
-
-  const username = 'username';
+  const userId = useAppSelector(state => state.auth.userId);
+  const { data: user } = useFindUserByIdQuery({ userId: Number(userId) });
 
   return (
     <div className={styles.page}>
       <header className={styles.pageHeader}>
-        <span>{format(lang.greeting, username)}</span>
+        {user?.username && <span>{format(lang.greeting, user.username)}</span>}
         <Link to="/settings">
           <ToolsIcon className={styles.settingsIcon} />
         </Link>
