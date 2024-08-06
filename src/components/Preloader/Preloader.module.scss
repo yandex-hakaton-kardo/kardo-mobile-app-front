@@ -19,18 +19,9 @@ $dur: 0.1s;
   stroke-dasharray: $offset;
   stroke-dashoffset: 0;
   transform-origin: center;
+  stroke: var(--color-inverted-primary);
   animation:
     dash $duration ease-out infinite,
-    colors $dur ease-out infinite;
-}
-
-@keyframes colors {
-  0% {
-    stroke: white;
-  }
-  100% {
-    stroke: white;
-  }
 }
 
 @keyframes dash {
@@ -38,7 +29,7 @@ $dur: 0.1s;
     stroke-dashoffset: $offset;
   }
   50% {
-    stroke-dashoffset: $offset/4;
+    stroke-dashoffset: calc($offset/4);
     transform: rotate(135deg);
   }
   100% {
