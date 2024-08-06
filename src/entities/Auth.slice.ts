@@ -33,7 +33,7 @@ export const authSlice = createSlice({
       localStorage.clear();
 
       return {
-        ...initialState,
+        userName: null,
         accessToken: null,
         refreshToken: null,
       };

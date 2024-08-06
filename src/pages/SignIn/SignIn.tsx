@@ -2,18 +2,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
 import { ArrowLeftIcon, Button, Password, TextInput } from '@components';
-import { api } from '@shared/api';
-import { useAppDispatch, useAppSelector } from 'app/store';
+import { authApi } from '@shared/api';
+import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
-import { authActions } from 'entities/Auth.slice';
 import { type SignInData, signinSchema } from './signin.schema';
 import styles from './SignIn.module.scss';
 
 export const SignIn = () => {
   const lang = useLang().auth;
-  const dispatch = useAppDispatch();
   const isAuth = !!useAppSelector(state => state.auth.accessToken);
-  const [login, { isLoading }] = api.useLoginMutation();
+  const [login, { isLoading }] = authApi.useLoginMutation();
 
   const {
     control,
@@ -29,9 +27,7 @@ export const SignIn = () => {
   });
 
   const onSubmit = (data: SignInData) => {
-    login({ login: data.username, password: data.password })
-      .unwrap()
-      .then(() => dispatch(authActions.setUserInfo(data.username)));
+    login({ login: data.username, password: data.password });
   };
 
   if (isAuth) {

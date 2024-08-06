@@ -1,13 +1,23 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAppSelector } from 'app/store';
+import { useFindUserByUsernameQuery } from '@shared/api';
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { PageLoader } from 'components/PageLoader';
+import { authActions } from 'entities/Auth.slice';
 
 export const RequireAuth = () => {
-  const { accessToken } = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
+  const username = useAppSelector(state => state.auth.userName);
+  const { isSuccess } = useFindUserByUsernameQuery({ username: username! }, { skip: !username });
   const location = useLocation();
 
-  if (!accessToken) {
+  if (!username) {
+    dispatch(authActions.clear());
     return <Navigate to="/auth" state={{ from: location }} replace />;
   }
 
-  return <Outlet />;
+  if (isSuccess) {
+    return <Outlet />;
+  }
+
+  return <PageLoader />;
 };

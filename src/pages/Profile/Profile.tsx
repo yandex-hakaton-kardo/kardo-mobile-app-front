@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Button, ExitIcon, HammerIcon, ToolsIcon } from '@components';
-import { api, useFindUserByUsernameQuery } from '@shared/api';
+import { authApi, useFindUserByUsernameQuery } from '@shared/api';
 import { format } from '@utils';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
@@ -11,7 +11,7 @@ export const Profile = () => {
   const lang = useLang().profile;
   const userName = useAppSelector(state => state.auth.userName);
   const { data: user } = useFindUserByUsernameQuery({ username: userName ?? '' });
-  const [logout] = api.useLogoutMutation();
+  const [logout] = authApi.useLogoutMutation();
 
   return (
     <div className={styles.page}>
