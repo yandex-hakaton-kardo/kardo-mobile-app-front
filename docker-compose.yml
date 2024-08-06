@@ -1,32 +1,5 @@
-version: '3.1'
 services:
-  kardo-backend-app:
-    image: vvbakh/kardo-mobile-app-back
-    container_name: kardo-backend-app
+  front:
+    build: .
     ports:
-      - '5000:443'
-    depends_on:
-      - kardo-db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://kardo-db:5432/kardo-db
-      - POSTGRES_DB=kardo-db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - FILE_STORAGE_PATH=/data
-      - SSL_LOCATION=/etc/ssl/certs/keystore.p12
-    volumes:
-      - /home/workshop/kardo/files:/data
-
-  kardo-db:
-    image: postgres:16-alpine
-    container_name: kardo-db
-    ports:
-      - '5432:5432'
-    environment:
-      - POSTGRES_DB=kardo-db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-volumes:
-  pgdata:
+      - '${VITE_PORT:-3000}:80'
