@@ -10,28 +10,30 @@ $dur: 0.1s;
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(270deg);
   }
 }
 
 .path {
+  stroke: var(--color-inverted-primary);
+  transform-origin: center;
+  animation: dash $duration ease-out infinite;
   stroke-dasharray: $offset;
   stroke-dashoffset: 0;
-  transform-origin: center;
-  stroke: var(--color-inverted-primary);
-  animation:
-    dash $duration ease-out infinite,
 }
 
 @keyframes dash {
   0% {
     stroke-dashoffset: $offset;
   }
+
   50% {
-    stroke-dashoffset: calc($offset/4);
+    stroke-dashoffset: calc($offset / 4);
     transform: rotate(135deg);
   }
+
   100% {
     stroke-dashoffset: $offset;
     transform: rotate(450deg);

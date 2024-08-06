@@ -1,143 +1,139 @@
 .container {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  width: 100%;
-  background: url('../../public/images/onBoardImg.png') no-repeat center;
+  inline-size: 100%;
+  block-size: 100vh;
+  background: url('/images/onBoardImg.png') no-repeat center;
   background-size: cover;
-  position: relative;
-  z-index: 1;
 }
 
 .container::before {
-  content: '';
-  background-color: var(--color-black-out-mid);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
   position: absolute;
+  inset: 0;
+  content: '';
   z-index: -1;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: var(--color-black-out-mid);
 }
 
 .header {
-  font: var(--font-header-2);
+  margin-block-start: 79px;
   color: var(--color-inverted-primary);
-  margin-top: 79px;
+  font: var(--font-header-2);
   text-align: center;
 }
 
 .header2 {
-  font: var(--font-header-1);
+  margin-block-start: 16px;
   color: var(--color-inverted-primary);
-  margin-top: 16px;
+  font: var(--font-header-1);
 }
 
 .text {
-  font: var(--font-accent);
-  color: var(--color-inverted-primary);
   position: absolute;
-  bottom: 18%;
+  inset-block-end: 18%;
+  color: var(--color-inverted-primary);
+  font: var(--font-accent);
 }
 
 .text2 {
-  font: var(--font-body-small);
-  color: var(--color-inverted-primary);
   position: absolute;
-  top: 5%;
-  right: 5%;
+  inset-block-start: 5%;
+  inset-inline-end: 5%;
+  color: var(--color-inverted-primary);
+  font: var(--font-body-small);
 }
 
 .text_for_video {
-  font: var(--font-accent);
-  color: var(--color-inverted-primary);
   position: absolute;
-  bottom: 53%;
-  text-align: center;
+  inset-block-end: 53%;
   display: block;
-  margin: 0 auto;
+  margin-block: 0;
+  margin-inline: auto;
+  color: var(--color-inverted-primary);
+  font: var(--font-accent);
+  text-align: center;
 }
 
 .strip_rectangle {
-  width: 18px;
-  margin-right: 8px;
-  height: 100%;
+  inline-size: 18px;
+  block-size: 100%;
+  margin-inline-end: 8px;
   background-color: var(--color-generic-active);
 }
 
 .strip_rectangle1 {
-  width: 18px;
-  margin-right: 8px;
-  height: 100%;
+  inline-size: 18px;
+  block-size: 100%;
+  margin-inline-end: 8px;
   background-color: var(--color-generic-active);
-  animation-name: long_rectangle;
+  animation-name: long-rectangle;
   animation-duration: 0.5s;
-  animation-fill-mode: forwards;
   animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
 .strip {
   position: absolute;
-  bottom: 46%;
-  height: 4px;
-  width: 88px;
+  inset-block-end: 46%;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  inline-size: 88px;
+  block-size: 4px;
 }
 
 .button_for_video {
   position: absolute;
-  bottom: 5%;
-  height: 45px;
-  width: calc(100% - 8%);
+  inset-block-end: 5%;
+  inline-size: calc(100% - 8%);
+  block-size: 45px;
   color: var(--color-inverted-primary);
 }
 
 .video_wrap {
-  content: '';
-  background-color: var(--color-black-out-mid);
-  height: 100vh;
-  width: 100%;
   position: relative;
-  overflow: hidden;
+  content: '';
   display: flex;
+  inline-size: 100%;
+  block-size: 100vh;
+  background-color: var(--color-black-out-mid);
+  overflow: hidden;
 }
 
 .video_bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -1;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: cover;
   object-position: center;
 }
 
 .container_video {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  z-index: 1;
+  inline-size: 100%;
+  block-size: 100vh;
 }
 
-@keyframes long_rectangle {
+@keyframes long-rectangle {
   from {
-    width: 18px;
+    inline-size: 18px;
     background-color: var(--color-generic-active);
   }
+
   to {
-    width: 36px;
+    inline-size: 36px;
     background-color: var(--color-inverted-primary);
   }
 }

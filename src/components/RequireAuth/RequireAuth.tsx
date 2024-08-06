@@ -8,7 +8,7 @@ import { authActions } from 'entities/Auth.slice';
 export const RequireAuth = () => {
   const dispatch = useAppDispatch();
   const username = useAppSelector(state => state.auth.userName);
-  const { isSuccess, isError } = useFindUserByUsernameQuery({ username: username! }, { skip: !username });
+  const { isSuccess, isError } = useFindUserByUsernameQuery({ username: username ?? '' }, { skip: !username });
   const location = useLocation();
 
   useEffect(() => {
