@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ToolsIcon } from '@components';
-import { useFindUserByIdQuery } from '@shared/api';
+import { useFindUserByUsernameQuery } from '@shared/api';
 import { format } from '@utils';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
@@ -9,8 +9,8 @@ import styles from './Main.module.scss';
 
 export const Main = () => {
   const lang = useLang().main;
-  const userId = useAppSelector(state => state.auth.userId);
-  const { data: user } = useFindUserByIdQuery({ userId: Number(userId) });
+  const userName = useAppSelector(state => state.auth.userName);
+  const { data: user } = useFindUserByUsernameQuery({ username: userName ?? '' });
 
   return (
     <div className={styles.page}>

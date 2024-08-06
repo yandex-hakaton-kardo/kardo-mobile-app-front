@@ -2,13 +2,13 @@ import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LsKeys } from '@shared/constants';
 
 export interface UserSchema {
-  userId: string | null;
+  userName: string | null;
   accessToken: string | null;
   refreshToken: string | null;
 }
 
 const initialState: UserSchema = {
-  userId: localStorage.getItem(LsKeys.USER_ID),
+  userName: localStorage.getItem(LsKeys.USERNAME),
   accessToken: localStorage.getItem(LsKeys.ACCESS_TOKEN),
   refreshToken: localStorage.getItem(LsKeys.REFRESH_TOKEN),
 };
@@ -17,6 +17,10 @@ export const authSlice = createSlice({
   name: 'Auth',
   initialState,
   reducers: {
+    setUserInfo(state, { payload }: PayloadAction<string>) {
+      state.userName = payload;
+      localStorage.setItem(LsKeys.USERNAME, payload);
+    },
     setAccessToken(state, { payload }: PayloadAction<string>) {
       state.accessToken = payload;
       localStorage.setItem(LsKeys.ACCESS_TOKEN, payload);
