@@ -2,19 +2,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
 import { ArrowLeftIcon, Button, Password, TextInput } from '@components';
-import { api, useCreateUserMutation } from '@shared/api';
-import { useAppDispatch, useAppSelector } from 'app/store';
+import { authApi, useCreateUserMutation } from '@shared/api';
+import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
-import { authActions } from 'entities/Auth.slice';
 import { type SignUpData, signupSchema } from './signup.schema';
 import styles from './SignUp.module.scss';
 
 export const SignUp = () => {
   const lang = useLang().auth;
-  const dispatch = useAppDispatch();
   const isAuth = !!useAppSelector(state => state.auth.userName);
 
-  const [login, { isLoading: loginLoading }] = api.useLoginMutation();
+  const [login, { isLoading: loginLoading }] = authApi.useLoginMutation();
   const [register, { isLoading: registerLoading }] = useCreateUserMutation();
   const isLoading = registerLoading || loginLoading;
 
@@ -35,7 +33,6 @@ export const SignUp = () => {
   const onSubmit = (data: SignUpData) => {
     register({ newUserRequest: data })
       .unwrap()
-      .then(() => dispatch(authActions.setUserInfo(data.username)))
       .then(() => login({ login: data.username, password: data.password }));
   };
 
