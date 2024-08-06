@@ -10,7 +10,6 @@ export const authApi = createApi({
     login: builder.mutation<LoginResponse, LoginParams>({
       query: authData => {
         const credentials = btoa(`${authData.login}:${authData.password}`);
-        localStorage.setItem(LsKeys.CREDS, credentials);
 
         return {
           url: 'users/login',
@@ -32,19 +31,14 @@ export const authApi = createApi({
       },
     }),
     logout: builder.mutation<void, void>({
-      query: () => {
-        const credentials = localStorage.getItem(LsKeys.CREDS);
-
-        return {
-          url: 'users/logout',
-          method: 'POST',
-          headers: {
-            Authorization: `Basic ${credentials}`,
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        };
-      },
+      query: () => ({
+        url: 'users/logout',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }),
       onQueryStarted(_authData, { dispatch }) {
         setTimeout(() => {
           dispatch(authActions.clear());
