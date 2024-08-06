@@ -35,7 +35,7 @@ export const SignUp = () => {
   const onSubmit = (data: SignUpData) => {
     register({ newUserRequest: data })
       .unwrap()
-      .then(res => dispatch(authActions.setUserInfo(String(res.id))))
+      .then(() => dispatch(authActions.setUserInfo(data.username)))
       .then(() => login({ login: data.username, password: data.password }));
   };
 
