@@ -78,12 +78,21 @@ export const api = createApi({
       },
     }),
     logout: builder.mutation<void, void>({
-      query: () => ({
-        url: 'users/logout',
-        method: 'POST',
-      }),
+      query: () => {
+        const credentials = localStorage.getItem(LsKeys.CREDS);
+
+        return {
+          url: 'users/logout',
+          method: 'POST',
+          headers: {
+            Authorization: `Basic ${credentials}`,
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        };
+      },
       onQueryStarted(_authData, { dispatch }) {
-        clearStore(dispatch);
+        setTimeout(() => clearStore(dispatch));
       },
     }),
   }),
