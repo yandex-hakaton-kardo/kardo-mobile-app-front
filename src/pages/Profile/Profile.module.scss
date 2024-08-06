@@ -1,0 +1,53 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  padding: 16px;
+  font: var(--font-body);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  margin-block-end: 32px;
+}
+
+.hammerIcon {
+  margin-inline-end: auto;
+}
+
+.icon {
+  inline-size: 48px;
+  block-size: 48px;
+  color: var(--color-inverted-primary);
+}
+
+.mainUserInfo {
+  display: flex;
+  gap: 32px;
+}
+
+.avatar {
+  margin-block-end: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
+
+.name {
+  margin-block-end: 8px;
+  font: var(--font-header-2);
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-block-end: 16px;
+}
+
+.addFriend {
+  margin-block-end: 16px;
+}
