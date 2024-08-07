@@ -88,7 +88,7 @@ export const api = createApi({
   tagTypes: ['POSTS'],
   baseQuery: baseQueryWithReAuth,
   endpoints: build => ({
-    getFeed: build.query<PostDto[], { page: number; size: number; searchFilter: string }>({
+    getFeed: build.query<PostDto[], { page: number; size?: number; searchFilter?: string }>({
       query: ({ page = 0, size = 10, searchFilter = '' }) => ({
         url: `/posts/search`,
         params: { page, size, title: searchFilter },

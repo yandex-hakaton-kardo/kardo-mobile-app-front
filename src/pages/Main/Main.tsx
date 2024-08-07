@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { TicketBanner, ToolsIcon } from '@components';
-import { useFindUserByUsernameQuery } from '@shared/api';
-import { format } from '@utils';
+import { api, useFindUserByUsernameQuery } from '@shared/api';
+import { format, useInfiniteScroll } from '@utils';
 import { Feed } from '@widgets/Feed';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
@@ -15,6 +15,11 @@ export const Main = () => {
   const lang = useLang().main;
   const userName = useAppSelector(state => state.auth.userName);
   const { data: user } = useFindUserByUsernameQuery({ username: userName ?? '' });
+
+  const { data: posts } = useInfiniteScroll({
+    scrollableContainerRef: pageRef,
+    fetchFn: page => api.useGetFeedQuery({ page, size: 8 }),
+  });
 
   return (
     <div className={styles.page} ref={pageRef}>
@@ -37,7 +42,7 @@ export const Main = () => {
       <div className={clsx(styles.section, styles.feed)}>
         <div className={styles.sectionHeader}>{lang.feed}</div>
         <div className={styles.feedWrapper}>
-          <Feed scrollableContainerRef={pageRef} />
+          <Feed posts={posts} />
         </div>
       </div>
     </div>

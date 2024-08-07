@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  margin-block-end: 32px;
+}
+
+.hammerIcon {
+  margin-inline-end: auto;
+}
+
+.icon {
+  inline-size: 48px;
+  block-size: 48px;
+  color: var(--color-inverted-primary);
+}
