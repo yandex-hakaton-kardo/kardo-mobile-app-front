@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ToolsIcon } from '@components';
+import { TicketBanner, ToolsIcon } from '@components';
 import { useFindUserByUsernameQuery } from '@shared/api';
 import { format } from '@utils';
 import { Feed } from '@widgets/Feed';
@@ -29,6 +29,10 @@ export const Main = () => {
         <div className={styles.sectionHeader}>{lang.recommendations}</div>
         <Recommendations />
       </div>
+
+      <a href="https://kardoaward.com/" target="__blank">
+        <TicketBanner width="100%" height="100%" />
+      </a>
 
       <div className={clsx(styles.section, styles.feed)}>
         <div className={styles.sectionHeader}>{lang.feed}</div>
