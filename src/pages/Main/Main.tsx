@@ -19,7 +19,7 @@ export const Main = () => {
   return (
     <div className={styles.page} ref={pageRef}>
       <header className={styles.pageHeader}>
-        {user?.username && <span>{format(lang.greeting, user.username)}</span>}
+        {user?.username && <span className={styles.username}>{format(lang.greeting, user.username)}</span>}
         <Link to="/settings">
           <ToolsIcon className={styles.settingsIcon} />
         </Link>

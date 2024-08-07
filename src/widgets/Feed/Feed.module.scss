@@ -7,9 +7,37 @@
 }
 
 .feedItem {
+  position: relative;
   inline-size: 100%;
   block-size: 164px;
   background-color: var(--color-generic);
+}
+
+.info {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  display: flex;
+  flex-direction: column;
+  padding-block: 8px;
+  padding-inline: 12px;
+  color: var(--color-inverted-primary);
+  background-color: var(--color-black-out-mid);
+}
+
+.title {
+  font: var(--font-body);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.author {
+  color: var(--color-generic);
+  font: var(--font-caption);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .placeholder {
