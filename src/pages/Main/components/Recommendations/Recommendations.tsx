@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Skeleton } from '@components';
 import { api } from '@shared/api';
 import { useInfiniteScroll } from '@utils';
 import { Video } from '@widgets/Video';
@@ -20,9 +21,19 @@ export const Recommendations = () => {
     return <div className={styles.placeholder}>{lang.noRecommendations}</div>;
   }
 
+  if (!recommendations) {
+    return (
+      <div className={styles.skeletons}>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.recommendations} ref={ref}>
-      {recommendations?.map(post => (
+      {recommendations.map(post => (
         <Link key={post.id} to={`/video/${post.id}}`} className={styles.recommendation}>
           <Video src={post.file?.filePath?.replace('/home/workshop/kardo/files/', '')} />
           <div className={styles.caption}>

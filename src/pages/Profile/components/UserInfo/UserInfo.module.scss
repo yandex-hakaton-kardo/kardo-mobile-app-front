@@ -1,0 +1,23 @@
+.mainUserInfo {
+  display: flex;
+  gap: 32px;
+}
+
+.avatar {
+  margin-block-end: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
+
+.name {
+  margin-block-end: 8px;
+  font: var(--font-header-2);
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-block-end: 16px;
+}

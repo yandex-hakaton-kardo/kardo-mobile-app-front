@@ -1,25 +1,17 @@
 import clsx from 'clsx';
-import { type RefObject } from 'react';
 import { Link } from 'react-router-dom';
-import { api } from '@shared/api';
-import { useInfiniteScroll } from '@utils';
+import { type PostDto } from '@shared/api';
 import { useLang } from 'context';
 import { Video } from '../Video';
 import styles from './Feed.module.scss';
 
 interface FeedProps {
-  scrollableContainerRef: RefObject<HTMLElement>;
-  searchFilter?: string;
+  posts?: PostDto[];
   className?: string;
 }
 
-export const Feed = ({ scrollableContainerRef, className, searchFilter = '' }: FeedProps) => {
+export const Feed = ({ posts, className }: FeedProps) => {
   const lang = useLang().main;
-
-  const { data: posts } = useInfiniteScroll({
-    scrollableContainerRef,
-    fetchFn: page => api.useGetFeedQuery({ page, size: 8, searchFilter }),
-  });
 
   if (posts && posts.length === 0) {
     return <div className={styles.placeholder}>{lang.emptyFeed}</div>;
