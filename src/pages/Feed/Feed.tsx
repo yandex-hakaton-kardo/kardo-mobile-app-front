@@ -17,7 +17,7 @@ export const FeedPage = () => {
 
   const { data: posts } = useInfiniteScroll({
     scrollableContainerRef: ref,
-    fetchFn: page => api.useGetFeedQuery({ page, size: 8 }),
+    fetchFn: page => api.useGetFeedQuery({ page, size: 8, searchFilter: search }),
   });
 
   return (
