@@ -25,6 +25,12 @@
   color: var(--color-inverted-primary);
 }
 
+.username {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .section {
   display: flex;
   flex-direction: column;

@@ -30,6 +30,10 @@ export const Feed = ({ scrollableContainerRef, className, searchFilter = '' }: F
       {posts?.map(post => (
         <Link key={post.id} to={`/video/${post.id}}`} className={styles.feedItem}>
           <Video src={post.file?.filePath?.replace('/home/workshop/kardo/files/', '')} />
+          <div className={styles.info}>
+            <p className={styles.title}>{post.title}</p>
+            <p className={styles.author}>{post.author?.username}</p>
+          </div>
         </Link>
       ))}
     </div>
