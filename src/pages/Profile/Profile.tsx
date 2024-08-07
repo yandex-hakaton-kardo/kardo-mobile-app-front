@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Button, ExitIcon, HammerIcon, ToolsIcon } from '@components';
 import { authApi, useFindUserByUsernameQuery } from '@shared/api';
@@ -16,7 +15,9 @@ export const Profile = () => {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <HammerIcon className={clsx(styles.icon, styles.hammerIcon)} />
+        <Link to="/admin" className={styles.hammerIcon}>
+          <HammerIcon className={styles.icon} />
+        </Link>
         <Link to="/settings">
           <ToolsIcon className={styles.icon} />
         </Link>

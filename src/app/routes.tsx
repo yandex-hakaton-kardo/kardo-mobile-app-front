@@ -1,5 +1,6 @@
 import { type RouteObject } from 'react-router-dom';
 import { IntroRedirect, Layout, RequireAuth } from '@components';
+import Admin from '@pages/Admin';
 import Auth from '@pages/Auth';
 import CompetitionDetail from '@pages/CompetitionDetail';
 import CompetitionRequest from '@pages/CompetitionRequest';
@@ -44,6 +45,10 @@ export const routes: RouteObject[] = [
           {
             element: <Layout />,
             children: [
+              {
+                path: '/admin',
+                Component: Admin,
+              },
               {
                 path: '/',
                 Component: Main,
