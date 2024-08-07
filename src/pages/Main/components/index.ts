@@ -1,3 +1,3 @@
 export * from './Recommendations';
 export * from '../../../widgets/Feed';
-export * from './CreatePost';
+export * from '../../Admin/components/CreatePost';

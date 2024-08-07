@@ -7,7 +7,7 @@ import { format } from '@utils';
 import { Feed } from '@widgets/Feed';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
-import { CreatePost, Recommendations } from './components';
+import { Recommendations } from './components';
 import styles from './Main.module.scss';
 
 export const Main = () => {
@@ -28,11 +28,6 @@ export const Main = () => {
       <div className={styles.section}>
         <div className={styles.sectionHeader}>{lang.recommendations}</div>
         <Recommendations />
-      </div>
-
-      <div className={styles.section}>
-        <div className={styles.sectionHeader}>Публикация поста</div>
-        <CreatePost />
       </div>
 
       <div className={clsx(styles.section, styles.feed)}>

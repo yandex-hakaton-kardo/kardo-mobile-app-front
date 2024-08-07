@@ -1,0 +1,40 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  inline-size: 100%;
+  padding: 16px;
+  padding-block-start: 80px;
+  overflow-y: auto;
+}
+
+.pageHeader {
+  position: fixed;
+  inset: 0;
+  inset-block-end: initial;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  font: var(--font-header-3);
+  background-color: var(--color-primary);
+}
+
+.settingsIcon {
+  color: var(--color-inverted-primary);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font: var(--font-header-3);
+}
