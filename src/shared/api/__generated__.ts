@@ -1,7 +1,7 @@
 import { api } from './api';
 
 export const addTagTypes = ['USERS', 'POSTS', 'LOCATIONS'] as const;
-const injectedRtkApi = api
+export const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
   })
@@ -376,17 +376,17 @@ export interface CommentDto {
 }
 export interface PostDto {
   /** Идентификатор поста */
-  id?: number;
+  id: number;
   /** Имя поста */
-  title?: string;
-  author?: ShortUserDto;
-  file?: DataFileDto;
+  title: string;
+  author: ShortUserDto;
+  file: DataFileDto;
   /** Количество лайков */
-  likes?: number;
+  likes: number;
   /** Количество просмотров */
-  views?: number;
+  views: number;
   /** Комментарии к посту */
-  comments?: CommentDto[];
+  comments: CommentDto[];
 }
 export interface CommentRequest {
   /** Содержание комментария */

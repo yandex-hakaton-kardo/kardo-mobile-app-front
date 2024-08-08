@@ -10,6 +10,7 @@ import Feed from '@pages/Feed';
 import Intro from '@pages/Intro';
 import Main from '@pages/Main';
 import NotFound from '@pages/NotFound';
+import PostDetail from '@pages/PostDetail';
 import Profile from '@pages/Profile';
 import Settings from '@pages/Settings';
 import SignIn from '@pages/SignIn';
@@ -56,6 +57,10 @@ export const routes: RouteObject[] = [
               {
                 path: '/feed',
                 Component: Feed,
+              },
+              {
+                path: '/feed/:postId',
+                Component: PostDetail,
               },
               {
                 path: '/competitions',
