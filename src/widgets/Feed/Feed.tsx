@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import { Skeleton } from '@components';
 import { type PostDto } from '@shared/api';
 import { useLang } from 'context';
 import { Video } from '../Video';
@@ -17,9 +18,19 @@ export const Feed = ({ posts, className }: FeedProps) => {
     return <div className={styles.placeholder}>{lang.emptyFeed}</div>;
   }
 
+  if (!posts) {
+    return (
+      <div className={styles.feed}>
+        <Skeleton className={styles.skeleton} />
+        <Skeleton className={styles.skeleton} />
+        <Skeleton className={styles.skeleton} />
+      </div>
+    );
+  }
+
   return (
     <div className={clsx(styles.feed, className)}>
-      {posts?.map(post => (
+      {posts.map(post => (
         <Link key={post.id} to={`/video/${post.id}}`} className={styles.feedItem}>
           <Video src={post.file?.filePath?.replace('/home/workshop/kardo/files/', '')} />
           <div className={styles.info}>
