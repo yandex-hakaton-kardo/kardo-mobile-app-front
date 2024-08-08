@@ -31,11 +31,11 @@ export const Feed = ({ posts, className }: FeedProps) => {
   return (
     <div className={clsx(styles.feed, className)}>
       {posts.map(post => (
-        <Link key={post.id} to={`/video/${post.id}}`} className={styles.feedItem}>
-          <Video src={post.file?.filePath?.replace('/home/workshop/kardo/files/', '')} />
+        <Link key={post.id} to={`/feed/${post.id}`} className={styles.feedItem}>
+          <Video src={post.file.filePath} />
           <div className={styles.info}>
             <p className={styles.title}>{post.title}</p>
-            <p className={styles.author}>{post.author?.username}</p>
+            <p className={styles.author}>{post.author.username}</p>
           </div>
         </Link>
       ))}

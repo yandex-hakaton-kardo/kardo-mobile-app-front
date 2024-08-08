@@ -1,0 +1,54 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  inline-size: 100%;
+  margin-block-end: 76px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.skeleton {
+  block-size: 200px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  inline-size: 100%;
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-block-start: 16px;
+  font: var(--font-header-4);
+}
+
+.author {
+  font: var(--font-body);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.button {
+  flex-grow: 1;
+}
+
+.sectionTitle {
+  font: var(--font-header-4);
+}

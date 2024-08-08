@@ -16,6 +16,7 @@ export { default as HammerIcon } from './hammer.svg?react';
 export { default as HeartIcon } from './heart.svg?react';
 export { default as LanguageIcon } from './language.svg?react';
 export { default as LikeIcon } from './like.svg?react';
+export { default as LikeFillIcon } from './likeFill.svg?react';
 export { default as ListIcon } from './list.svg?react';
 export { default as LockIcon } from './lock.svg?react';
 export { default as MainIcon } from './main.svg?react';
