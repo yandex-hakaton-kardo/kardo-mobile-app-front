@@ -19,13 +19,13 @@ export type BaseInputProps = JSX.IntrinsicElements['input'] & {
 
 /** Базовый компонент для поля ввода. Используется только для создания поверх него других полей ввода */
 export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
-  ({ value, label, error, hint, disabled, afterContent, ...props }, ref) => {
+  ({ value, label, error, hint, disabled, afterContent, onUpdate, onChange, ...props }, ref) => {
     const internalId = useId();
     const id = props.id ?? internalId;
 
-    const onUpdate = (e: ChangeEvent<HTMLInputElement>) => {
-      props.onUpdate?.(e.target.value);
-      props.onChange?.(e);
+    const onUpdateValue = (e: ChangeEvent<HTMLInputElement>) => {
+      onUpdate?.(e.target.value);
+      onChange?.(e);
     };
 
     return (
@@ -43,7 +43,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
             disabled={disabled}
             className={clsx(styles.input, error && styles.error, props.className)}
             value={value}
-            onChange={onUpdate}
+            onChange={onUpdateValue}
             ref={ref}
           />
 

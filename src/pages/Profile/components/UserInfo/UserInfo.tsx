@@ -1,5 +1,6 @@
 import { useFindUserByUsernameQuery } from '@shared/api';
 import { format } from '@shared/utils';
+import { Avatar } from '@widgets';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import styles from './UserInfo.module.scss';
@@ -13,7 +14,7 @@ export const UserInfo = () => {
   return (
     <div className={styles.container}>
       <div className={styles.mainUserInfo}>
-        <img className={styles.avatar} src={user?.profilePicture?.filePath} alt="avatar" width={80} height={80} />
+        <Avatar userId={user?.id} className={styles.avatar} width={80} height={80} />
         <div>
           <div className={styles.name}>{user?.username}</div>
           <div className={styles.email}>{user?.email}</div>

@@ -1,0 +1,22 @@
+.container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--color-black-out-mid);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease-out 0.2s;
+}
+
+.modal {
+  inline-size: 100%;
+  background-color: var(--color-inverted-primary);
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: all;
+}

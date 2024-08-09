@@ -30,13 +30,12 @@ export const authSlice = createSlice({
       localStorage.setItem(LsKeys.REFRESH_TOKEN, payload);
     },
     clear() {
-      localStorage.clear();
-
-      return {
-        userName: null,
-        accessToken: null,
-        refreshToken: null,
-      };
+      // localStorage.clear();
+      // return {
+      //   userName: null,
+      //   accessToken: null,
+      //   refreshToken: null,
+      // };
     },
   },
 });

@@ -1,0 +1,21 @@
+.buttonWrapper {
+  flex-grow: 1;
+}
+
+.button {
+  pointer-events: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin-block: 16px 32px;
+}
+
+.text {
+  padding: 10px;
+  color: var(--color-primary);
+  font: var(--font-body);
+}

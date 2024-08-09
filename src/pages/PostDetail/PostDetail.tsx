@@ -1,31 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { type PostDto, injectedRtkApi } from '@shared/api';
-import { ArrowLeftIcon, Button, CommentIcon, HeartIcon, Skeleton } from '@shared/ui';
+import { useGetPostByIdQuery } from '@shared/api';
+import { ArrowLeftIcon, Preloader } from '@shared/ui';
+import { plural } from '@shared/utils';
 import { Video } from '@widgets';
-import { useAppDispatch } from 'app/store';
-import { CommentsList, LikeButton, ShareButton } from './components';
+import { useLang } from 'context';
+import { CommentsList, FavoriteButton, LikeButton, ShareButton, CommentButton } from './components';
 import styles from './PostDetail.module.scss';
 
 export const PostDetail = () => {
+  const lang = useLang().post;
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { postId } = useParams<{ postId: string }>();
-  const [post, setPost] = useState<PostDto | null>(null);
+  const { data: post } = useGetPostByIdQuery({ postId: Number(postId) }, { skip: !postId });
+  const [views, setViews] = useState(post?.views ?? 0);
 
   useEffect(() => {
-    if (postId) {
-      dispatch(injectedRtkApi.endpoints.getPostById.initiate({ postId: Number(postId) })).then(result => {
-        const { data } = result;
-        if (data) {
-          setPost(data);
-        }
-      });
+    if (post && !views) {
+      setViews(post.views);
     }
-  }, [dispatch, postId]);
+  }, [post, views]);
 
   if (!post) {
-    return <Skeleton className={styles.skeleton} />;
+    return (
+      <div className={styles.loaderWrapper}>
+        <Preloader />
+      </div>
+    );
   }
 
   return (
@@ -41,22 +42,20 @@ export const PostDetail = () => {
         </div>
 
         <div className={styles.info}>
-          <p>{post.views} просмотров</p>
+          <p>
+            {views} {plural(views, lang.view)}
+          </p>
           <div className={styles.actions}>
             <LikeButton postId={post.id} likeCount={post.likes} />
             <ShareButton content={window.location.toString()} />
-            <Button className={styles.button} view="normal" size="s">
-              <CommentIcon width={24} height={24} />
-            </Button>
-            <Button className={styles.button} view="normal" size="s" disabled>
-              <HeartIcon width={24} height={24} />
-            </Button>
+            <CommentButton postId={post.id} />
+            <FavoriteButton />
           </div>
         </div>
 
         <div className={styles.comments}>
-          <h2 className={styles.sectionTitle}>Комментарии</h2>
-          <CommentsList post={post} />
+          <h2 className={styles.sectionTitle}>{lang.comments}</h2>
+          <CommentsList comments={post.comments} />
         </div>
       </div>
     </div>
