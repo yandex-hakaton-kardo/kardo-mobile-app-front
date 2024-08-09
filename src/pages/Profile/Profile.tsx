@@ -1,9 +1,8 @@
 import { useRef, useState } from 'react';
-import { Button } from '@components';
 import { useFindUserByUsernameQuery, useGetAllPostByUserQuery } from '@shared/api';
-import { Feed } from '@widgets/Feed';
+import { Button, SegmentPicker } from '@shared/ui';
+import { Feed } from '@widgets';
 import { useAppSelector } from 'app/store';
-import { SegmentPicker } from 'components/SegmentPicker';
 import { useLang } from 'context';
 import { Header, UserInfo } from './components';
 import styles from './Profile.module.scss';

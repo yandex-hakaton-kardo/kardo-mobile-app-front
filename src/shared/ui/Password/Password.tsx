@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef, useState } from 'react';
-import { type BaseInputProps } from 'components/BaseInput';
-import { EyeClosedIcon, EyeOpenedIcon } from 'components/icons';
+import { type BaseInputProps } from '../BaseInput';
+import { EyeClosedIcon, EyeOpenedIcon } from '../icons';
 import { TextInput } from '../TextInput';
 import styles from './Password.module.scss';
 

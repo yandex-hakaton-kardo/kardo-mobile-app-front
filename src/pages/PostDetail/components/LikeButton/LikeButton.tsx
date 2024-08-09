@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button, LikeFillIcon, LikeIcon } from '@components';
 import { useAddLikeToPostMutation } from '@shared/api';
+import { Button, LikeFillIcon, LikeIcon } from '@shared/ui';
 import styles from './LikeButton.module.scss';
 
 interface LikeButtonProps {

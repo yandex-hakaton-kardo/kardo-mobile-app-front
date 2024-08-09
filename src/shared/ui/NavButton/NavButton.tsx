@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon } from 'components/icons';
+import { ArrowRightIcon } from '../icons';
 import styles from './NavButton.module.scss';
 
 export interface NavButtonProps {

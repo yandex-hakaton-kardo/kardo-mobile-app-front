@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ToolsIcon } from '@components';
+import { ToolsIcon } from '@shared/ui';
 import { CreatePost } from './components';
 import styles from './Admin.module.scss';
 

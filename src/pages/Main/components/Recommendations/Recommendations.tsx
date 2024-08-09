@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Skeleton } from '@components';
 import { api } from '@shared/api';
-import { useInfiniteScroll } from '@utils';
-import { Video } from '@widgets/Video';
+import { Skeleton } from '@shared/ui';
+import { useInfiniteScroll } from '@shared/utils';
+import { Video } from '@widgets';
 import { useLang } from 'context';
 import styles from './Recommendations.module.scss';
 
@@ -35,10 +35,10 @@ export const Recommendations = () => {
     <div className={styles.recommendations} ref={ref}>
       {recommendations.map(post => (
         <Link key={post.id} to={`/video/${post.id}}`} className={styles.recommendation}>
-          <Video src={post.file?.filePath?.replace('/home/workshop/kardo/files/', '')} />
+          <Video src={post.file.filePath?.replace('/home/workshop/kardo/files/', '')} />
           <div className={styles.caption}>
             <span className={styles.title}>{post.title}</span>
-            <span className={styles.author}>{`${post.author?.username}`}</span>
+            <span className={styles.author}>{`${post.author.username}`}</span>
           </div>
         </Link>
       ))}

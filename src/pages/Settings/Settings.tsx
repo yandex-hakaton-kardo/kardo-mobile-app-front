@@ -8,7 +8,7 @@ import {
   NotificationIcon,
   ProfileIcon,
   SupportIcon,
-} from '@components';
+} from '@shared/ui';
 import { useLang } from 'context';
 import styles from './Settings.module.scss';
 

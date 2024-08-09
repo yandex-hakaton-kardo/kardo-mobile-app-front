@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeftIcon, Button, CommentIcon, HeartIcon, Skeleton } from '@components';
 import { type PostDto, injectedRtkApi } from '@shared/api';
-import { Video } from '@widgets/Video';
+import { ArrowLeftIcon, Button, CommentIcon, HeartIcon, Skeleton } from '@shared/ui';
+import { Video } from '@widgets';
 import { useAppDispatch } from 'app/store';
 import { CommentsList, LikeButton, ShareButton } from './components';
 import styles from './PostDetail.module.scss';

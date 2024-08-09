@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useFindUserByUsernameQuery } from '@shared/api';
 import { useAppDispatch, useAppSelector } from 'app/store';
-import { PageLoader } from 'components/PageLoader';
 import { authActions } from 'entities/Auth.slice';
+import { PageLoader } from '../PageLoader';
 
 export const RequireAuth = () => {
   const dispatch = useAppDispatch();

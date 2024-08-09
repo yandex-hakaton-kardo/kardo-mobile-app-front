@@ -1,5 +1,5 @@
 import { Navigate, useNavigate } from 'react-router-dom';
-import { AccountIcon, Button, PlusIcon, VkIcon } from '@components';
+import { AccountIcon, Button, PlusIcon, VkIcon } from '@shared/ui';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import styles from './Auth.module.scss';

@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
-import { AllIcon, ListIcon } from '@components';
 import { api } from '@shared/api';
-import { useInfiniteScroll } from '@utils';
-import { Feed } from '@widgets/Feed';
-import { SearchInput } from 'components/SearchInput';
+import { AllIcon, ListIcon, SearchInput } from '@shared/ui';
+import { useInfiniteScroll } from '@shared/utils';
+import { Feed } from '@widgets';
 import { useLang } from 'context';
 import styles from './Feed.module.scss';
 

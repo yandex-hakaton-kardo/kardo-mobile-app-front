@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { HeartIcon } from 'components/icons';
+import { HeartIcon } from '../icons';
 import { NavButton } from './NavButton';
 import type { Meta, StoryObj } from '@storybook/react';
 

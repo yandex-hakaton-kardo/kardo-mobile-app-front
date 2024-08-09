@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { CrossIcon, MicrophoneIcon, SearchIcon } from 'components/icons';
+import { CrossIcon, MicrophoneIcon, SearchIcon } from '../icons';
 import styles from './SearchInput.module.scss';
 
 export interface SearchInputProps {

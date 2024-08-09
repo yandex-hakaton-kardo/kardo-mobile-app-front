@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
-import { CalendarIcon, EventsIcon, MainIcon, ProfileIcon, SearchIcon } from '@components';
+import { CalendarIcon, EventsIcon, MainIcon, ProfileIcon, SearchIcon } from '@shared/ui/icons';
 import styles from './Navigation.module.scss';
 
 const links: { to: string; Icon: React.ReactNode }[] = [

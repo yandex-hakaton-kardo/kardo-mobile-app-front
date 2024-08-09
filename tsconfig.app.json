@@ -27,11 +27,9 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@components": ["./components"],
-      "@pages/*": ["./pages/*"],
-      "@utils": ["./utils"],
-      "@shared/*": ["./shared/*"],
-      "@widgets/*": ["./widgets/*"]
+      "@pages": ["./pages"],
+      "@widgets": ["./widgets"],
+      "@shared/*": ["./shared/*"]
     }
   },
   "include": ["src", "env.d.ts"]

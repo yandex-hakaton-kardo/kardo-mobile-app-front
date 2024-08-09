@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { Skeleton } from '@components';
 import { type PostDto } from '@shared/api';
+import { Skeleton } from '@shared/ui';
 import { useLang } from 'context';
 import { Video } from '../Video';
 import styles from './Feed.module.scss';

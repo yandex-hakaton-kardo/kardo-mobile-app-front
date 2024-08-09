@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { type ChangeEvent, type FocusEvent, forwardRef, useState } from 'react';
-import { BaseInput, type BaseInputProps } from 'components/BaseInput';
-import { CheckmarkIcon, QuestionIcon } from 'components/icons';
+import { BaseInput, type BaseInputProps } from '../BaseInput';
+import { CheckmarkIcon, QuestionIcon } from '../icons';
 import styles from './TextInput.module.scss';
 
 export type TextInputProps = BaseInputProps;

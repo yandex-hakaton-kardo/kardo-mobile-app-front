@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '@components';
 import { LsKeys } from '@shared/constants';
-import { Preloader } from 'components/Preloader';
+import { Button, Preloader } from '@shared/ui';
 import styles from './Intro.module.scss';
 
 export const Intro = () => {

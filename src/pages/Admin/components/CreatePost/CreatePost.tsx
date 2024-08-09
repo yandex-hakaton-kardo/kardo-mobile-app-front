@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import { Button, TextInput } from '@components';
 import { requestWithAuth, requestWithReAuth } from '@shared/api';
+import { Button, TextInput } from '@shared/ui';
 import { useAppDispatch } from 'app/store';
 
 export const CreatePost = () => {
@@ -30,7 +30,8 @@ export const CreatePost = () => {
         body: data,
       }),
     ).then(() => {
-      fileRef.current!.value = '';
+      if (!fileRef.current) return;
+      fileRef.current.value = '';
       setInput('');
       setShowSuccessMessage(true);
       setLoading(false);

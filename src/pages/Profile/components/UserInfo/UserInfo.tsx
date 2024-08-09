@@ -1,5 +1,5 @@
 import { useFindUserByUsernameQuery } from '@shared/api';
-import { format } from '@utils';
+import { format } from '@shared/utils';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import styles from './UserInfo.module.scss';

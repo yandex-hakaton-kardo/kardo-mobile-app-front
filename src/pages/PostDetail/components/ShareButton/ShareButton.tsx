@@ -1,4 +1,4 @@
-import { Button, ShareIcon } from '@components';
+import { Button, ShareIcon } from '@shared/ui';
 import styles from './ShareButton.module.scss';
 
 interface ShareButtonProps {

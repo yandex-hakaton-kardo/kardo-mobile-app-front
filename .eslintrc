@@ -94,7 +94,7 @@
         },
         "pathGroups": [
           {
-            "pattern": "@(components)|(pages)/*",
+            "pattern": "@(components)|(pages)|(shared)/*",
             "group": "internal",
           },
           {

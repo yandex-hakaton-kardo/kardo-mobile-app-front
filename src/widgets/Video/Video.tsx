@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Skeleton } from '@components';
+import { Skeleton } from '@shared/ui';
 import styles from './Video.module.scss';
 
 export const Video = ({ src, ...props }: JSX.IntrinsicElements['video']) => {

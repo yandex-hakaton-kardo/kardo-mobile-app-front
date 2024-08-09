@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
-import { ArrowLeftIcon, Button, Password, TextInput } from '@components';
 import { authApi, useCreateUserMutation } from '@shared/api';
+import { ArrowLeftIcon, Button, Password, TextInput } from '@shared/ui';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import { type SignUpData, signupSchema } from './signup.schema';

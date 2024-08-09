@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { TicketBanner, ToolsIcon } from '@components';
 import { api, useFindUserByUsernameQuery } from '@shared/api';
-import { format, useInfiniteScroll } from '@utils';
-import { Feed } from '@widgets/Feed';
+import { TicketBanner, ToolsIcon } from '@shared/ui';
+import { format, useInfiniteScroll } from '@shared/utils';
+import { Feed } from '@widgets';
 import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
 import { Recommendations } from './components';

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { HammerIcon, ToolsIcon, ExitIcon } from '@components';
 import { authApi } from '@shared/api';
+import { HammerIcon, ToolsIcon, ExitIcon } from '@shared/ui';
 import styles from './Header.module.scss';
 
 export const Header = () => {

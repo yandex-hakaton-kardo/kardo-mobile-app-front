@@ -1,20 +1,22 @@
 import { type RouteObject } from 'react-router-dom';
-import { IntroRedirect, Layout, RequireAuth } from '@components';
-import Admin from '@pages/Admin';
-import Auth from '@pages/Auth';
-import CompetitionDetail from '@pages/CompetitionDetail';
-import CompetitionRequest from '@pages/CompetitionRequest';
-import Competitions from '@pages/Competitions';
-import Events from '@pages/Events';
-import Feed from '@pages/Feed';
-import Intro from '@pages/Intro';
-import Main from '@pages/Main';
-import NotFound from '@pages/NotFound';
-import PostDetail from '@pages/PostDetail';
-import Profile from '@pages/Profile';
-import Settings from '@pages/Settings';
-import SignIn from '@pages/SignIn';
-import SignUp from '@pages/SignUp';
+import {
+  Admin,
+  Auth,
+  CompetitionDetail,
+  CompetitionRequest,
+  Competitions,
+  Events,
+  Feed,
+  Intro,
+  Main,
+  NotFound,
+  PostDetail,
+  Profile,
+  Settings,
+  SignIn,
+  SignUp,
+} from '@pages';
+import { IntroRedirect, Layout, RequireAuth } from '@shared/ui';
 
 export const routes: RouteObject[] = [
   {
