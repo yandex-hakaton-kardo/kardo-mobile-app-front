@@ -8,12 +8,7 @@ export const Video = ({ src, ...props }: JSX.IntrinsicElements['video']) => {
   return (
     <div className={styles.container}>
       {!loaded && <Skeleton className={styles.skeleton} />}
-      <video
-        src={src?.replace('/home/workshop/kardo/files/', '/api/content/')}
-        width="100%"
-        onLoadedData={() => setLoaded(true)}
-        {...props}
-      />
+      <video src={src} width="100%" onLoadedData={() => setLoaded(true)} {...props} />
     </div>
   );
 };
