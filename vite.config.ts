@@ -20,6 +20,11 @@ export default defineConfig(() => {
           secure: false,
           rewrite: path => path.replace('/api', ''),
         },
+        '/data': {
+          target: process.env?.VITE_FILES_HOST,
+          changeOrigin: true,
+          secure: false,
+        },
       },
     },
     plugins: [
