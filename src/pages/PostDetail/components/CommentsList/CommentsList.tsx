@@ -1,20 +1,21 @@
-import { type PostDto } from '@shared/api';
+import { type CommentDto } from '@shared/api';
+import { useLang } from 'context';
+import { Comment } from './components';
 import styles from './CommentsList.module.scss';
 
 interface CommentsListProps {
-  post: PostDto;
+  comments: CommentDto[];
 }
 
-export const CommentsList = ({ post }: CommentsListProps) => (
-  <div className={styles.container}>
-    {post.comments.map(comment => (
-      <div className={styles.comment} key={comment.id}>
-        {/* <Avatar userId={comment.authorId}/> */}
-        <span>{comment.authorId}</span>
-        <span>{comment.text}</span>
-      </div>
-    ))}
+export const CommentsList = ({ comments }: CommentsListProps) => {
+  const lang = useLang().post;
 
-    {post.comments.length === 0 && <div>Комментариев нет</div>}
-  </div>
-);
+  return (
+    <div className={styles.container}>
+      {comments.length === 0 && <div>{lang.noComments}</div>}
+      {comments.map(comment => (
+        <Comment key={comment.id} comment={comment} />
+      ))}
+    </div>
+  );
+};

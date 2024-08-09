@@ -368,11 +368,11 @@ export interface ShortUserDto {
 }
 export interface CommentDto {
   /** Идентификатор комментария */
-  id?: number;
+  id: number;
   /** Содержание комментария */
-  text?: string;
+  text: string;
   /** Идентификатор автора комментария */
-  authorId?: number;
+  authorId: number;
 }
 export interface PostDto {
   /** Идентификатор поста */

@@ -8,8 +8,12 @@
   overflow-y: auto;
 }
 
-.skeleton {
-  block-size: 200px;
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 .content {
@@ -45,10 +49,7 @@
   align-items: center;
 }
 
-.button {
-  flex-grow: 1;
-}
-
 .sectionTitle {
+  margin-block-end: 16px;
   font: var(--font-header-4);
 }
