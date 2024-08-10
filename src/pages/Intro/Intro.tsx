@@ -4,22 +4,16 @@ import { LsKeys } from '@shared/constants';
 import { Button, Preloader } from '@shared/ui';
 import styles from './Intro.module.scss';
 
-export const Intro = () => {
-  interface TState {
-    title: string | null;
-    subtitle: string | null;
-    text: string;
-    button: string | null;
-    isLoading: boolean;
-    page: number;
-  }
+interface TState {
+  button: string | null;
+  isLoading: boolean;
+  page: number;
+}
 
+export const Intro = () => {
   const navigate = useNavigate();
 
   const [state, setState] = useState<TState>({
-    title: 'Международная премия',
-    subtitle: 'Кардо',
-    text: 'Улица начинается здесь',
     button: null,
     isLoading: true,
     page: 0,
@@ -28,9 +22,6 @@ export const Intro = () => {
   function nextPage() {
     setTimeout(() => {
       setState({
-        title: '',
-        subtitle: '',
-        text: 'Регистрируйся на соревнования быстро и просто',
         button: 'Далее',
         isLoading: false,
         page: 1,
@@ -48,13 +39,11 @@ export const Intro = () => {
       setState(prevState => ({
         ...prevState,
         page: newPage,
-        text: 'Листай ленту, смотри видео и болей за любимого спортсмена',
       }));
     } else if (state.page === 2) {
       setState(prevState => ({
         ...prevState,
         page: newPage,
-        text: 'Настрой уведомления, чтобы не пропускать онлайн-трансляции соревнований',
       }));
     } else {
       localStorage.setItem(LsKeys.PASS_INTRO, 'true');
@@ -70,29 +59,28 @@ export const Intro = () => {
           <source src="/videos/skateboarding.mp4" type="video/mp4" />
         </video>
         <div className={styles.container_video}>
-          <p className={styles.text_for_video}>{state.text}</p>
+          {state.page === 1 && (
+            <p className={styles.text_for_video}>
+              Регистрируйся <br /> на соревнования быстро <br /> и просто
+            </p>
+          )}
+          {state.page === 2 && (
+            <p className={styles.text_for_video}>
+              Листай ленту, смотри видео <br /> и болей за любимого <br /> спортсмена
+            </p>
+          )}
+          {state.page === 3 && (
+            <p className={styles.text_for_video}>
+              Настрой уведомления, <br /> чтобы не пропускать онлайн- <br /> трансляции соревнований
+            </p>
+          )}
           <div className={styles.strip}>
-            {state.page === 1 && (
-              <>
-                <div className={styles.strip_rectangle1} />
-                <div className={styles.strip_rectangle} />
-                <div className={styles.strip_rectangle} />
-              </>
-            )}
-            {state.page === 2 && (
-              <>
-                <div className={styles.strip_rectangle} />
-                <div className={styles.strip_rectangle1} />
-                <div className={styles.strip_rectangle} />
-              </>
-            )}
-            {state.page === 3 && (
-              <>
-                <div className={styles.strip_rectangle} />
-                <div className={styles.strip_rectangle} />
-                <div className={styles.strip_rectangle1} />
-              </>
-            )}
+            {[1, 2, 3].map(indicatorNum => (
+              <div
+                className={indicatorNum === state.page ? styles.strip_rectangle1 : styles.strip_rectangle}
+                key={indicatorNum}
+              />
+            ))}
           </div>
           <Button view="action" size="l" className={styles.button_for_video} onClick={clickButton}>
             {state.button}
@@ -107,9 +95,11 @@ export const Intro = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>{state.title}</h1>
-      <h2 className={styles.header2}>{state.subtitle}</h2>
-      <p className={styles.text}>{state.text}</p>
+      <h1 className={styles.header}>
+        Международная <br /> премия
+      </h1>
+      <h2 className={styles.header2}>КАРДО</h2>
+      <p className={styles.text}>Улица начинается здесь</p>
       <div style={{ position: 'absolute', bottom: '21%' }}>
         <Preloader />
       </div>
