@@ -14,7 +14,7 @@
     "lint": "tsc --noEmit && eslint . --ext=.ts,.tsx --quiet && stylelint ./src/**/*.scss --quiet",
     "lint:fix": "eslint . --ext=.ts,.tsx --fix && stylelint ./src/**/*.scss --fix",
     "generate:icons": "node ./scripts/generateIcons.js",
-    "generate:api": "npx @rtk-query/codegen-openapi ./scripts/openapi-config.cjs",
+    "generate:api": "bash ./scripts/generateApi.sh",
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

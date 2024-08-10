@@ -5,6 +5,8 @@
   "tags": [
     { "name": "POSTS", "description": "Взаимодействие с постами пользователей" },
     { "name": "LOCATIONS", "description": "Взаимодействие с географическими локациями" },
+    { "name": "EVENTS", "description": "Администрирование мероприятий" },
+    { "name": "EVENTS", "description": "Взаимодействие с мероприятиями" },
     { "name": "USERS", "description": "Взаимодействие с пользователями" }
   ],
   "paths": {
@@ -30,6 +32,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -44,10 +50,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -78,6 +80,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -92,10 +98,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK" }
@@ -118,6 +120,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -134,13 +140,55 @@
             "description": "Conflict",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
+          "200": { "description": "OK", "content": { "*/*": { "schema": { "type": "integer", "format": "int64" } } } }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/admin/participations/{participationId}/status": {
+      "put": {
+        "tags": ["participation-admin-controller"],
+        "operationId": "changeParticipationStatus",
+        "parameters": [
+          {
+            "name": "participationId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "description": "Статус заявки", "enum": ["CREATED", "APPROVED", "DECLINED"] }
+          }
+        ],
+        "responses": {
           "500": {
             "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
-          "200": { "description": "OK", "content": { "*/*": { "schema": { "type": "integer", "format": "int64" } } } }
-        },
-        "security": [{ "JWT": [] }]
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ParticipationDto" } } }
+          }
+        }
       }
     },
     "/users/{userId}/avatar": {
@@ -158,6 +206,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -172,10 +224,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -204,6 +252,10 @@
           }
         },
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -218,10 +270,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -245,6 +293,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -259,10 +311,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "204": { "description": "No Content" }
@@ -280,6 +328,10 @@
           "required": true
         },
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -294,10 +346,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "201": {
@@ -322,6 +370,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -336,10 +388,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -374,6 +422,10 @@
           }
         },
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -388,10 +440,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "201": {
@@ -421,6 +469,10 @@
           "required": true
         },
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -437,13 +489,194 @@
             "description": "Conflict",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/CommentDto" } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/participations/{participationId}/score": {
+      "post": {
+        "tags": ["participation-controller"],
+        "summary": "Оценка заявки судьей",
+        "operationId": "rateParticipation",
+        "parameters": [
+          {
+            "name": "participationId",
+            "in": "path",
+            "description": "Идентификатор заявки",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/NewScoreRequest" } } },
+          "required": true
+        },
+        "responses": {
           "500": {
             "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "200": {
             "description": "OK",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/CommentDto" } } }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ParticipationDto" } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/events/{eventId}/participation/{userId}": {
+      "post": {
+        "tags": ["EVENTS"],
+        "summary": "Добавление заявки на участие в мероприятии",
+        "operationId": "addParticipation",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Идентификатор мероприятия",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Идентификатор пользователя",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ParticipationRequest" } } },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ParticipationDto" } } }
+          }
+        }
+      }
+    },
+    "/admin/events": {
+      "post": {
+        "tags": ["EVENTS"],
+        "summary": "Создание нового мероприятия",
+        "operationId": "createEvent",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/NewEventRequest" } } },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "201": {
+            "description": "Created",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/EventDto" } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/admin/events/{masterEventId}": {
+      "post": {
+        "tags": ["EVENTS"],
+        "summary": "Создание нового этапа мероприятия",
+        "operationId": "createSubEvent",
+        "parameters": [
+          {
+            "name": "masterEventId",
+            "in": "path",
+            "description": "Идентификатор родительского мероприятия",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/NewSubEventRequest" } } },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/EventDto" } } }
           }
         },
         "security": [{ "JWT": [] }]
@@ -464,6 +697,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -478,10 +715,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK", "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserDto" } } } }
@@ -502,6 +735,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -516,10 +753,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "204": { "description": "No Content" }
@@ -544,6 +777,10 @@
           "required": true
         },
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -558,10 +795,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK", "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserDto" } } } }
@@ -584,6 +817,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -598,10 +835,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK", "content": { "*/*": { "schema": { "$ref": "#/components/schemas/PostDto" } } } }
@@ -622,6 +855,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -636,10 +873,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK" }
@@ -677,6 +910,10 @@
           }
         },
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -691,10 +928,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK", "content": { "*/*": { "schema": { "$ref": "#/components/schemas/PostDto" } } } }
@@ -724,6 +957,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -738,10 +975,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK" }
@@ -773,6 +1006,10 @@
           "required": true
         },
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -789,13 +1026,222 @@
             "description": "Conflict",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/CommentDto" } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/participations/{participationId}": {
+      "get": {
+        "tags": ["participation-controller"],
+        "summary": "Поиск заявки по идентификатору",
+        "operationId": "findParticipationById",
+        "parameters": [
+          {
+            "name": "participationId",
+            "in": "path",
+            "description": "Идентификатор заявки",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
           "500": {
             "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "200": {
             "description": "OK",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/CommentDto" } } }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ParticipationDto" } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      },
+      "delete": {
+        "tags": ["participation-controller"],
+        "summary": "Удаление заявки на участие",
+        "operationId": "deleteParticipation",
+        "parameters": [
+          {
+            "name": "participationId",
+            "in": "path",
+            "description": "Идентификатор заявки",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": { "description": "OK" }
+        },
+        "security": [{ "JWT": [] }]
+      },
+      "patch": {
+        "tags": ["participation-controller"],
+        "summary": "Обновление заявки на участие",
+        "operationId": "updateParticipation",
+        "parameters": [
+          {
+            "name": "participationId",
+            "in": "path",
+            "description": "Идентификатор заявки",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/ParticipationUpdateRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ParticipationDto" } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/admin/events/{eventId}": {
+      "delete": {
+        "tags": ["EVENTS"],
+        "summary": "Удаление мероприятия",
+        "operationId": "deleteEvent",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Идентификатор мероприятия",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "204": { "description": "No Content" }
+        },
+        "security": [{ "JWT": [] }]
+      },
+      "patch": {
+        "tags": ["EVENTS"],
+        "summary": "Обновление данных мероприятия",
+        "operationId": "updateEvent",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Идентификатор мероприятия",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EventUpdateRequest" } } },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/EventDto" } } }
           }
         },
         "security": [{ "JWT": [] }]
@@ -830,6 +1276,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -844,10 +1294,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -873,6 +1319,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -887,10 +1337,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -918,6 +1364,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -932,10 +1382,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": { "description": "OK", "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserDto" } } } }
@@ -972,6 +1418,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -986,10 +1436,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -1025,10 +1471,14 @@
             "in": "query",
             "description": "Параметр сортировки",
             "required": false,
-            "schema": { "type": "string", "default": "LIKES", "enum": ["VIEWS", "LIKES"] }
+            "schema": { "type": "string", "enum": ["VIEWS", "LIKES"], "default": "LIKES" }
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -1043,10 +1493,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -1079,6 +1525,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -1095,13 +1545,203 @@
             "description": "Conflict",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/PostDto" } } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/participations/users/{userId}": {
+      "get": {
+        "tags": ["participation-controller"],
+        "summary": "Поиск заявок пользователя",
+        "operationId": "findUsersParticipations",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Идентификатор пользователя",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Роль пользователя в мероприятии",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Роль пользователя в мероприятии",
+              "enum": ["PARTICIPANT", "JUDGE", "SPECTATOR", "SPONSOR"]
+            }
+          }
+        ],
+        "responses": {
           "500": {
             "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "200": {
             "description": "OK",
-            "content": { "*/*": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/PostDto" } } } }
+            "content": {
+              "*/*": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/ParticipationDto" } } }
+            }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/events": {
+      "get": {
+        "tags": ["EVENTS"],
+        "summary": "Поиск мероприятий",
+        "operationId": "searchEvents",
+        "parameters": [
+          {
+            "name": "searchFilter",
+            "in": "query",
+            "description": "Фильтр поиска",
+            "required": true,
+            "schema": { "$ref": "#/components/schemas/EventSearchFilter" }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Количество постов на странице",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 10 }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/EventDto" } } }
+            }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/events/{eventId}": {
+      "get": {
+        "tags": ["EVENTS"],
+        "summary": "Поиск мероприятия по идентификатору",
+        "operationId": "findEventById",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Идентификатор мероприятия",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/EventDto" } } }
+          }
+        },
+        "security": [{ "JWT": [] }]
+      }
+    },
+    "/events/activities": {
+      "get": {
+        "tags": ["EVENTS"],
+        "summary": "Получение списка всех направлений",
+        "operationId": "findAllActivities",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/ActivityDto" } } }
+            }
           }
         },
         "security": [{ "JWT": [] }]
@@ -1113,6 +1753,10 @@
         "summary": "Получение списка всех стран в алфавитном порядке",
         "operationId": "getAllCountries",
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -1127,10 +1771,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -1157,6 +1797,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -1171,10 +1815,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -1206,6 +1846,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -1220,10 +1864,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -1248,6 +1888,10 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
+          },
           "404": {
             "description": "Not Found",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
@@ -1262,10 +1906,6 @@
           },
           "409": {
             "description": "Conflict",
-            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
-          },
-          "500": {
-            "description": "Internal Server Error",
             "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } }
           },
           "200": {
@@ -1299,6 +1939,30 @@
         },
         "description": "Дружба"
       },
+      "ParticipationDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "Идентификатор заявка", "format": "int64" },
+          "eventId": {
+            "type": "integer",
+            "description": "Идентификатор мероприятия, на которое подана заявка",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "Идентификатор пользователя, который подал заявку",
+            "format": "int64"
+          },
+          "participantType": {
+            "type": "string",
+            "description": "Роль пользователя в мероприятии",
+            "enum": ["PARTICIPANT", "JUDGE", "SPECTATOR", "SPONSOR"]
+          },
+          "status": { "type": "string", "description": "Статус заявки", "enum": ["CREATED", "APPROVED", "DECLINED"] },
+          "avgRating": { "type": "number", "description": "Средняя оценка", "format": "double" }
+        },
+        "description": "Заявка на участие в мероприятии"
+      },
       "DataFileDto": {
         "type": "object",
         "properties": {
@@ -1322,8 +1986,8 @@
           "email": { "maxLength": 50, "minLength": 5, "type": "string", "description": "Электронная почта" },
           "password": {
             "maxLength": 15,
-            "minLength": 8,
-            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$",
+            "minLength": 6,
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,15}$",
             "type": "string",
             "description": "Пароль"
           }
@@ -1382,6 +2046,181 @@
         },
         "description": "Новый комментарий"
       },
+      "NewScoreRequest": {
+        "required": ["scoreType1", "scoreType2", "scoreType3"],
+        "type": "object",
+        "properties": {
+          "scoreType1": {
+            "maximum": 10,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Первая оценка",
+            "format": "int64"
+          },
+          "scoreType2": {
+            "maximum": 10,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Вторая оценка",
+            "format": "int64"
+          },
+          "scoreType3": {
+            "maximum": 10,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Третья оценка",
+            "format": "int64"
+          }
+        },
+        "description": "Запрос на установку оценки заявки"
+      },
+      "ParticipationRequest": {
+        "required": ["type"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ-]+$",
+            "type": "string",
+            "description": "Имя пользователя"
+          },
+          "secondName": {
+            "maxLength": 20,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ-]+$",
+            "type": "string",
+            "description": "Отчество пользователя"
+          },
+          "surname": {
+            "maxLength": 20,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ-]+$",
+            "type": "string",
+            "description": "Фамилия пользователя"
+          },
+          "email": {
+            "maxLength": 50,
+            "minLength": 5,
+            "type": "string",
+            "description": "Электронная почта пользователя"
+          },
+          "gender": { "type": "string", "description": "Пол", "enum": ["MALE", "FEMALE"] },
+          "countryId": { "type": "integer", "description": "Страна проживания", "format": "int64" },
+          "regionId": { "type": "integer", "description": "Регион проживания", "format": "int64" },
+          "city": {
+            "maxLength": 20,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ -]+$",
+            "type": "string",
+            "description": "Город проживания"
+          },
+          "dateOfBirth": { "type": "string", "description": "Дата рождения пользователя", "format": "date" },
+          "phoneNumber": {
+            "maxLength": 15,
+            "minLength": 12,
+            "pattern": "^[0-9+]${12,15}",
+            "type": "string",
+            "description": "Номер телефона"
+          },
+          "overview": {
+            "maxLength": 500,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ -]+$",
+            "type": "string",
+            "description": "О себе"
+          },
+          "website": {
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9:/@.#$%&?,*]{2,30}$",
+            "type": "string",
+            "description": "Ссылка на соцсети"
+          },
+          "linkToContestFile": {
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9:/@.#$%&?,*]{2,30}$",
+            "type": "string",
+            "description": "Ссылка на на файл для участия в соревновании"
+          },
+          "type": {
+            "type": "string",
+            "description": "Роль пользователя в мероприятии",
+            "enum": ["PARTICIPANT", "JUDGE", "SPECTATOR", "SPONSOR"]
+          }
+        },
+        "description": "Заявка на участие"
+      },
+      "NewEventRequest": {
+        "required": ["activityId", "description", "eventEnd", "eventName", "eventStart", "eventType", "prize"],
+        "type": "object",
+        "properties": {
+          "eventName": { "maxLength": 100, "minLength": 5, "type": "string", "description": "Название мероприятия" },
+          "description": { "maxLength": 1000, "minLength": 5, "type": "string", "description": "Описание мероприятия" },
+          "eventStart": { "type": "string", "description": "Дата начала мероприятия", "format": "date-time" },
+          "eventEnd": { "type": "string", "description": "Дата окончания мероприятия", "format": "date-time" },
+          "activityId": {
+            "type": "integer",
+            "description": "Идентификатор направления мероприятия",
+            "format": "int64"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Тип мероприятия",
+            "enum": ["PREMIUM", "VIDEO_CONTEST", "PROJECT", "CHILDREN"]
+          },
+          "prize": { "type": "integer", "description": "Призовой фонд", "format": "int32" },
+          "countryId": { "type": "integer", "description": "Страна проживания", "format": "int64" },
+          "regionId": { "type": "integer", "description": "Регион проживания", "format": "int64" },
+          "city": {
+            "maxLength": 20,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ -]+$",
+            "type": "string",
+            "description": "Город проживания"
+          }
+        },
+        "description": "Новое мероприятие"
+      },
+      "EventDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "Идентификатор мероприятия", "format": "int64" },
+          "eventName": { "type": "string", "description": "Название мероприятия" },
+          "description": { "type": "string", "description": "Описание мероприятия" },
+          "eventStart": { "type": "string", "description": "Дата начала мероприятия", "format": "date-time" },
+          "eventEnd": { "type": "string", "description": "Дата окончания мероприятия", "format": "date-time" },
+          "activity": { "type": "string", "description": "Направление мероприятия" },
+          "eventType": { "type": "string", "description": "Тип мероприятия" },
+          "masterEvent": { "type": "integer", "description": "Идентификатор главного мероприятия", "format": "int64" },
+          "prize": { "type": "integer", "description": "Награда мероприятия", "format": "int32" },
+          "country": { "type": "string", "description": "Страна проживания" },
+          "region": { "type": "string", "description": "Регион страны проживания" },
+          "city": { "type": "string", "description": "Город проживания" }
+        },
+        "description": "Сущность мероприятия"
+      },
+      "NewSubEventRequest": {
+        "required": ["description", "eventEnd", "eventName", "eventStart"],
+        "type": "object",
+        "properties": {
+          "eventName": { "maxLength": 100, "minLength": 5, "type": "string", "description": "Название мероприятия" },
+          "description": { "maxLength": 1000, "minLength": 5, "type": "string", "description": "Описание мероприятия" },
+          "eventStart": { "type": "string", "description": "Дата начала мероприятия", "format": "date-time" },
+          "eventEnd": { "type": "string", "description": "Дата окончания мероприятия", "format": "date-time" },
+          "countryId": { "type": "integer", "description": "Страна проживания", "format": "int64" },
+          "regionId": { "type": "integer", "description": "Регион проживания", "format": "int64" },
+          "city": {
+            "maxLength": 20,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ -]+$",
+            "type": "string",
+            "description": "Город проживания"
+          }
+        },
+        "description": "Новый этап мероприятия"
+      },
       "UserUpdateRequest": {
         "type": "object",
         "properties": {
@@ -1415,7 +2254,7 @@
           },
           "email": {
             "maxLength": 50,
-            "minLength": 5,
+            "minLength": 6,
             "type": "string",
             "description": "Электронная почта пользователя"
           },
@@ -1423,7 +2262,7 @@
           "password": {
             "maxLength": 15,
             "minLength": 8,
-            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$",
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,15}$",
             "type": "string",
             "description": "Пароль"
           },
@@ -1454,7 +2293,7 @@
           "website": {
             "maxLength": 50,
             "minLength": 2,
-            "pattern": "^[a-z0-9:/@.#$%&?,*]{2,30}$",
+            "pattern": "^[a-z0-9:/@.#$%&?,*]{2,50}$",
             "type": "string",
             "description": "Ссылка на соцсети"
           }
@@ -1559,6 +2398,50 @@
         },
         "description": "Сущность пользователя"
       },
+      "ParticipationUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "linkToContestFile": {
+            "maxLength": 50,
+            "minLength": 2,
+            "pattern": "^[a-z0-9:/@.#$%&?,*]{2,30}$",
+            "type": "string",
+            "description": "Ссылка на на файл для участия в соревновании"
+          }
+        },
+        "description": "Запрос обновления заявки"
+      },
+      "EventUpdateRequest": {
+        "required": ["prize"],
+        "type": "object",
+        "properties": {
+          "eventName": { "maxLength": 100, "minLength": 5, "type": "string", "description": "Название мероприятия" },
+          "description": { "maxLength": 1000, "minLength": 5, "type": "string", "description": "Описание мероприятия" },
+          "eventStart": { "type": "string", "description": "Дата начала мероприятия", "format": "date-time" },
+          "eventEnd": { "type": "string", "description": "Дата окончания мероприятия", "format": "date-time" },
+          "activityId": {
+            "type": "integer",
+            "description": "Идентификатор направления мероприятия",
+            "format": "int64"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Тип мероприятия",
+            "enum": ["PREMIUM", "VIDEO_CONTEST", "PROJECT", "CHILDREN"]
+          },
+          "prize": { "type": "integer", "description": "Призовой фонд", "format": "int32" },
+          "countryId": { "type": "integer", "description": "Страна проживания", "format": "int64" },
+          "regionId": { "type": "integer", "description": "Регион проживания", "format": "int64" },
+          "city": {
+            "maxLength": 20,
+            "minLength": 2,
+            "pattern": "^[a-zA-zа-яА-ЯёЁ -]+$",
+            "type": "string",
+            "description": "Город проживания"
+          }
+        },
+        "description": "Обновленное мероприятие"
+      },
       "UserSearchFilter": {
         "type": "object",
         "properties": {
@@ -1570,6 +2453,51 @@
         "type": "object",
         "properties": { "title": { "type": "string", "description": "Поиск данного значения в названии поста" } },
         "description": "Фильтр поиска постов"
+      },
+      "EventSearchFilter": {
+        "type": "object",
+        "properties": {
+          "types": {
+            "type": "array",
+            "description": "Список искомых типов мероприятий",
+            "items": {
+              "type": "string",
+              "description": "Список искомых типов мероприятий",
+              "enum": ["PREMIUM", "VIDEO_CONTEST", "PROJECT", "CHILDREN"]
+            }
+          },
+          "activity": { "type": "string", "description": "Поиск по названию направления" },
+          "startDate": {
+            "type": "string",
+            "description": "Стартовая дата поиска для начала мероприятия",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Конечная дата поиска для окончания мероприятия",
+            "format": "date"
+          },
+          "text": { "type": "string", "description": "Поиск по названию или описанию мероприятия" },
+          "country": { "type": "string", "description": "Поиск по названию страны" },
+          "region": { "type": "string", "description": "Поиск по названию региона" },
+          "city": { "type": "string", "description": "Поиск по названию города" },
+          "sort": {
+            "type": "string",
+            "description": "Виды сортировок мероприятий",
+            "enum": ["EVENT_START", "PRIZE"],
+            "default": "Сортировка по идентификатору мероприятия"
+          }
+        },
+        "description": "Фильтр поиска мероприятий"
+      },
+      "ActivityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "Идентификатор направления", "format": "int64" },
+          "name": { "type": "string", "description": "Название направления" },
+          "description": { "type": "string", "description": "Описание направления" }
+        },
+        "description": "Сущность направления"
       },
       "CountryDto": {
         "type": "object",

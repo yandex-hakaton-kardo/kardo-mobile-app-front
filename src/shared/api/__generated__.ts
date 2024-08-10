@@ -1,7 +1,14 @@
 import { api } from './api';
 
-export const addTagTypes = ['USERS', 'POSTS', 'LOCATIONS'] as const;
-export const injectedRtkApi = api
+export const addTagTypes = [
+  'USERS',
+  'POSTS',
+  'participation-admin-controller',
+  'participation-controller',
+  'EVENTS',
+  'LOCATIONS',
+] as const;
+const injectedRtkApi = api
   .enhanceEndpoints({
     addTagTypes,
   })
@@ -18,6 +25,14 @@ export const injectedRtkApi = api
       addLikeToPost: build.mutation<AddLikeToPostApiResponse, AddLikeToPostApiArg>({
         query: queryArg => ({ url: `/posts/${queryArg.postId}/like`, method: 'PUT' }),
         invalidatesTags: ['POSTS'],
+      }),
+      changeParticipationStatus: build.mutation<ChangeParticipationStatusApiResponse, ChangeParticipationStatusApiArg>({
+        query: queryArg => ({
+          url: `/admin/participations/${queryArg.participationId}/status`,
+          method: 'PUT',
+          params: { status: queryArg.status },
+        }),
+        invalidatesTags: ['participation-admin-controller'],
       }),
       getUserProfilePicture: build.query<GetUserProfilePictureApiResponse, GetUserProfilePictureApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}/avatar` }),
@@ -55,6 +70,34 @@ export const injectedRtkApi = api
           body: queryArg.commentRequest,
         }),
         invalidatesTags: ['POSTS'],
+      }),
+      rateParticipation: build.mutation<RateParticipationApiResponse, RateParticipationApiArg>({
+        query: queryArg => ({
+          url: `/participations/${queryArg.participationId}/score`,
+          method: 'POST',
+          body: queryArg.newScoreRequest,
+        }),
+        invalidatesTags: ['participation-controller'],
+      }),
+      addParticipation: build.mutation<AddParticipationApiResponse, AddParticipationApiArg>({
+        query: queryArg => ({
+          url: `/events/${queryArg.eventId}/participation/${queryArg.userId}`,
+          method: 'POST',
+          body: queryArg.participationRequest,
+        }),
+        invalidatesTags: ['EVENTS'],
+      }),
+      createEvent: build.mutation<CreateEventApiResponse, CreateEventApiArg>({
+        query: queryArg => ({ url: `/admin/events`, method: 'POST', body: queryArg.newEventRequest }),
+        invalidatesTags: ['EVENTS'],
+      }),
+      createSubEvent: build.mutation<CreateSubEventApiResponse, CreateSubEventApiArg>({
+        query: queryArg => ({
+          url: `/admin/events/${queryArg.masterEventId}`,
+          method: 'POST',
+          body: queryArg.newSubEventRequest,
+        }),
+        invalidatesTags: ['EVENTS'],
       }),
       findUserById: build.query<FindUserByIdApiResponse, FindUserByIdApiArg>({
         query: queryArg => ({ url: `/users/${queryArg.userId}` }),
@@ -97,6 +140,34 @@ export const injectedRtkApi = api
         }),
         invalidatesTags: ['POSTS'],
       }),
+      findParticipationById: build.query<FindParticipationByIdApiResponse, FindParticipationByIdApiArg>({
+        query: queryArg => ({ url: `/participations/${queryArg.participationId}` }),
+        providesTags: ['participation-controller'],
+      }),
+      deleteParticipation: build.mutation<DeleteParticipationApiResponse, DeleteParticipationApiArg>({
+        query: queryArg => ({ url: `/participations/${queryArg.participationId}`, method: 'DELETE' }),
+        invalidatesTags: ['participation-controller'],
+      }),
+      updateParticipation: build.mutation<UpdateParticipationApiResponse, UpdateParticipationApiArg>({
+        query: queryArg => ({
+          url: `/participations/${queryArg.participationId}`,
+          method: 'PATCH',
+          body: queryArg.participationUpdateRequest,
+        }),
+        invalidatesTags: ['participation-controller'],
+      }),
+      deleteEvent: build.mutation<DeleteEventApiResponse, DeleteEventApiArg>({
+        query: queryArg => ({ url: `/admin/events/${queryArg.eventId}`, method: 'DELETE' }),
+        invalidatesTags: ['EVENTS'],
+      }),
+      updateEvent: build.mutation<UpdateEventApiResponse, UpdateEventApiArg>({
+        query: queryArg => ({
+          url: `/admin/events/${queryArg.eventId}`,
+          method: 'PATCH',
+          body: queryArg.eventUpdateRequest,
+        }),
+        invalidatesTags: ['EVENTS'],
+      }),
       findAllUsers: build.query<FindAllUsersApiResponse, FindAllUsersApiArg>({
         query: queryArg => ({
           url: `/users`,
@@ -129,6 +200,25 @@ export const injectedRtkApi = api
       getPostsFeed: build.query<GetPostsFeedApiResponse, GetPostsFeedApiArg>({
         query: queryArg => ({ url: `/posts/feed`, params: { page: queryArg.page, size: queryArg.size } }),
         providesTags: ['POSTS'],
+      }),
+      findUsersParticipations: build.query<FindUsersParticipationsApiResponse, FindUsersParticipationsApiArg>({
+        query: queryArg => ({ url: `/participations/users/${queryArg.userId}`, params: { type: queryArg.type } }),
+        providesTags: ['participation-controller'],
+      }),
+      searchEvents: build.query<SearchEventsApiResponse, SearchEventsApiArg>({
+        query: queryArg => ({
+          url: `/events`,
+          params: { searchFilter: queryArg.searchFilter, page: queryArg.page, size: queryArg.size },
+        }),
+        providesTags: ['EVENTS'],
+      }),
+      findEventById: build.query<FindEventByIdApiResponse, FindEventByIdApiArg>({
+        query: queryArg => ({ url: `/events/${queryArg.eventId}` }),
+        providesTags: ['EVENTS'],
+      }),
+      findAllActivities: build.query<FindAllActivitiesApiResponse, FindAllActivitiesApiArg>({
+        query: () => ({ url: `/events/activities` }),
+        providesTags: ['EVENTS'],
       }),
       getAllCountries: build.query<GetAllCountriesApiResponse, GetAllCountriesApiArg>({
         query: () => ({ url: `/countries` }),
@@ -168,6 +258,11 @@ export type AddLikeToPostApiResponse = /** status 200 OK */ number;
 export interface AddLikeToPostApiArg {
   /** Идентификатор поста */
   postId: number;
+}
+export type ChangeParticipationStatusApiResponse = /** status 200 OK */ ParticipationDto;
+export interface ChangeParticipationStatusApiArg {
+  participationId: number;
+  status: 'CREATED' | 'APPROVED' | 'DECLINED';
 }
 export type GetUserProfilePictureApiResponse = /** status 200 OK */ DataFileDto;
 export interface GetUserProfilePictureApiArg {
@@ -210,6 +305,30 @@ export interface AddCommentToPostApiArg {
   /** Идентификатор поста */
   postId: number;
   commentRequest: CommentRequest;
+}
+export type RateParticipationApiResponse = /** status 200 OK */ ParticipationDto;
+export interface RateParticipationApiArg {
+  /** Идентификатор заявки */
+  participationId: number;
+  newScoreRequest: NewScoreRequest;
+}
+export type AddParticipationApiResponse = /** status 200 OK */ ParticipationDto;
+export interface AddParticipationApiArg {
+  /** Идентификатор мероприятия */
+  eventId: number;
+  /** Идентификатор пользователя */
+  userId: number;
+  participationRequest: ParticipationRequest;
+}
+export type CreateEventApiResponse = /** status 201 Created */ EventDto;
+export interface CreateEventApiArg {
+  newEventRequest: NewEventRequest;
+}
+export type CreateSubEventApiResponse = /** status 200 OK */ EventDto;
+export interface CreateSubEventApiArg {
+  /** Идентификатор родительского мероприятия */
+  masterEventId: number;
+  newSubEventRequest: NewSubEventRequest;
 }
 export type FindUserByIdApiResponse = /** status 200 OK */ UserDto;
 export interface FindUserByIdApiArg {
@@ -263,6 +382,33 @@ export interface UpdateCommentApiArg {
   commentId: number;
   commentRequest: CommentRequest;
 }
+export type FindParticipationByIdApiResponse = /** status 200 OK */ ParticipationDto;
+export interface FindParticipationByIdApiArg {
+  /** Идентификатор заявки */
+  participationId: number;
+}
+export type DeleteParticipationApiResponse = /** status 200 OK */ void;
+export interface DeleteParticipationApiArg {
+  /** Идентификатор заявки */
+  participationId: number;
+}
+export type UpdateParticipationApiResponse = /** status 200 OK */ ParticipationDto;
+export interface UpdateParticipationApiArg {
+  /** Идентификатор заявки */
+  participationId: number;
+  participationUpdateRequest: ParticipationUpdateRequest;
+}
+export type DeleteEventApiResponse = /** status 204 No Content */ void;
+export interface DeleteEventApiArg {
+  /** Идентификатор мероприятия */
+  eventId: number;
+}
+export type UpdateEventApiResponse = /** status 200 OK */ EventDto;
+export interface UpdateEventApiArg {
+  /** Идентификатор мероприятия */
+  eventId: number;
+  eventUpdateRequest: EventUpdateRequest;
+}
 export type FindAllUsersApiResponse = /** status 200 OK */ UserDto[];
 export interface FindAllUsersApiArg {
   /** Фильтр поиска */
@@ -307,6 +453,29 @@ export interface GetPostsFeedApiArg {
   /** Количество постов на странице */
   size?: number;
 }
+export type FindUsersParticipationsApiResponse = /** status 200 OK */ ParticipationDto[];
+export interface FindUsersParticipationsApiArg {
+  /** Идентификатор пользователя */
+  userId: number;
+  /** Роль пользователя в мероприятии */
+  type?: 'PARTICIPANT' | 'JUDGE' | 'SPECTATOR' | 'SPONSOR';
+}
+export type SearchEventsApiResponse = /** status 200 OK */ EventDto[];
+export interface SearchEventsApiArg {
+  /** Фильтр поиска */
+  searchFilter: EventSearchFilter;
+  /** Номер страницы */
+  page?: number;
+  /** Количество постов на странице */
+  size?: number;
+}
+export type FindEventByIdApiResponse = /** status 200 OK */ EventDto;
+export interface FindEventByIdApiArg {
+  /** Идентификатор мероприятия */
+  eventId: number;
+}
+export type FindAllActivitiesApiResponse = /** status 200 OK */ ActivityDto[];
+export type FindAllActivitiesApiArg = void;
 export type GetAllCountriesApiResponse = /** status 200 OK */ CountryDto[];
 export type GetAllCountriesApiArg = void;
 export type GetCountryByIdApiResponse = /** status 200 OK */ CountryDto;
@@ -334,6 +503,20 @@ export interface ErrorResponse {
   errors?: Record<string, string>;
   status?: number;
   timestamp?: string;
+}
+export interface ParticipationDto {
+  /** Идентификатор заявка */
+  id?: number;
+  /** Идентификатор мероприятия, на которое подана заявка */
+  eventId?: number;
+  /** Идентификатор пользователя, который подал заявку */
+  userId?: number;
+  /** Роль пользователя в мероприятии */
+  participantType?: 'PARTICIPANT' | 'JUDGE' | 'SPECTATOR' | 'SPONSOR';
+  /** Статус заявки */
+  status?: 'CREATED' | 'APPROVED' | 'DECLINED';
+  /** Средняя оценка */
+  avgRating?: number;
 }
 export interface DataFileDto {
   /** Идентификатор файла */
@@ -391,6 +574,108 @@ export interface PostDto {
 export interface CommentRequest {
   /** Содержание комментария */
   text: string;
+}
+export interface NewScoreRequest {
+  /** Первая оценка */
+  scoreType1: number;
+  /** Вторая оценка */
+  scoreType2: number;
+  /** Третья оценка */
+  scoreType3: number;
+}
+export interface ParticipationRequest {
+  /** Имя пользователя */
+  name?: string;
+  /** Отчество пользователя */
+  secondName?: string;
+  /** Фамилия пользователя */
+  surname?: string;
+  /** Электронная почта пользователя */
+  email?: string;
+  /** Пол */
+  gender?: 'MALE' | 'FEMALE';
+  /** Страна проживания */
+  countryId?: number;
+  /** Регион проживания */
+  regionId?: number;
+  /** Город проживания */
+  city?: string;
+  /** Дата рождения пользователя */
+  dateOfBirth?: string;
+  /** Номер телефона */
+  phoneNumber?: string;
+  /** О себе */
+  overview?: string;
+  /** Ссылка на соцсети */
+  website?: string;
+  /** Ссылка на на файл для участия в соревновании */
+  linkToContestFile?: string;
+  /** Роль пользователя в мероприятии */
+  type: 'PARTICIPANT' | 'JUDGE' | 'SPECTATOR' | 'SPONSOR';
+}
+export interface EventDto {
+  /** Идентификатор мероприятия */
+  id?: number;
+  /** Название мероприятия */
+  eventName?: string;
+  /** Описание мероприятия */
+  description?: string;
+  /** Дата начала мероприятия */
+  eventStart?: string;
+  /** Дата окончания мероприятия */
+  eventEnd?: string;
+  /** Направление мероприятия */
+  activity?: string;
+  /** Тип мероприятия */
+  eventType?: string;
+  /** Идентификатор главного мероприятия */
+  masterEvent?: number;
+  /** Награда мероприятия */
+  prize?: number;
+  /** Страна проживания */
+  country?: string;
+  /** Регион страны проживания */
+  region?: string;
+  /** Город проживания */
+  city?: string;
+}
+export interface NewEventRequest {
+  /** Название мероприятия */
+  eventName: string;
+  /** Описание мероприятия */
+  description: string;
+  /** Дата начала мероприятия */
+  eventStart: string;
+  /** Дата окончания мероприятия */
+  eventEnd: string;
+  /** Идентификатор направления мероприятия */
+  activityId: number;
+  /** Тип мероприятия */
+  eventType: 'PREMIUM' | 'VIDEO_CONTEST' | 'PROJECT' | 'CHILDREN';
+  /** Призовой фонд */
+  prize: number;
+  /** Страна проживания */
+  countryId?: number;
+  /** Регион проживания */
+  regionId?: number;
+  /** Город проживания */
+  city?: string;
+}
+export interface NewSubEventRequest {
+  /** Название мероприятия */
+  eventName: string;
+  /** Описание мероприятия */
+  description: string;
+  /** Дата начала мероприятия */
+  eventStart: string;
+  /** Дата окончания мероприятия */
+  eventEnd: string;
+  /** Страна проживания */
+  countryId?: number;
+  /** Регион проживания */
+  regionId?: number;
+  /** Город проживания */
+  city?: string;
 }
 export interface Country {
   id?: number;
@@ -511,6 +796,32 @@ export interface UserUpdateRequest {
   /** Ссылка на соцсети */
   website?: string;
 }
+export interface ParticipationUpdateRequest {
+  /** Ссылка на на файл для участия в соревновании */
+  linkToContestFile?: string;
+}
+export interface EventUpdateRequest {
+  /** Название мероприятия */
+  eventName?: string;
+  /** Описание мероприятия */
+  description?: string;
+  /** Дата начала мероприятия */
+  eventStart?: string;
+  /** Дата окончания мероприятия */
+  eventEnd?: string;
+  /** Идентификатор направления мероприятия */
+  activityId?: number;
+  /** Тип мероприятия */
+  eventType?: 'PREMIUM' | 'VIDEO_CONTEST' | 'PROJECT' | 'CHILDREN';
+  /** Призовой фонд */
+  prize: number;
+  /** Страна проживания */
+  countryId?: number;
+  /** Регион проживания */
+  regionId?: number;
+  /** Город проживания */
+  city?: string;
+}
 export interface UserSearchFilter {
   /** Поиск данного значения в никнейме или электронной почте */
   name?: string;
@@ -518,6 +829,34 @@ export interface UserSearchFilter {
 export interface PostSearchFilter {
   /** Поиск данного значения в названии поста */
   title?: string;
+}
+export interface EventSearchFilter {
+  /** Список искомых типов мероприятий */
+  types?: ('PREMIUM' | 'VIDEO_CONTEST' | 'PROJECT' | 'CHILDREN')[];
+  /** Поиск по названию направления */
+  activity?: string;
+  /** Стартовая дата поиска для начала мероприятия */
+  startDate?: string;
+  /** Конечная дата поиска для окончания мероприятия */
+  endDate?: string;
+  /** Поиск по названию или описанию мероприятия */
+  text?: string;
+  /** Поиск по названию страны */
+  country?: string;
+  /** Поиск по названию региона */
+  region?: string;
+  /** Поиск по названию города */
+  city?: string;
+  /** Виды сортировок мероприятий */
+  sort?: 'EVENT_START' | 'PRIZE';
+}
+export interface ActivityDto {
+  /** Идентификатор направления */
+  id?: number;
+  /** Название направления */
+  name?: string;
+  /** Описание направления */
+  description?: string;
 }
 export interface CountryDto {
   /** Идентификатор страны */
@@ -537,6 +876,7 @@ export const {
   useAddFriendMutation,
   useDeleteFriendMutation,
   useAddLikeToPostMutation,
+  useChangeParticipationStatusMutation,
   useGetUserProfilePictureQuery,
   useLazyGetUserProfilePictureQuery,
   useUploadProfilePictureMutation,
@@ -546,6 +886,10 @@ export const {
   useLazyGetAllPostByUserQuery,
   useCreatePostMutation,
   useAddCommentToPostMutation,
+  useRateParticipationMutation,
+  useAddParticipationMutation,
+  useCreateEventMutation,
+  useCreateSubEventMutation,
   useFindUserByIdQuery,
   useLazyFindUserByIdQuery,
   useDeleteUserMutation,
@@ -556,6 +900,12 @@ export const {
   useUpdatePostMutation,
   useDeleteCommentMutation,
   useUpdateCommentMutation,
+  useFindParticipationByIdQuery,
+  useLazyFindParticipationByIdQuery,
+  useDeleteParticipationMutation,
+  useUpdateParticipationMutation,
+  useDeleteEventMutation,
+  useUpdateEventMutation,
   useFindAllUsersQuery,
   useLazyFindAllUsersQuery,
   useGetFriendsListQuery,
@@ -568,6 +918,14 @@ export const {
   useLazyGetRecommendationsQuery,
   useGetPostsFeedQuery,
   useLazyGetPostsFeedQuery,
+  useFindUsersParticipationsQuery,
+  useLazyFindUsersParticipationsQuery,
+  useSearchEventsQuery,
+  useLazySearchEventsQuery,
+  useFindEventByIdQuery,
+  useLazyFindEventByIdQuery,
+  useFindAllActivitiesQuery,
+  useLazyFindAllActivitiesQuery,
   useGetAllCountriesQuery,
   useLazyGetAllCountriesQuery,
   useGetCountryByIdQuery,
