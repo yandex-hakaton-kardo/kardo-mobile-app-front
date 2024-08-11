@@ -46,7 +46,7 @@ export const PostDetail = () => {
             {views} {plural(views, lang.view)}
           </p>
           <div className={styles.actions}>
-            <LikeButton postId={post.id} likeCount={post.likes} />
+            <LikeButton postId={post.id} likeCount={post.likes} liked={post.likedByUser} />
             <ShareButton content={window.location.toString()} />
             <CommentButton postId={post.id} />
             <FavoriteButton />

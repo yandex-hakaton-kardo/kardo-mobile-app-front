@@ -570,6 +570,7 @@ export interface PostDto {
   views: number;
   /** Комментарии к посту */
   comments: CommentDto[];
+  likedByUser: boolean;
 }
 export interface CommentRequest {
   /** Содержание комментария */
