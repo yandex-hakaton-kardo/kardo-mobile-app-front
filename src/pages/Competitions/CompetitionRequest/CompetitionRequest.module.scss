@@ -1,0 +1,27 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  inline-size: 100%;
+  block-size: 100vh;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  font: var(--font-header-2);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
+  block-size: 100%;
+  overflow-y: auto;
+}
+
+.stepHeader {
+  font: var(--font-header-3);
+}

@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font: var(--font-header-4);
+}
+
+.textarea {
+  padding-block: 16px;
+  padding-inline: 12px;
+  font: var(--font-body);
+  outline: none;
+}

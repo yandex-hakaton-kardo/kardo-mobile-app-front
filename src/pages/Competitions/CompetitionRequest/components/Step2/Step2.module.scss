@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  block-size: 100%;
+}
+
+.nextBtn {
+  margin-block-start: auto;
+}

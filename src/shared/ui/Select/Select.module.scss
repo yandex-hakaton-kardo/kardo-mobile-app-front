@@ -1,0 +1,61 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font: var(--font-body);
+}
+
+.select {
+  color: var(--color-primary);
+  background-color: var(--color-inverted-primary);
+}
+
+.selectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 10px;
+  padding-inline: 12px;
+  cursor: pointer;
+}
+
+.input {
+  flex-grow: 1;
+}
+
+.arrow {
+  inline-size: 36px;
+  block-size: 36px;
+  color: var(--color-primary);
+
+  &.open {
+    transform: rotateX(180deg);
+  }
+}
+
+.optionsWrapper {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  max-block-size: 300px;
+  background-color: var(--color-inverted-primary);
+  overflow-y: auto;
+}
+
+.option {
+  padding: 12px;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: var(--color-primary);
+    background-color: var(--color-brand-active);
+  }
+}
