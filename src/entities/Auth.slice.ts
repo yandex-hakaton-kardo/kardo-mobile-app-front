@@ -30,12 +30,16 @@ export const authSlice = createSlice({
       localStorage.setItem(LsKeys.REFRESH_TOKEN, payload);
     },
     clear() {
-      // localStorage.clear();
-      // return {
-      //   userName: null,
-      //   accessToken: null,
-      //   refreshToken: null,
-      // };
+      localStorage.removeItem(LsKeys.USERNAME);
+      localStorage.removeItem(LsKeys.REFRESH_TOKEN);
+      localStorage.removeItem(LsKeys.ACCESS_TOKEN);
+      localStorage.removeItem(LsKeys.ACCESS_TOKEN_EXPIRED);
+
+      return {
+        userName: null,
+        accessToken: null,
+        refreshToken: null,
+      };
     },
   },
 });
