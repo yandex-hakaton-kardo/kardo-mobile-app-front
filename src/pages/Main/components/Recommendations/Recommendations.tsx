@@ -34,8 +34,8 @@ export const Recommendations = () => {
   return (
     <div className={styles.recommendations} ref={ref}>
       {recommendations.map(post => (
-        <Link key={post.id} to={`/video/${post.id}}`} className={styles.recommendation}>
-          <Video src={post.file.filePath?.replace('/home/workshop/kardo/files/', '')} />
+        <Link key={post.id} to={`/feed/${post.id}`} className={styles.recommendation}>
+          <Video src={post.file.filePath} />
           <div className={styles.caption}>
             <span className={styles.title}>{post.title}</span>
             <span className={styles.author}>{`${post.author.username}`}</span>
