@@ -1,0 +1,107 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: auto;
+  padding-top: 63px;
+  min-width: 343px;
+}
+
+.header {
+  font: var(--font-header-2);
+  color: var(--color-inverted-primary);
+}
+
+.tabs {
+  display: block;
+  margin-top: 16px;
+}
+
+.tab {
+  height: 36px;
+  width: 170px;
+  font: var(--font-header-4);
+}
+
+.cards {
+  margin-top: 32px;
+  min-height: 512px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  width: 343px;
+  height: 116px;
+  overflow: hidden;
+}
+
+.cards {
+  margin-top: 32px;
+  min-height: 512px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 343px;
+  height: 116px;
+  transition: background-color 0.6s linear;
+}
+
+.title {
+  font: var(--font-header-4);
+  color: var(--color-inverted-primary);
+  padding-left: 14px;
+  padding-top: 48px;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.title:hover {
+  font: var(--font-accent);
+}
+
+.poster {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  z-index: -2;
+}
+
+.card:hover {
+  background-color: var(--color-black-out-mid);
+  cursor: pointer;
+}
+
+.card::before {
+  content: '';
+  background-color: var(--color-black-out-light);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.spec {
+  object-position: calc(35%) calc(30%);
+  transform: scale(1.5);
+}
