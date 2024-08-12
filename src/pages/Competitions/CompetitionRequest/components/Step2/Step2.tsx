@@ -58,12 +58,16 @@ export const Step2 = ({ onSubmit }: Step2Props) => {
         <Controller
           name="phone"
           control={control}
-          render={({ field }) => <TextInput label="Телефон" {...field} error={errors.phone?.message} />}
+          render={({ field }) => (
+            <TextInput label="Телефон" {...field} error={errors.phone?.message} placeholder="+7 (000) 000-00-00" />
+          )}
         />
         <Controller
           name="birthDate"
           control={control}
-          render={({ field }) => <TextInput label="Дата рождения" {...field} error={errors.birthDate?.message} />}
+          render={({ field }) => (
+            <TextInput label="Дата рождения" {...field} error={errors.birthDate?.message} placeholder="00.00.0000" />
+          )}
         />
         <Controller
           name="gender"

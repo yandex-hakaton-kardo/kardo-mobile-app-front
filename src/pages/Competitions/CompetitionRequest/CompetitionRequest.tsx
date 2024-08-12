@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAddParticipationMutation } from '@shared/api';
 import { ArrowLeftIcon } from '@shared/ui';
 import {} from './competitionRequest.schema';
@@ -10,7 +10,6 @@ import styles from './CompetitionRequest.module.scss';
 
 export const CompetitionRequest = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
   const { user } = useUserInfo();
 
   const dataRef = useRef<Partial<CompetitionRequestData>>({});
@@ -25,7 +24,7 @@ export const CompetitionRequest = () => {
   const onSend = (data: CompetitionRequestData3) => {
     Object.assign(dataRef.current, data);
     addParticipant({
-      eventId: Number(id),
+      eventId: 1,
       userId: user!.id,
       participationRequest: {
         type: dataRef.current.role!,
