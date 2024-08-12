@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { isValidDate, isValidPhone } from './utils';
 
 export const competitionRequestSchema1 = z
   .object({
@@ -7,7 +8,11 @@ export const competitionRequestSchema1 = z
     direction: z.string(),
     country: z.string(),
     region: z.string().optional(),
-    city: z.string(),
+    city: z
+      .string()
+      .min(2, 'Минимум 2 символа')
+      .max(20, 'Максимум 20 символов')
+      .regex(/^[а-яА-ЯёЁa-zA-Z -]+$/, 'Использованы недопустимые символы'),
   })
   .refine(
     data => {
@@ -23,17 +28,21 @@ export const competitionRequestSchema1 = z
   );
 
 export const competitionRequestSchema2 = z.object({
-  secondName: z.string(),
-  firstName: z.string(),
-  thirdName: z.string(),
-  email: z.string().email().min(5).max(50),
-  phone: z.string(),
-  birthDate: z.string(),
+  secondName: z.string().min(2, 'Минимум 2 символа').max(30, 'Максимум 30 символов'),
+  firstName: z.string().min(2, 'Минимум 2 символа').max(30, 'Максимум 30 символов'),
+  thirdName: z.string().min(2, 'Минимум 2 символа').max(30, 'Максимум 30 символов'),
+  email: z.string().email('Некорректный email').min(5, 'Минимум 5 символов').max(50, 'Максимум 50 символов'),
+  phone: z.string().refine(isValidPhone, {
+    message: 'Некорректный телефонный номер',
+  }),
+  birthDate: z.string().refine(isValidDate, {
+    message: 'Дата должна быть в формате DD.MM.YYYY',
+  }),
   gender: z.string(),
 });
 
 export const competitionRequestSchema3 = z.object({
-  file: z.string().url(),
-  socialLink: z.string().url(),
+  file: z.string().url('Введенное значение не является ссылкой'),
+  socialLink: z.string().url('Введенное значение не является ссылкой').optional(),
   about: z.string(),
 });
