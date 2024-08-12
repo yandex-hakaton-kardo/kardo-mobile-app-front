@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { LsKeys } from '@shared/constants';
-import { authActions } from 'entities/Auth.slice';
+import { authActions } from 'entities/Auth/Auth.slice';
 import { type LoginParams, type LoginResponse } from './types';
 
 export const authApi = createApi({

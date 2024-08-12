@@ -1,20 +1,19 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { api, useFindUserByUsernameQuery } from '@shared/api';
+import { api } from '@shared/api';
 import { TicketBanner, ToolsIcon } from '@shared/ui';
 import { format, useInfiniteScroll } from '@shared/utils';
 import { Feed } from '@widgets';
-import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
+import { useUserInfo } from 'entities/Auth';
 import { Recommendations } from './components';
 import styles from './Main.module.scss';
 
 export const Main = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   const lang = useLang().main;
-  const userName = useAppSelector(state => state.auth.userName);
-  const { data: user } = useFindUserByUsernameQuery({ username: userName ?? '' });
+  const { user } = useUserInfo();
 
   const { data: posts } = useInfiniteScroll({
     scrollableContainerRef: pageRef,

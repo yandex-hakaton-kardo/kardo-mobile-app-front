@@ -1,17 +1,16 @@
 import { useRef, useState } from 'react';
-import { useFindUserByUsernameQuery, useGetAllPostByUserQuery } from '@shared/api';
+import { useGetAllPostByUserQuery } from '@shared/api';
 import { Button, SegmentPicker } from '@shared/ui';
 import { Feed } from '@widgets';
-import { useAppSelector } from 'app/store';
 import { useLang } from 'context';
+import { useUserInfo } from 'entities/Auth';
 import { Header, UserInfo } from './components';
 import styles from './Profile.module.scss';
 
 export const Profile = () => {
   const lang = useLang().profile;
   const ref = useRef<HTMLDivElement>(null);
-  const username = useAppSelector(state => state.auth.userName);
-  const { data: user } = useFindUserByUsernameQuery({ username: username ?? '' }, { skip: !username });
+  const { user } = useUserInfo();
   const { data: posts } = useGetAllPostByUserQuery({ userId: user?.id ?? 0 }, { skip: !user?.id });
   const [activeTab, setActiveTab] = useState<'feed' | 'requests'>('feed');
 
