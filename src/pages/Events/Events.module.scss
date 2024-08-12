@@ -38,3 +38,9 @@
   block-size: 100%;
   overflow-y: auto;
 }
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}

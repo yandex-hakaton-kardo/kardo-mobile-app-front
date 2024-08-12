@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
+import { gender } from '@shared/constants';
 import { Button, Select, TextInput } from '@shared/ui';
 import { useUserInfo } from 'entities/Auth';
 import { competitionRequestSchema2 } from '../../competitionRequest.schema';
-import { gender } from '../../constants';
 import { type CompetitionRequestData2 } from '../../types';
 import styles from './Step2.module.scss';
 

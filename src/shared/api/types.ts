@@ -11,3 +11,5 @@ export interface LoginParams {
   login: string;
   password: string;
 }
+
+export type CompetitionType = 'PREMIUM' | 'VIDEO_CONTEST' | 'PROJECT' | 'CHILDREN';

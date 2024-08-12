@@ -3,11 +3,17 @@ import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useFindEventByIdQuery, useGetAllCountriesQuery, useGetAllRegionsByCountryIdQuery } from '@shared/api';
-import { getCountryByName, getRegionByName } from '@shared/constants';
+import {
+  getCountryByName,
+  getRegionByName,
+  competitionTypes,
+  competitionDirections,
+  getActivityByName,
+  roles,
+} from '@shared/constants';
 import { Button, Select, TextInput } from '@shared/ui';
 import { useUserInfo } from 'entities/Auth';
 import { competitionRequestSchema1 } from '../../competitionRequest.schema';
-import { competitionTypes, direction, getActivityByName, roles } from '../../constants';
 import { type CompetitionRequestData1 } from '../../types';
 import styles from './Step1.module.scss';
 
@@ -89,7 +95,7 @@ export const Step1 = ({ onSubmit }: Step1Props) => {
           name="direction"
           control={control}
           render={({ field }) => (
-            <Select value={field.value} onUpdate={field.onChange} label="Направление" options={direction} />
+            <Select value={field.value} onUpdate={field.onChange} label="Направление" options={competitionDirections} />
           )}
         />
         <Controller
