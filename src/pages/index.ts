@@ -1,7 +1,7 @@
 export { default as Admin } from './Admin';
 export { default as Auth } from './Auth';
-export { default as CompetitionDetail } from './CompetitionDetail';
-export { default as CompetitionRequest } from './CompetitionRequest';
+export { default as CompetitionDetail } from './Competitions/CompetitionDetail';
+export { default as CompetitionRequest } from './Competitions/CompetitionRequest';
 export { default as Competitions } from './Competitions';
 export { default as Events } from './Events';
 export { default as Feed } from './Feed';

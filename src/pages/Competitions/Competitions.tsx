@@ -1,13 +1,8 @@
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 import { SegmentPicker } from '@shared/ui';
+import { cards } from './constants';
 import styles from './Competitions.module.scss';
-
-const cards = [
-  { title: 'Премия', imageClass: 'award' },
-  { title: 'Видеоконкурс', imageClass: 'video' },
-  { title: 'Проекты', imageClass: 'projects' },
-  { title: 'Дети', imageClass: 'children' },
-];
 
 export const Competitions = () => (
   <div className={styles.page}>
@@ -24,11 +19,11 @@ export const Competitions = () => (
 
     <div className={styles.content}>
       {cards.map(card => (
-        <div key={card.title} className={clsx(styles.card, styles[card.imageClass])}>
+        <Link to={`/competitions/${card.id}`} key={card.id} className={clsx(styles.card, styles[card.id])}>
           <div className={styles.cardContent}>
             <p className={styles.cardTitle}>{card.title}</p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   </div>

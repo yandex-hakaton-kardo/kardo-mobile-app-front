@@ -1,0 +1,31 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  inline-size: 100%;
+  block-size: 100vh;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  font: var(--font-header-2);
+}
+
+.content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.image {
+  inline-size: 100%;
+  margin-block-end: 32px;
+  object-fit: cover;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
