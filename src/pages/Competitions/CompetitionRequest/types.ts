@@ -3,7 +3,7 @@ export interface CompetitionRequestData1 {
   type: string;
   direction: string;
   country: string;
-  region: string;
+  region?: string;
   city: string;
 }
 

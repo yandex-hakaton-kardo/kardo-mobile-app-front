@@ -861,17 +861,17 @@ export interface ActivityDto {
 }
 export interface CountryDto {
   /** Идентификатор страны */
-  id?: number;
+  id: number;
   /** Название страны */
-  name?: string;
+  name: string;
 }
 export interface RegionDto {
   /** Идентификатор региона */
-  id?: number;
+  id: number;
   /** Название региона */
-  name?: string;
+  name: string;
   /** Идентификатор страны, в которой находится регион */
-  countryId?: number;
+  countryId: number;
 }
 export const {
   useAddFriendMutation,

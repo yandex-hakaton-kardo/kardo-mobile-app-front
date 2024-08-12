@@ -1,6 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Button, Select } from '@shared/ui';
+import { useParams } from 'react-router-dom';
+import { useGetAllCountriesQuery, useGetAllRegionsByCountryIdQuery } from '@shared/api';
+import { Button, Select, TextInput } from '@shared/ui';
+import { useUserInfo } from 'entities/Auth';
 import { competitionRequestSchema1 } from '../../competitionRequest.schema';
 import { competitionTypes, direction, roles } from '../../constants';
 import { type CompetitionRequestData1 } from '../../types';
@@ -11,85 +15,97 @@ interface Step1Props {
 }
 
 export const Step1 = ({ onSubmit }: Step1Props) => {
+  const { id } = useParams();
+  const { user } = useUserInfo();
+
   const {
+    watch,
     control,
+    setValue,
     handleSubmit,
-    formState: { isValid },
+    formState: { errors, isValid },
   } = useForm<CompetitionRequestData1>({
     resolver: zodResolver(competitionRequestSchema1),
     mode: 'all',
-    defaultValues: {},
+    defaultValues: {
+      type: id,
+      country: user?.country,
+      region: user?.region,
+      city: user?.city ?? '',
+    },
   });
+
+  const selectedCountry = watch('country');
+
+  const { data: rawCountries } = useGetAllCountriesQuery();
+  const countries = rawCountries?.map(country => ({ value: `${country.id}`, label: country.name })) ?? [];
+
+  const { data: rawRegions } = useGetAllRegionsByCountryIdQuery(
+    { countryId: Number(selectedCountry) },
+    { skip: !selectedCountry },
+  );
+  const regions = rawRegions?.map(region => ({ value: `${region.id}`, label: region.name })) ?? [];
+
+  useEffect(() => {
+    if (!regions.length) {
+      setValue('region', undefined);
+    }
+  }, [regions.length, setValue]);
 
   return (
     <form className={styles.form}>
-      <Controller
-        name="role"
-        control={control}
-        render={({ field }) => (
-          <Select value={field.value} onUpdate={field.onChange} label="Твоя роль" options={roles} />
-        )}
-      />
-      <Controller
-        name="type"
-        control={control}
-        render={({ field }) => (
-          <Select value={field.value} onUpdate={field.onChange} label="Тип конкурса" options={competitionTypes} />
-        )}
-      />
-      <Controller
-        name="direction"
-        control={control}
-        render={({ field }) => (
-          <Select value={field.value} onUpdate={field.onChange} label="Направление" options={direction} />
-        )}
-      />
-      <Controller
-        name="country"
-        control={control}
-        render={({ field }) => (
-          <Select
-            value={field.value}
-            onUpdate={field.onChange}
-            label="Страна"
-            options={[{ value: '1', label: 'Обучение' }]}
+      <div className={styles.content}>
+        <Controller
+          name="role"
+          control={control}
+          render={({ field }) => (
+            <Select value={field.value} onUpdate={field.onChange} label="Твоя роль" options={roles} />
+          )}
+        />
+        <Controller
+          name="type"
+          control={control}
+          render={({ field }) => (
+            <Select value={field.value} onUpdate={field.onChange} label="Тип конкурса" options={competitionTypes} />
+          )}
+        />
+        <Controller
+          name="direction"
+          control={control}
+          render={({ field }) => (
+            <Select value={field.value} onUpdate={field.onChange} label="Направление" options={direction} />
+          )}
+        />
+        <Controller
+          name="country"
+          control={control}
+          render={({ field }) => (
+            <Select
+              value={field.value}
+              onUpdate={field.onChange}
+              label="Страна"
+              options={countries}
+              disabled={!countries.length}
+            />
+          )}
+        />
+        {!!regions.length && (
+          <Controller
+            name="region"
+            control={control}
+            render={({ field }) => (
+              <Select value={field.value} onUpdate={field.onChange} label="Регион" options={regions} />
+            )}
           />
         )}
-      />
-      <Controller
-        name="region"
-        control={control}
-        render={({ field }) => (
-          <Select
-            value={field.value}
-            onUpdate={field.onChange}
-            label="Регион"
-            options={[{ value: '1', label: 'Обучение' }]}
-          />
-        )}
-      />
-      <Controller
-        name="city"
-        control={control}
-        render={({ field }) => (
-          <Select
-            value={field.value}
-            onUpdate={field.onChange}
-            label="Город"
-            options={[{ value: '1', label: 'Обучение' }]}
-          />
-        )}
-      />
+        <Controller
+          name="city"
+          control={control}
+          render={({ field }) => <TextInput label="Город" {...field} error={errors.city?.message} />}
+        />
+      </div>
 
-      <Button
-        className={styles.nextBtn}
-        view="action"
-        type="submit"
-        size="l"
-        wide
-        disabled={!isValid}
-        onClick={handleSubmit(onSubmit)}
-      >
+      <Button view="action" type="submit" size="l" wide disabled={!isValid} onClick={handleSubmit(onSubmit)}>
         Далее
       </Button>
     </form>
