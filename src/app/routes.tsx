@@ -5,6 +5,7 @@ import {
   CompetitionDetail,
   CompetitionRequest,
   Competitions,
+  EventDetails,
   Events,
   Feed,
   Intro,
@@ -52,6 +53,10 @@ export const routes: RouteObject[] = [
           {
             path: '/competitions/:id/request',
             Component: CompetitionRequest,
+          },
+          {
+            path: '/events/:id',
+            Component: EventDetails,
           },
           {
             element: <Layout />,

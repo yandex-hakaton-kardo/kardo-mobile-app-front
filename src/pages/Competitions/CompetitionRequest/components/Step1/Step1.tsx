@@ -2,11 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { useGetAllCountriesQuery, useGetAllRegionsByCountryIdQuery } from '@shared/api';
+import { useFindEventByIdQuery, useGetAllCountriesQuery, useGetAllRegionsByCountryIdQuery } from '@shared/api';
+import { getCountryByName, getRegionByName } from '@shared/constants';
 import { Button, Select, TextInput } from '@shared/ui';
 import { useUserInfo } from 'entities/Auth';
 import { competitionRequestSchema1 } from '../../competitionRequest.schema';
-import { competitionTypes, direction, roles } from '../../constants';
+import { competitionTypes, direction, getActivityByName, roles } from '../../constants';
 import { type CompetitionRequestData1 } from '../../types';
 import styles from './Step1.module.scss';
 
@@ -17,6 +18,7 @@ interface Step1Props {
 export const Step1 = ({ onSubmit }: Step1Props) => {
   const { id } = useParams();
   const { user } = useUserInfo();
+  const { data: event } = useFindEventByIdQuery({ eventId: Number(id) }, { skip: !id });
 
   const {
     watch,
@@ -51,6 +53,20 @@ export const Step1 = ({ onSubmit }: Step1Props) => {
       setValue('region', undefined);
     }
   }, [regions.length, setValue]);
+
+  useEffect(() => {
+    if (!event) return;
+
+    const countryId = event.country ? getCountryByName(event.country)?.id : undefined;
+    const regionId = event.region ? getRegionByName(event.region)?.id : undefined;
+    const activityId = event.activity ? getActivityByName(event.activity)?.value : undefined;
+
+    if (event.city) setValue('city', event.city);
+    if (regionId) setValue('region', regionId.toString());
+    if (countryId) setValue('country', countryId.toString());
+    if (activityId) setValue('direction', activityId);
+    setValue('type', event.eventType);
+  }, [event, setValue]);
 
   return (
     <form className={styles.form}>

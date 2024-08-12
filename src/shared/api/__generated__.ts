@@ -616,7 +616,7 @@ export interface ParticipationRequest {
 }
 export interface EventDto {
   /** Идентификатор мероприятия */
-  id?: number;
+  id: number;
   /** Название мероприятия */
   eventName?: string;
   /** Описание мероприятия */
@@ -628,7 +628,7 @@ export interface EventDto {
   /** Направление мероприятия */
   activity?: string;
   /** Тип мероприятия */
-  eventType?: string;
+  eventType: 'PREMIUM' | 'VIDEO_CONTEST' | 'PROJECT' | 'CHILDREN';
   /** Идентификатор главного мероприятия */
   masterEvent?: number;
   /** Награда мероприятия */
