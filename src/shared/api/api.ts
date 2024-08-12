@@ -129,7 +129,8 @@ export const api = createApi({
         url: `/events`,
         params: { ...queryArg.searchFilter, page: queryArg.page, size: queryArg.size },
       }),
-      serializeQueryArgs: ({ endpointName }) => endpointName,
+      serializeQueryArgs: ({ endpointName, queryArgs }) =>
+        `${endpointName}-${queryArgs.searchFilter.types?.join(',')}-${queryArgs.searchFilter.activity}`,
       merge: (currentCache, newItems) => [
         ...currentCache.filter(existingItem => !newItems.some(newItem => newItem.id === existingItem.id)),
         ...newItems,

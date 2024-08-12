@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
-import { getCountryByName, getRegionByName } from '@shared/constants';
-import { eventsTypes } from '../../constants';
+import { getCountryByName, getRegionByName, getCompetitionTypeByKey } from '@shared/constants';
 import type { EventDto } from '@shared/api';
 import styles from './EventCard.module.scss';
 
@@ -25,7 +24,7 @@ export const EventCard = ({ event }: EventCardProps) => {
     >
       <div className={styles.eventCard}>
         <div className={styles.tags}>
-          <div className={styles.tag}>{eventsTypes[event.eventType]}</div>
+          <div className={styles.tag}>{getCompetitionTypeByKey(event.eventType)?.label}</div>
           <div className={styles.tag}>{event.activity}</div>
         </div>
         <div className={styles.eventInfo}>
