@@ -46,6 +46,14 @@ export const routes: RouteObject[] = [
             Component: Settings,
           },
           {
+            path: '/competitions/:id',
+            Component: CompetitionDetail,
+          },
+          {
+            path: '/competitions/:id/request',
+            Component: CompetitionRequest,
+          },
+          {
             element: <Layout />,
             children: [
               {
@@ -67,14 +75,6 @@ export const routes: RouteObject[] = [
               {
                 path: '/competitions',
                 Component: Competitions,
-              },
-              {
-                path: '/competitions/:id',
-                Component: CompetitionDetail,
-              },
-              {
-                path: '/competitions/:id/request',
-                Component: CompetitionRequest,
               },
               {
                 path: '/events',
