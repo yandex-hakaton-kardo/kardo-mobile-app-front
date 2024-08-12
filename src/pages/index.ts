@@ -4,6 +4,7 @@ export { default as CompetitionDetail } from './Competitions/CompetitionDetail';
 export { default as CompetitionRequest } from './Competitions/CompetitionRequest';
 export { default as Competitions } from './Competitions';
 export { default as Events } from './Events';
+export { default as EventDetails } from './EventDetails';
 export { default as Feed } from './Feed';
 export { default as Intro } from './Intro';
 export { default as Main } from './Main';

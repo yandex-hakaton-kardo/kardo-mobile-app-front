@@ -1,0 +1,8 @@
+.wrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  block-size: 100%;
+  font: var(--font-accent);
+}

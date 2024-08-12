@@ -7,7 +7,13 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { LsKeys } from '@shared/constants';
 import { authActions } from 'entities/Auth/Auth.slice';
-import { type GetRecommendationsApiArg, type GetRecommendationsApiResponse, type PostDto } from './__generated__';
+import {
+  type GetRecommendationsApiArg,
+  type GetRecommendationsApiResponse,
+  type PostDto,
+  type SearchEventsApiArg,
+  type SearchEventsApiResponse,
+} from './__generated__';
 import type { AppDispatch } from 'app/store';
 
 export const requestWithAuth = (url: string, props: RequestInit = {}) =>
@@ -85,7 +91,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 ) => requestWithReAuth(api.dispatch, async () => baseQueryWithAuth(args, api, extraOptions));
 
 export const api = createApi({
-  tagTypes: ['POSTS'],
+  tagTypes: ['POSTS', 'EVENTS'],
   baseQuery: baseQueryWithReAuth,
   endpoints: build => ({
     getFeed: build.query<PostDto[], { page: number; size?: number; searchFilter?: string }>({
@@ -117,6 +123,21 @@ export const api = createApi({
         return currentArg !== previousArg;
       },
       providesTags: ['POSTS'],
+    }),
+    getEvents: build.query<SearchEventsApiResponse, SearchEventsApiArg>({
+      query: queryArg => ({
+        url: `/events`,
+        params: { ...queryArg.searchFilter, page: queryArg.page, size: queryArg.size },
+      }),
+      serializeQueryArgs: ({ endpointName }) => endpointName,
+      merge: (currentCache, newItems) => [
+        ...currentCache.filter(existingItem => !newItems.some(newItem => newItem.id === existingItem.id)),
+        ...newItems,
+      ],
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+      providesTags: ['EVENTS'],
     }),
   }),
 });

@@ -10,9 +10,10 @@ export interface SelectProps {
   options: { value: string; label: string }[];
   placeholder?: string;
   disabled?: boolean;
+  size?: 'm' | 'l';
 }
 
-export const Select = ({ label, onUpdate, value, options, placeholder, disabled }: SelectProps) => {
+export const Select = ({ label, onUpdate, value, options, placeholder, disabled, size = 'm' }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
@@ -41,8 +42,8 @@ export const Select = ({ label, onUpdate, value, options, placeholder, disabled 
   }, [handleClickOutside]);
 
   return (
-    <div className={styles.container} ref={selectRef}>
-      <span className={styles.label}>{label}</span>
+    <div className={clsx(styles.container, styles[size])} ref={selectRef}>
+      {label && <span className={styles.label}>{label}</span>}
       <div className={styles.select}>
         <button type="button" disabled={disabled} className={styles.selectHeader} onClick={toggleDropdown}>
           <span className={styles.input}>
@@ -50,6 +51,7 @@ export const Select = ({ label, onUpdate, value, options, placeholder, disabled 
           </span>
           <ArrowDownIcon className={clsx(styles.arrow, isOpen && styles.open)} />
         </button>
+
         {isOpen && (
           <div className={styles.optionsWrapper} ref={optionsRef}>
             {options.map(option => (

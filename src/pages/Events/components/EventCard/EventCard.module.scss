@@ -1,0 +1,41 @@
+.eventCardWrapper {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.eventCard {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--color-black-out-light);
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  padding-block: 4px;
+  padding-inline: 12px;
+  color: var(--color-primary);
+  font: var(--font-body-small);
+  background-color: var(--color-generic);
+}
+
+.eventInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 12px;
+}
+
+.eventTitle {
+  font: var(--font-header-4);
+}
+
+.eventDate {
+  font: var(--font-accent);
+}

@@ -1,0 +1,40 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  inline-size: 100%;
+  margin-block-end: 76px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font: var(--font-header-2);
+}
+
+.calendar {
+  inline-size: 36px;
+  block-size: 36px;
+  color: var(--color-generic);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  block-size: 100%;
+  overflow-y: auto;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
+  block-size: 100%;
+  overflow-y: auto;
+}
