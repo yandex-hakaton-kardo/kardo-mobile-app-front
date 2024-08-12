@@ -16,6 +16,7 @@
   padding-block: 10px;
   color: var(--color-generic-active);
   font: var(--font-body);
+  line-height: 16px;
   border: none;
   outline: none;
 }
@@ -23,6 +24,7 @@
 .active {
   color: var(--color-primary);
   font: var(--font-header-4);
+  line-height: 16px;
   border: 1px solid var(--color-primary);
   background-color: var(--color-inverted-primary);
 }

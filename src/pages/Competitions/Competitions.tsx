@@ -1,41 +1,35 @@
-import styles from './Competitions.module.scss';
 import clsx from 'clsx';
+import { SegmentPicker } from '@shared/ui';
+import styles from './Competitions.module.scss';
 
-export const Competitions = () => {
-  const specImg = clsx(styles.poster, styles.spec);
-  return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <h1 className={styles.header}>Конкурсы</h1>
-        <nav>
-          <ul>
-            <div className={styles.tabs}>
-              <button className={styles.tab}>Участникам</button>
-              <button className={styles.tab} disabled>
-                Спонсорам
-              </button>
-            </div>
-          </ul>
-        </nav>
-        <div className={styles.cards}>
-          <div className={styles.card}>
-            <p className={styles.title}>Премия</p>
-            <img className={styles.poster} src="/images/award.png" alt="award" />
-          </div>
-          <div className={styles.card}>
-            <p className={styles.title}>Видеоконкурс</p>
-            <img className={specImg} src="/images/videoCompetition.png" alt="videoCompetition" />
-          </div>
-          <div className={styles.card}>
-            <p className={styles.title}>Проекты</p>
-            <img className={styles.poster} src="/images/projects.png" alt="projects" />
-          </div>
-          <div className={styles.card}>
-            <p className={styles.title}>Дети</p>
-            <img className={styles.poster} src="/images/children.png" alt="children" />
+const cards = [
+  { title: 'Премия', imageClass: 'award' },
+  { title: 'Видеоконкурс', imageClass: 'video' },
+  { title: 'Проекты', imageClass: 'projects' },
+  { title: 'Дети', imageClass: 'children' },
+];
+
+export const Competitions = () => (
+  <div className={styles.page}>
+    <div className={styles.header}>
+      <h1 className={styles.headerText}>Конкурсы</h1>
+      <SegmentPicker
+        activeSegment="participant"
+        segments={[
+          { id: 'participant', text: 'Участникам' },
+          { id: 'sponsor', text: 'Спонсорам' },
+        ]}
+      />
+    </div>
+
+    <div className={styles.content}>
+      {cards.map(card => (
+        <div key={card.title} className={clsx(styles.card, styles[card.imageClass])}>
+          <div className={styles.cardContent}>
+            <p className={styles.cardTitle}>{card.title}</p>
           </div>
         </div>
-      </div>
+      ))}
     </div>
-  );
-};
+  </div>
+);
