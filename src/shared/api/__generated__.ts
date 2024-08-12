@@ -738,9 +738,9 @@ export interface DataFile {
 }
 export interface UserDto {
   /** Идентификатор пользователя */
-  id?: number;
+  id: number;
   /** Никнейм пользователя */
-  username?: string;
+  username: string;
   /** Имя пользователя */
   name?: string;
   /** Отчество пользователя */

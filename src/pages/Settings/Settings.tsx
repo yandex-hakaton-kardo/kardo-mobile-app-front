@@ -10,11 +10,12 @@ import {
   SupportIcon,
 } from '@shared/ui';
 import { useLang } from 'context';
+import { useUserInfo } from 'entities/Auth';
 import styles from './Settings.module.scss';
 
 export const Settings = () => {
   const lang = useLang().settings;
-  const username = 'username';
+  const { user } = useUserInfo();
   const navigate = useNavigate();
 
   return (
@@ -27,7 +28,7 @@ export const Settings = () => {
       <main className={styles.content}>
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>{lang.account}</h2>
-          <NavButton Icon={ProfileIcon} text={username} to="/settings/profile" />
+          <NavButton Icon={ProfileIcon} text={user?.username ?? 'incognito'} to="/settings/profile" />
         </div>
 
         <div className={styles.section}>

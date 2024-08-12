@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAddParticipationMutation } from '@shared/api';
 import { ArrowLeftIcon } from '@shared/ui';
 import {} from './competitionRequest.schema';
+import { useUserInfo } from 'entities/Auth';
 import { Step1, Step2, Step3 } from './components';
 import type { CompetitionRequestData, CompetitionRequestData3 } from './types';
 import styles from './CompetitionRequest.module.scss';
@@ -10,8 +11,10 @@ import styles from './CompetitionRequest.module.scss';
 export const CompetitionRequest = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
+  const { user } = useUserInfo();
+
   const dataRef = useRef<Partial<CompetitionRequestData>>({});
+  const [step, setStep] = useState(0);
   const [addParticipant, { isSuccess, isLoading }] = useAddParticipationMutation();
 
   const onClickNext = (data: Partial<CompetitionRequestData>) => {
@@ -23,7 +26,7 @@ export const CompetitionRequest = () => {
     Object.assign(dataRef.current, data);
     addParticipant({
       eventId: Number(id),
-      userId: Number(id),
+      userId: user!.id,
       participationRequest: {
         type: dataRef.current.role!,
         countryId: Number(dataRef.current.country),

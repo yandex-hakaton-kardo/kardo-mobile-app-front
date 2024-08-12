@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useFindUserByUsernameQuery } from '@shared/api';
 import { useAppDispatch, useAppSelector } from 'app/store';
-import { authActions } from 'entities/Auth.slice';
+import { authActions } from 'entities/Auth';
 import { PageLoader } from '../PageLoader';
 
 export const RequireAuth = () => {

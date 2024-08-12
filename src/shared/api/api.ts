@@ -6,7 +6,7 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 import { LsKeys } from '@shared/constants';
-import { authActions } from 'entities/Auth.slice';
+import { authActions } from 'entities/Auth/Auth.slice';
 import { type GetRecommendationsApiArg, type GetRecommendationsApiResponse, type PostDto } from './__generated__';
 import type { AppDispatch } from 'app/store';
 
