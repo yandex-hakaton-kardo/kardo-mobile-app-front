@@ -6,7 +6,7 @@ interface SegmentPickerProps {
   segments: {
     id: string;
     text: ReactNode;
-    onClick: () => void;
+    onClick?: () => void;
   }[];
   activeSegment: string;
 }
