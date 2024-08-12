@@ -9,8 +9,8 @@ import type { CompetitionRequestData, CompetitionRequestData3 } from './types';
 import styles from './CompetitionRequest.module.scss';
 
 export const CompetitionRequest = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams();
   const { user } = useUserInfo();
 
   const dataRef = useRef<Partial<CompetitionRequestData>>({});

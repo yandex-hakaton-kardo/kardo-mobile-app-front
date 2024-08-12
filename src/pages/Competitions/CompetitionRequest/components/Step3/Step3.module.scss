@@ -3,8 +3,13 @@
   flex-direction: column;
   gap: 16px;
   block-size: 100%;
+  overflow-y: auto;
 }
 
-.nextBtn {
-  margin-block-start: auto;
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
+  overflow-y: auto;
 }
