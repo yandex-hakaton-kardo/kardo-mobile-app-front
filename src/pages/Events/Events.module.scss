@@ -40,8 +40,8 @@
 }
 
 .filters {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto auto;
   gap: 16px;
 }
 
