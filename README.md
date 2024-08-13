@@ -2,12 +2,15 @@
 
 Фронтенд часть для [kargo-mobile-app](https://github.com/yandex-hakaton-kardo/kardo-mobile-app)
 
-### [Ссылка на деплой: http://51.250.33.187](http://51.250.33.187)
+### Ссылки
+
+- [деплой](http://51.250.33.187)
+- [swagger](https://51.250.33.187/swagger-ui/index.html)
 
 ### Команда разработки фронтенда
 
-[Андрей Воронин (AVor0n)](https://github.com/AVor0n)
-[Дмитрий Мажник (CrabF)](https://github.com/CrabF)
+- [Андрей Воронин (AVor0n)](https://github.com/AVor0n)
+- [Дмитрий Мажник (CrabF)](https://github.com/CrabF)
 
 ### Стек
 
