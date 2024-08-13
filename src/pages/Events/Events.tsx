@@ -21,7 +21,6 @@ export const Events = () => {
   const [direction, setDirection] = useState('all');
   const [date, setDate] = useState<DateRange>({
     from: dayjs(new Date()).toDate(),
-    to: dayjs(new Date()).add(7, 'days').toDate(),
   });
   const [calendarVisible, setCalendarVisible] = useState(false);
 
@@ -46,7 +45,7 @@ export const Events = () => {
           types: type === 'all' ? ['PREMIUM', 'PROJECT', 'VIDEO_CONTEST', 'CHILDREN'] : [type as CompetitionType],
           activity: direction === 'all' ? undefined : direction,
           startDate: dayjs(date.from).format('YYYY-MM-DD'),
-          endDate: dayjs(date.to).format('YYYY-MM-DD'),
+          endDate: date.to ? dayjs(date.to).format('YYYY-MM-DD') : undefined,
           sort: 'EVENT_START',
         },
       }),

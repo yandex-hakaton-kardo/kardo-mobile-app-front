@@ -42,7 +42,7 @@ export const EventDetails = () => {
         </div>
 
         <div className={styles.description}>
-          <p>{event.description}</p>
+          {event.description?.split('\n').map((chunk, idx) => <p key={idx}>{chunk}</p>)}
         </div>
       </div>
 
