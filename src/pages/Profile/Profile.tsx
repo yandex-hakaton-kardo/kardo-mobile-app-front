@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useGetAllPostByUserQuery } from '@shared/api';
 import { Button, SegmentPicker } from '@shared/ui';
 import { Feed } from '@widgets';
@@ -20,9 +21,11 @@ export const Profile = () => {
 
       <UserInfo />
 
-      <Button className={styles.addFriend} view="action" wide size="l" disabled>
-        {lang.addFriends}
-      </Button>
+      <Link to="/admin">
+        <Button className={styles.addPost} view="action" wide size="l">
+          {lang.addPost}
+        </Button>
+      </Link>
 
       <SegmentPicker
         activeSegment={activeTab}

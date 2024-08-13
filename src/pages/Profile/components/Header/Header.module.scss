@@ -6,12 +6,36 @@
   margin-block-end: 32px;
 }
 
-.hammerIcon {
+.hammer {
   margin-inline-end: auto;
+}
+
+.hammerIcon {
+  pointer-events: none;
 }
 
 .icon {
   inline-size: 48px;
   block-size: 48px;
-  color: var(--color-inverted-primary);
+  color: var(--color-generic-active);
+
+  &:hover {
+    color: var(--color-inverted-primary);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin-block: 32px;
+}
+
+.text {
+  max-inline-size: 330px;
+  padding: 10px;
+  color: var(--color-primary);
+  font: var(--font-body);
+  text-align: center;
 }

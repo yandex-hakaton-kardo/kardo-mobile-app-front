@@ -22,7 +22,11 @@
 }
 
 .settingsIcon {
-  color: var(--color-inverted-primary);
+  color: var(--color-generic-active);
+
+  &:hover {
+    color: var(--color-inverted-primary);
+  }
 }
 
 .username {

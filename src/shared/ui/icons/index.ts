@@ -28,6 +28,8 @@ export { default as ProfileIcon } from './profile.svg?react';
 export { default as QuestionIcon } from './question.svg?react';
 export { default as SearchIcon } from './search.svg?react';
 export { default as ShareIcon } from './share.svg?react';
+export { default as ScrollIcon } from './scroll.svg?react';
 export { default as SupportIcon } from './support.svg?react';
 export { default as ToolsIcon } from './tools.svg?react';
 export { default as VkIcon } from './vk.svg?react';
+export { default as WhistleIcon } from './Whistle.svg?react';

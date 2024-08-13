@@ -28,7 +28,7 @@ export const CompetitionDetail = () => {
       </div>
 
       <footer className={styles.footer}>
-        <Link to={`/competitions/${id}/request`}>
+        <Link to={`/events?type=${post.id}`}>
           <Button view="action" wide size="l">
             Подать заявку
           </Button>

@@ -14,3 +14,4 @@ export { default as Profile } from './Profile';
 export { default as Settings } from './Settings';
 export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
+export { default as Success } from './Success';

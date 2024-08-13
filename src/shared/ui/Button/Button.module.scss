@@ -106,6 +106,7 @@
 .s {
   gap: 4px;
   min-block-size: 26px;
-  padding: 4px;
+  padding-block: 4px;
+  padding-inline: 8px;
   font: var(--font-body-small);
 }
