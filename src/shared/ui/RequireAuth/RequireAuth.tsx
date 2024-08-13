@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useFindUserByUsernameQuery } from '@shared/api';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { authActions } from 'entities/Auth';
-import { PageLoader } from '../PageLoader';
+import { Preloader } from '../Preloader';
 
 export const RequireAuth = () => {
   const dispatch = useAppDispatch();
@@ -25,5 +25,5 @@ export const RequireAuth = () => {
     return <Outlet />;
   }
 
-  return <PageLoader />;
+  return <Preloader />;
 };

@@ -4,7 +4,6 @@ export * from './IntroRedirect';
 export * from './Layout';
 export * from './NavButton';
 export * from './Navigation';
-export * from './PageLoader';
 export * from './Password';
 export * from './Preloader';
 export * from './Modal';
