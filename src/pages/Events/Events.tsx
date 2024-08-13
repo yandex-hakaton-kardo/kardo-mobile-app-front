@@ -19,7 +19,10 @@ export const Events = () => {
 
   const [type, setType] = useState(searchParams.get('type')?.toUpperCase() ?? 'all');
   const [direction, setDirection] = useState('all');
-  const [date, setDate] = useState<DateRange>();
+  const [date, setDate] = useState<DateRange>({
+    from: dayjs(new Date()).toDate(),
+    to: dayjs(new Date()).add(7, 'days').toDate(),
+  });
   const [calendarVisible, setCalendarVisible] = useState(false);
 
   useEffect(() => {
@@ -42,8 +45,8 @@ export const Events = () => {
         searchFilter: {
           types: type === 'all' ? ['PREMIUM', 'PROJECT', 'VIDEO_CONTEST', 'CHILDREN'] : [type as CompetitionType],
           activity: direction === 'all' ? undefined : direction,
-          startDate: dayjs(date?.from).format('YYYY-MM-DD'),
-          endDate: dayjs(date?.to).format('YYYY-MM-DD'),
+          startDate: dayjs(date.from).format('YYYY-MM-DD'),
+          endDate: dayjs(date.to).format('YYYY-MM-DD'),
           sort: 'EVENT_START',
         },
       }),
@@ -54,7 +57,13 @@ export const Events = () => {
     <div className={styles.page}>
       <div className={styles.header}>
         Афиша
-        <CalendarIcon className={styles.calendarIcon} onClick={() => setTimeout(() => setCalendarVisible(true))} />
+        <CalendarIcon
+          className={styles.calendarIcon}
+          onClick={e => {
+            e.stopPropagation();
+            setCalendarVisible(show => !show);
+          }}
+        />
       </div>
 
       <div className={styles.content}>

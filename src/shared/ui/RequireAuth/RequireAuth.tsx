@@ -4,6 +4,7 @@ import { useFindUserByUsernameQuery } from '@shared/api';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { authActions } from 'entities/Auth';
 import { Preloader } from '../Preloader';
+import styles from './RequireAuth.module.scss';
 
 export const RequireAuth = () => {
   const dispatch = useAppDispatch();
@@ -25,5 +26,9 @@ export const RequireAuth = () => {
     return <Outlet />;
   }
 
-  return <Preloader />;
+  return (
+    <div className={styles.loaderWrapper}>
+      <Preloader />
+    </div>
+  );
 };
