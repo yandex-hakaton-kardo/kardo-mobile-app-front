@@ -16,7 +16,7 @@
   font: var(--font-header-2);
 }
 
-.calendar {
+.calendarIcon {
   inline-size: 36px;
   block-size: 36px;
   color: var(--color-generic);
@@ -43,4 +43,28 @@
   display: flex;
   flex-direction: row;
   gap: 16px;
+}
+
+.calendarWrapper {
+  position: absolute;
+  inset-inline: 16px;
+  color: var(--color-primary);
+  background-color: var(--color-inverted-primary);
+
+  :global(.rdp-day) {
+    padding-inline: 6px;
+  }
+
+  :global(.rdp-month_caption) {
+    justify-content: center;
+  }
+
+  :global(.rdp-nav) {
+    inset-inline: 0;
+    justify-content: space-between;
+  }
+}
+
+.hidden {
+  display: none;
 }
