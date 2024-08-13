@@ -88,14 +88,26 @@ export const Step1 = ({ onSubmit }: Step1Props) => {
           name="type"
           control={control}
           render={({ field }) => (
-            <Select value={field.value} onUpdate={field.onChange} label="Тип конкурса" options={competitionTypes} />
+            <Select
+              value={field.value}
+              onUpdate={field.onChange}
+              label="Тип конкурса"
+              options={field.value ? competitionTypes.filter(item => item.value === field.value) : competitionTypes}
+            />
           )}
         />
         <Controller
           name="direction"
           control={control}
           render={({ field }) => (
-            <Select value={field.value} onUpdate={field.onChange} label="Направление" options={competitionDirections} />
+            <Select
+              value={field.value}
+              onUpdate={field.onChange}
+              label="Направление"
+              options={
+                field.value ? competitionDirections.filter(item => item.value === field.value) : competitionDirections
+              }
+            />
           )}
         />
         <Controller
