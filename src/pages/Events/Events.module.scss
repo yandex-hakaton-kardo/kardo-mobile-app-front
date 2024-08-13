@@ -51,8 +51,8 @@
   color: var(--color-primary);
   background-color: var(--color-inverted-primary);
 
-  :global(.rdp-day) {
-    padding-inline: 6px;
+  :global(.rdp-months) {
+    margin-inline: auto;
   }
 
   :global(.rdp-month_caption) {
