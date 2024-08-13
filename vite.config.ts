@@ -43,5 +43,8 @@ export default defineConfig(() => {
         'top-level-await': true,
       },
     },
+    build: {
+      chunkSizeWarningLimit: 600,
+    },
   };
 });

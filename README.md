@@ -5,7 +5,15 @@
 ![TypeScript Badge](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=plastic) ![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=plastic) ![Redux Badge](https://img.shields.io/badge/RTK%20query-764ABC?logo=redux&logoColor=fff&style=plastic) ![React Router Badge](https://img.shields.io/badge/React%20Router-CA4245?logo=reactrouter&logoColor=fff&style=plastic) ![Sass Badge](https://img.shields.io/badge/Sass-C69?logo=sass&logoColor=fff&style=plastic) ![CSS Modules Badge](https://img.shields.io/badge/CSS%20Modules-000?logo=cssmodules&logoColor=fff&style=plastic) ![React Hook Form Badge](https://img.shields.io/badge/React%20Hook%20Form-EC5990?logo=reacthookform&logoColor=fff&style=plastic) ![Zod Badge](https://img.shields.io/badge/Zod-000?logo=zod&logoColor=fff&style=plastic)
 ![Docker Badge](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=plastic) ![NGINX Badge](https://img.shields.io/badge/NGINX-009639?logo=nginx&logoColor=fff&style=plastic) ![Vite Badge](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff&style=plastic) ![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=fff&style=plastic) ![DotEnv Badge](https://img.shields.io/badge/.ENV-ECD53F?logo=dotenv&logoColor=fff&style=plastic) ![Git Badge](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=plastic) ![ESLint Badge](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=fff&style=plastic) ![stylelint Badge](https://img.shields.io/badge/stylelint-263238?logo=stylelint&logoColor=fff&style=plastic) ![Prettier Badge](https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=fff&style=plastic)
 
-## Запуск фронтенда
+## Сборка приложения
+
+1. Установить [NodeJS 20+](https://nodejs.org/en)
+2. Поставить зависимости командой `npm i`
+3. Запустить сборку командой `npm run build`
+
+После сборки билд будет лежать в `./dist`
+
+## Запуск devServer с фронтендом
 
 Перед запуском необходимо создать файл `.env` в корне репозитория (пример в `.env.example`), где указать адрес сервера с бэкендом
 
@@ -36,7 +44,7 @@ docker-compose up
 curl -sSL https://gist.githubusercontent.com/AVor0n/2a3053bbe206abe499741ee49c67e90d/raw/run.sh | bash
 ```
 
-Данная команда создаст папку `kardo` скачает в неё `docker-compose.yml` и `nginx.conf` после чего запустит 4 докер-контейнера
+Данная команда скачает `docker-compose.yml` и `nginx.conf` после чего запустит 4 докер-контейнера
 
 3. Приложение будет доступно по адресу http://localhost
 
