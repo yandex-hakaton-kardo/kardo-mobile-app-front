@@ -38,7 +38,7 @@ export const Auth = () => {
         </div>
 
         <footer className={styles.footer}>
-          {`${lang.continueYouAgree} `}
+          {lang.continueYouAgree}&nbsp;
           <a className={styles.link} href="!#">
             {lang.termsOfUse}
           </a>

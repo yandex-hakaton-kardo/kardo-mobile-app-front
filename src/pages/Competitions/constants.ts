@@ -1,6 +1,6 @@
 export const cards = [
   {
-    id: 'award',
+    id: 'PREMIUM',
     title: 'Премия',
     image: '/images/posters/award-big.jpeg',
     description: [
@@ -8,7 +8,7 @@ export const cards = [
     ],
   },
   {
-    id: 'video',
+    id: 'VIDEO_CONTEST',
     title: 'Видеоконкурс',
     image: '/images/posters/video-big.jpg',
     description: [
@@ -17,13 +17,13 @@ export const cards = [
     ],
   },
   {
-    id: 'projects',
+    id: 'PROJECT',
     title: 'Проекты',
     image: '/images/posters/projects-big.jpg',
     description: ['Описание не предоставлено'],
   },
   {
-    id: 'children',
+    id: 'CHILDREN',
     title: 'Дети',
     image: '/images/posters/chlidren-big.png',
     description: [

@@ -27,7 +27,7 @@ export const Step2 = ({ onSubmit }: Step2Props) => {
       thirdName: user?.secondName ?? '',
       email: user?.email ?? '',
       phone: user?.phoneNumber ?? '',
-      birthDate: user?.dateOfBirth ?? '',
+      birthDate: user?.dateOfBirth?.split('-').reverse().join('.') ?? '',
       gender: user?.gender,
     },
   });

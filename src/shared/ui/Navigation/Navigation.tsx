@@ -1,28 +1,28 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
-import { CalendarIcon, EventsIcon, MainIcon, ProfileIcon, SearchIcon } from '@shared/ui/icons';
+import { CalendarIcon, EventsIcon, MainIcon, ProfileIcon, ScrollIcon } from '@shared/ui/icons';
 import styles from './Navigation.module.scss';
 
 const links: { to: string; Icon: React.ReactNode }[] = [
   {
     to: '/',
-    Icon: <MainIcon />,
+    Icon: <MainIcon width={40} height={40} />,
   },
   {
     to: '/feed',
-    Icon: <SearchIcon />,
+    Icon: <ScrollIcon width={40} height={40} />,
   },
   {
     to: '/competitions',
-    Icon: <EventsIcon />,
+    Icon: <EventsIcon width={40} height={40} />,
   },
   {
     to: '/events',
-    Icon: <CalendarIcon />,
+    Icon: <CalendarIcon width={40} height={40} />,
   },
   {
     to: '/profile',
-    Icon: <ProfileIcon />,
+    Icon: <ProfileIcon width={40} height={40} />,
   },
 ];
 

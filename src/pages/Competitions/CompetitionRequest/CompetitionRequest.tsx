@@ -51,9 +51,13 @@ export const CompetitionRequest = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/');
+      if (event?.id) {
+        navigate(`/events/${event.id}/success-register`);
+      } else {
+        navigate(`/event/`);
+      }
     }
-  }, [isSuccess, navigate]);
+  }, [event?.id, isSuccess, navigate]);
 
   return (
     <div className={styles.page}>

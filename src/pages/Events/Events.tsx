@@ -3,6 +3,7 @@ import { ru } from 'date-fns/locale';
 import dayjs from 'dayjs';
 import { useEffect, useRef, useState } from 'react';
 import { DayPicker, type DateRange } from 'react-day-picker';
+import { useSearchParams } from 'react-router-dom';
 import { api, type CompetitionType } from '@shared/api';
 import { competitionTypes, competitionDirections } from '@shared/constants';
 import { CalendarIcon, Select } from '@shared/ui';
@@ -14,8 +15,9 @@ import 'react-day-picker/style.css';
 export const Events = () => {
   const ref = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
+  const [searchParams] = useSearchParams();
 
-  const [type, setType] = useState('all');
+  const [type, setType] = useState(searchParams.get('type')?.toUpperCase() ?? 'all');
   const [direction, setDirection] = useState('all');
   const [date, setDate] = useState<DateRange>();
   const [calendarVisible, setCalendarVisible] = useState(false);

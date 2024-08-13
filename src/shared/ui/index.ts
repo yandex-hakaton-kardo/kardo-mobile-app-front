@@ -7,6 +7,7 @@ export * from './Navigation';
 export * from './PageLoader';
 export * from './Password';
 export * from './Preloader';
+export * from './Modal';
 export * from './RequireAuth';
 export * from './SearchInput';
 export * from './SegmentPicker';

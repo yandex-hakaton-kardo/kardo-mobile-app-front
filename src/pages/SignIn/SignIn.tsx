@@ -64,7 +64,7 @@ export const SignIn = () => {
             control={control}
             render={({ field }) => (
               <Password
-                autoComplete="new-password"
+                autoComplete="current-password"
                 label={lang.passwordLabel}
                 hint={lang.passwordHint}
                 error={errors.password?.message ? lang.passwordHint : undefined}

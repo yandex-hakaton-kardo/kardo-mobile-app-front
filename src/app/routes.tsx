@@ -16,6 +16,7 @@ import {
   Settings,
   SignIn,
   SignUp,
+  Success,
 } from '@pages';
 import { IntroRedirect, Layout, RequireAuth } from '@shared/ui';
 
@@ -57,6 +58,10 @@ export const routes: RouteObject[] = [
           {
             path: '/events/:id',
             Component: EventDetails,
+          },
+          {
+            path: '/events/:id/success-register',
+            Component: Success,
           },
           {
             element: <Layout />,
