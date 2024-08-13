@@ -30,9 +30,9 @@ export const competitionRequestSchema1 = z
 export const competitionRequestSchema2 = z.object({
   secondName: z.string().min(2, 'Минимум 2 символа').max(30, 'Максимум 30 символов'),
   firstName: z.string().min(2, 'Минимум 2 символа').max(30, 'Максимум 30 символов'),
-  thirdName: z.string().max(30, 'Максимум 30 символов').optional(),
+  thirdName: z.string().max(20, 'Максимум 20 символов').optional(),
   email: z.string().email('Некорректный email').min(5, 'Минимум 5 символов').max(50, 'Максимум 50 символов'),
-  phone: z.string().refine(isValidPhone, {
+  phone: z.string().min(12, 'Минимум 12 символов').max(15, 'Максимум 15 символов').refine(isValidPhone, {
     message: 'Некорректный телефонный номер',
   }),
   birthDate: z.string().refine(isValidDate, {
@@ -42,9 +42,10 @@ export const competitionRequestSchema2 = z.object({
 });
 
 export const competitionRequestSchema3 = z.object({
-  file: z.string().url('Введенное значение не является ссылкой'),
+  file: z.string().max(150, 'Максимум 150 символов').url('Введенное значение не является ссылкой'),
   socialLink: z
     .string()
+    .max(150, 'Максимум 150 символов')
     .refine(value => value === '' || /^(http|https):\/\/[^ "]+$/.test(value), 'Введенное значение не является ссылкой'),
-  about: z.string(),
+  about: z.string().max(500, 'Максимум 500 символов'),
 });
