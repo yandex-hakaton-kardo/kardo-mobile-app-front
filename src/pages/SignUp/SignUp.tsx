@@ -58,7 +58,7 @@ export const SignUp = () => {
             control={control}
             render={({ field }) => (
               <TextInput
-                label={lang.usernameLabel}
+                label={lang.loginLabel}
                 autoComplete="username"
                 error={errors.username?.message ? lang.usernameError : undefined}
                 {...field}
@@ -71,7 +71,7 @@ export const SignUp = () => {
             render={({ field }) => (
               <TextInput
                 autoComplete="email"
-                label={lang.loginLabel}
+                label={lang.emailLabel}
                 hint={lang.loginHint}
                 error={errors.email?.message ? lang.loginHint : undefined}
                 {...field}
