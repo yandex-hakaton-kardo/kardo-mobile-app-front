@@ -22,6 +22,17 @@
   --font-caption: normal 300 12px/140% Rubik;
 }
 
+.rdp-root {
+  --rdp-accent-color: var(--color-brand-active);
+  --rdp-accent-background-color: var(--color-inverted-primary);
+  --rdp-day-font: var(--font-accent);
+  --rdp-selected-font: var(--font-accent);
+  --rdp-font-family: 'Grtsk Tera';
+  --rdp-day_button-border-radius: 0;
+  --rdp-selected-border: 1px solid var(--color-brand-active);
+  --rdp-range_middle-background-color: var(--color-generic);
+}
+
 body {
   background-color: var(--color-primary);
   color: var(--color-inverted-primary);

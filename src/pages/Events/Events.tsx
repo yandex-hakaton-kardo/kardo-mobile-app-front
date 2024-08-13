@@ -1,15 +1,36 @@
-import { useRef, useState } from 'react';
+import clsx from 'clsx';
+import { ru } from 'date-fns/locale';
+import dayjs from 'dayjs';
+import { useEffect, useRef, useState } from 'react';
+import { DayPicker, type DateRange } from 'react-day-picker';
 import { api, type CompetitionType } from '@shared/api';
 import { competitionTypes, competitionDirections } from '@shared/constants';
 import { CalendarIcon, Select } from '@shared/ui';
 import { useInfiniteScroll } from '@shared/utils';
 import { EventCard, EventsPlaceholder, EventsSkeleton } from './components';
 import styles from './Events.module.scss';
+import 'react-day-picker/style.css';
 
 export const Events = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
   const [type, setType] = useState('all');
   const [direction, setDirection] = useState('all');
+  const [date, setDate] = useState<DateRange>();
+  const [calendarVisible, setCalendarVisible] = useState(false);
+
+  useEffect(() => {
+    const outsideClickHandler = (e: MouseEvent) => {
+      if (calendarVisible && !calendarRef.current?.contains(e.target as Node)) {
+        setCalendarVisible(false);
+      }
+    };
+
+    document.addEventListener('click', outsideClickHandler);
+
+    return () => document.removeEventListener('click', outsideClickHandler);
+  }, [calendarVisible]);
 
   const { data: events } = useInfiniteScroll({
     fetchFn: page =>
@@ -19,8 +40,8 @@ export const Events = () => {
         searchFilter: {
           types: type === 'all' ? ['PREMIUM', 'PROJECT', 'VIDEO_CONTEST', 'CHILDREN'] : [type as CompetitionType],
           activity: direction === 'all' ? undefined : direction,
-          startDate: '2024-08-10',
-          endDate: '2024-08-13',
+          startDate: dayjs(date?.from).format('YYYY-MM-DD'),
+          endDate: dayjs(date?.to).format('YYYY-MM-DD'),
           sort: 'EVENT_START',
         },
       }),
@@ -31,7 +52,7 @@ export const Events = () => {
     <div className={styles.page}>
       <div className={styles.header}>
         Афиша
-        <CalendarIcon className={styles.calendar} />
+        <CalendarIcon className={styles.calendarIcon} onClick={() => setTimeout(() => setCalendarVisible(true))} />
       </div>
 
       <div className={styles.content}>
@@ -46,6 +67,9 @@ export const Events = () => {
             onUpdate={setDirection}
             options={[{ value: 'all', label: 'Все направления' }].concat(competitionDirections)}
           />
+          <div ref={calendarRef} className={clsx(styles.calendarWrapper, !calendarVisible && styles.hidden)}>
+            <DayPicker locale={ru} mode="range" selected={date} onSelect={setDate} required />
+          </div>
         </div>
         <div className={styles.events} ref={ref}>
           {events === undefined && <EventsSkeleton />}
